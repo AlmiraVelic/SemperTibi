@@ -1,0 +1,113 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Semper Tibi</string>
+    <string name="hello_message">Always with you</string>
+    <string name="johndoe">johndoe</string>
+    <string name="pwHint">*******</string>
+    <string name="mailHint">example@mail.com</string>
+    <string name="register">Register</string>
+    <string name="getStarted">Get Started</string>
+    <string name="newUserQuestion">New User?</string>
+    <string name="skip">Skip >> </string>
+    <string name="dashBoard">Dashboard</string>
+    <string name="sevenDayMood">7-day Mood-Overview</string>
+    <string name="moodJournal">Mood Journal</string>
+    <string name="stressTracker">Stress Tracker</string>
+    <string name="tipps">Tipps &amp; Tricks</string>
+    <string name="settings">Settings</string>
+    <string name="newEntry">New Entry</string>
+    <string name="yourMood">Your Mood Journal</string>
+    <string name="chooseDate">Please choose a Date</string>
+    <string name="questionFeelings">How do you feel today?</string>
+    <string name="questionHappening">What happened today?</string>
+    <string name="questionGoals">Which goals did you achieve?</string>
+    <string name="exampleAnswer1">Example: When [SITUATION] happened, I felt [EMOTION].</string>
+    <string name="exampleAnswer2">Example: I feel [EMOTION], because [EXPERIENCE].</string>
+    <string name="exampleAnswer3">Example: I was able to [ACHIEVEMENT].</string>
+    <string name="happenings">Happenings</string>
+    <string name="feelings">Feelings</string>
+    <string name="goals">Goals</string>
+    <string name="textHint">Type here your Text</string>
+    <string name="newMeasurePSS">New Measurement PSS</string>
+    <string name="newMeasureHRV">New Measurement HRV</string>
+    <string name="sevenDayStress">7-day Stress-Curve</string>
+    <string name="learnMore">Learn more about the Tracker</string>
+    <string name="stressLevel">Your Stress-Level</string>
+    <string name="testStress">Test Stress-Level</string>
+    <string name="heartRate">Detect heart rate</string>
+    <string name="testStressPSS">Stress Test with PSS</string>
+    <string name="answerQuestions">Please answer the following 10 questions</string>
+    <string name="lastMonth">In the last month, how often have you </string>
+    <string name="questionPSS1">In the last month, how often have you been upset because of something that happened unexpectedly?</string>
+    <string name="questionPSS2">In the last month, how often have you felt that you were unable to control the important things in your life?</string>
+    <string name="questionPSS3">In the last month, how often have you felt nervous and stressed?</string>
+    <string name="questionPSS4">In the last month, how often have you felt confident about your ability to handle your personal problems?</string>
+    <string name="questionPSS5">In the last month, how often have you felt that things were going your way?</string>
+    <string name="questionPSS6">In the last month, how often have you found that you could not cope with all the things that you had to do?</string>
+    <string name="questionPSS7">In the last month, how often have you been able to control irritations in your life?</string>
+    <string name="questionPSS8">In the last month, how often have you felt that you were on top of things?</string>
+    <string name="questionPSS9">In the last month, how often have you been angered because of things that happened that were outside of your control?</string>
+    <string name="questionPSS10">In the last month, how often have you felt difficulties were piling up so high that you could not overcome them?</string>
+    <string name="explanation" tools:ignore="ExtraTranslation">The Perceived Stress Scale (PSS) is the most widely used psychological instrument for measuring the perception of stress. It is a measure of the degree to which situations in one’s life are appraised as stressful. Items were designed to tap how unpredictable, uncontrollable, and overloaded respondents find their lives. The scale also includes a number of direct queries about current levels of experienced stress. The PSS was designed for use in community samples with at least a junior high school education. The items are easy to understand, and the response alternatives are simple to grasp. Moreover, the questions are of a general nature and hence are relatively free of content specific to any subpopulation group. The questions in the PSS ask about feelings and thoughts during the last month.</string>
+    <string name="answerPSS1">Never</string>
+    <string name="answerPSS2">Almost never</string>
+    <string name="answerPSS3">Sometimes</string>
+    <string name="answerPSS4">Fairly often</string>
+    <string name="answerPSS5">Very often</string>
+    <string name="outputPSS1">Your test results indicate that you had low stress the last month. Keep this pace in life! You are doing a great job!</string>
+    <string name="outputPSS2">Your test results indicate that you had moderate stress the last month. Please try to reduce your stress level. See the Tipps and Tricks for more information on how to self-control the stress. </string>
+    <string name="outputPSS3">Your test results indicate that you had high perceived stress the last month. Check your health status at a medical institution as soon as you feel uncomfortable.</string>
+    <string name="heartRateTest">Check your stress level with your heart rate</string>
+    <string name="start">Start</string>
+    <string name="tippsHeader">Tipps &amp; Tricks for your mental health</string>
+    <string name="breaks">Make breaks</string>
+    <string name="breath">Breath</string>
+    <string name="sports">Sports</string>
+    <string name="plans">Plans</string>
+    <string name="nutrition">Nutrition</string>
+    <string name="gender">Gender</string>
+    <string name="notification">Notifications</string>
+    <string name="userName">User Name</string>
+    <string name="password">Password</string>
+    <string name="passwordRepeat">Repeat password</string>
+    <string name="mail">E-Mail address</string>
+    <string name="saveChanges">Save changes</string>
+    <string name="on">ON</string>
+    <string name="off">OFF</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="action_register">Register</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="lotus">Logo of Semper Tibi that shows a blue lotus flower</string>
+    <string name="title_activity_mood_journal_overview">MoodJournalOverview</string>
+    <string name="signout">Sign out</string>
+
+    <string-array name="gender_identity">
+        <item>Woman</item>
+        <item>Man</item>
+        <item>Transgender</item>
+        <item>Non-binary</item>
+        <item>Non-conforming</item>
+        <item>Prefer not to respond</item>
+    </string-array>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_tipp_breath">tippBreath</string>
+    <!--    <string name=""></string>-->
+    <!-- Video strings -->
+    <string name="test_mp3">"https://storage.googleapis.com/exoplayer-test-media-0/play.mp3"</string>
+    <string name="media_url_mp4">https://storage.googleapis.com/exoplayer-test-media-0/BigBuckBunny_320x180.mp4</string>
+    <string name="myTestMp4">"https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4"</string>
+</resources>

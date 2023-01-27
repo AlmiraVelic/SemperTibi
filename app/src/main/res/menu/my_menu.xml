@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/menuDashboard"
+        android:icon="@drawable/ic_home"
+        android:title="@string/dashBoard"
+        android:contentDescription="@string/dashBoard"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/menuMoodJournal"
+        android:icon="@drawable/ic_menu_book"
+        android:title="@string/moodJournal"
+        android:contentDescription="@string/moodJournal"
+        app:showAsAction="never"
+        />
+
+    <item android:id="@+id/menuStressTracker"
+        android:icon="@drawable/ic_tracker"
+        android:title="@string/stressTracker"
+        android:contentDescription="@string/stressTracker"
+        app:showAsAction="never"/>
+
+    <!-- Settings, should always be in the overflow -->
+    <item android:id="@+id/menuSettings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings"
+        android:contentDescription="@string/settings"
+        app:showAsAction="never"
+        />
+
+    <item android:id="@+id/menuSignout"
+        android:icon="@drawable/ic_logout"
+        android:title="@string/signout"
+        android:contentDescription="@string/signout"
+        app:showAsAction="never"/>
+</menu>

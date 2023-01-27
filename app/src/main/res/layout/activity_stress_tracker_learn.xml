@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/anti_flash_white"
+    tools:context=".StressTrackerLearn">
+    <include
+        layout="@layout/top_app_bar"
+        android:id="@+id/topAppBar9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_below="@id/topAppBar9">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvStressTracker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/learnMore"
+                android:textColor="@color/logo_font"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                android:textAlignment="center"/>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                app:dividerColor="@color/lotus_blue"
+                app:dividerThickness="3dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="The Perceived Stress Scale (PSS) is the most widely used psychological instrument for measuring the perception of stress. It is a measure of the degree to which situations in one’s life are appraised as stressful. Items were designed to tap how unpredictable, uncontrollable, and overloaded respondents find their lives. The scale also includes a number of direct queries about current levels of experienced stress. The PSS was designed for use in community samples with at least a junior high school education. The items are easy to understand, and the response alternatives are simple to grasp. Moreover, the questions are of a general nature and hence are relatively free of content specific to any subpopulation group. The questions in the PSS ask about feelings and thoughts during the last month."
+                android:textSize="20sp"
+                android:textAlignment="center"
+                />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/lotus" />
+
+</RelativeLayout>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/anti_flash_white"
+    android:backgroundTint="@color/anti_flash_white"
+    tools:context=".Dashboard">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/toolbar_dashboard_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:backgroundTint="@color/anti_flash_white"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_anchorGravity="top"
+        app:layout_scrollFlags="scroll"
+        app:liftOnScroll="true">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_dashboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:menu="@menu/my_menu"
+            app:navigationIcon="@drawable/ic_back" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_below="@id/toolbar_dashboard_layout">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="top|center">
+
+                <TextView
+                    android:id="@+id/tvDashboard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dashBoard"
+                    android:textColor="@color/logo_font"
+                    android:textSize="34sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    app:dividerColor="@color/lotus_blue"
+                    app:dividerThickness="3dp" />
+
+                <Button
+                    android:id="@+id/btnMoodJournal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/moodJournal"
+                    android:textColor="@color/logo_font"
+                    android:textSize="24sp" />
+
+                <Button
+                    android:id="@+id/btnStressTracker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/stressTracker"
+                    android:textColor="@color/logo_font"
+                    android:textSize="24sp" />
+
+                <Button
+                    android:id="@+id/btnTippsTricks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/tipps"
+                    android:textColor="@color/logo_font"
+                    android:textSize="24sp" />
+
+                <Button
+                    android:id="@+id/btnSettings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="@string/settings"
+                    android:textColor="@color/logo_font"
+                    android:textSize="24sp" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/lotus" />
+
+</RelativeLayout>
