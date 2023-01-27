@@ -19,11 +19,13 @@ A conceptual design of an Android-based application for stress monitoring as wel
 Regarding authorisation, authentication, secure data transmission and storage, the topic of data security is chosen as the focus of the evaluation to show how different interfaces (smartphone application, data storage on a backend server, optional sensor technology to measure physical characteristics of stress) can be designed securely based on the implemented application example.   
 
 <h2 align="left"> Research questions</h2>
-1.	What effects does permanent stress have on the body (physical and mental symptoms) or performance?
-2.	What interventions and derived functions (design & functionality) can be used to support one's own stress management and, beyond that, mental health?
-3.	Which vital parameters can be validly used as automated indicators of stress?
-4.	What data security measures need to be set for a mental health support mobile app?
-5.	What could a data security concept for the mobile mental health app for frontend and backend look like?
+<ol>
+<li>What effects does permanent stress have on the body (physical and mental symptoms) or performance?</li>
+<li>What interventions and derived functions (design & functionality) can be used to support one's own stress management and, beyond that, mental health?</li>
+<li>Which vital parameters can be validly used as automated indicators of stress?</li>
+<li>What data security measures need to be set for a mental health support mobile app?</li>
+<li>What could a data security concept for the mobile mental health app for frontend and backend look like?</li>
+</ol>
 
 <h2 align="left"> Current Results </h2>
 The Name for the application has been chosen to be fitted to the mental health topic. Its name is “semper tibi” which is the meaning for “always with you” on latin language. 
