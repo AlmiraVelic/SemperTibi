@@ -37,7 +37,7 @@
                     android:id="@+id/tvMoodJournalOv2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/breath"
+                    android:text="@string/nutrition"
                     android:textColor="@color/logo_font"
                     android:textSize="34sp"
                     android:textStyle="bold" />
@@ -55,7 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="@string/breath"
+                    android:text="@string/nutrition"
                     android:textColor="@color/logo_font"
                     android:textSize="20sp" />
 
