@@ -187,7 +187,7 @@ class Register : AppCompatActivity(), View.OnClickListener {
             R.id.btRegister -> {
                 confirmInput()
                 postDataToSQLite()
-                startActivity(Intent(this, SigninActivity::class.java))
+                //startActivity(Intent(this, SigninActivity::class.java))
             }
             R.id.appCompatTextViewLoginLink -> finish()
         }
@@ -214,6 +214,7 @@ class Register : AppCompatActivity(), View.OnClickListener {
                 Snackbar.LENGTH_LONG
             ).show()
             emptyInputEditText()
+
 /*
         //} else {
             // Snack Bar to show error message that record already exists
