@@ -121,8 +121,16 @@
                 app:dividerColor="@color/lotus_blue"
                 app:dividerThickness="3dp"/>
 
+            <TextView
+                android:id="@+id/appCompatTextViewLoginLink"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="@string/text_not_member"
+                android:textSize="16dp" />
             <Button
-                android:id="@+id/btRegister"
+                android:id="@+id/btRegisterSignIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/register"

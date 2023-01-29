@@ -13,8 +13,8 @@ class UserDbHelper(context: Context) :
 
     // create table sql query
     private val CREATE_USER_TABLE = ("CREATE TABLE " + TABLE_USER + "("
-            + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"
-            + COLUMN_USER_EMAIL + " TEXT," + COLUMN_USER_PASSWORD + " TEXT" + COLUMN_USER_GENDER + " TEXT" + ")")
+            + COLUMN_USER_ID + " INTEGER PRIMARY KEY, " + COLUMN_USER_NAME + " TEXT, "
+            + COLUMN_USER_EMAIL + " TEXT, " + COLUMN_USER_PASSWORD + " TEXT, " + COLUMN_USER_GENDER + " TEXT" + ")")
 
     // drop table sql query
     private val DROP_USER_TABLE = "DROP TABLE IF EXISTS $TABLE_USER"
@@ -22,7 +22,6 @@ class UserDbHelper(context: Context) :
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(CREATE_USER_TABLE)
     }
-
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         //Drop User Table if exist
@@ -38,13 +37,12 @@ class UserDbHelper(context: Context) :
      */
     @SuppressLint("Range")
     fun getAllUser(): List<UserModel> {
-
         // array of columns to fetch
         val columns =
             arrayOf(
                 COLUMN_USER_ID,
-                COLUMN_USER_EMAIL,
                 COLUMN_USER_NAME,
+                COLUMN_USER_EMAIL,
                 COLUMN_USER_PASSWORD,
                 COLUMN_USER_GENDER
             )
@@ -57,12 +55,12 @@ class UserDbHelper(context: Context) :
 
         // query the user table
         val cursor = db.query(
-            TABLE_USER, //Table to query
+            TABLE_USER,         //Table to query
             columns,            //columns to return
-            null,     //columns for the WHERE clause
-            null,  //The values for the WHERE clause
-            null,      //group the rows
-            null,       //filter by row groups
+            null,       //columns for the WHERE clause
+            null,    //The values for the WHERE clause
+            null,       //group the rows
+            null,        //filter by row groups
             sortOrder
         )         //The sort order
         if (cursor.moveToFirst()) {
@@ -92,6 +90,7 @@ class UserDbHelper(context: Context) :
         val db = this.writableDatabase
 
         val values = ContentValues()
+        values.put(COLUMN_USER_ID, user.id)
         values.put(COLUMN_USER_NAME, user.name)
         values.put(COLUMN_USER_EMAIL, user.email)
         values.put(COLUMN_USER_PASSWORD, user.password)
@@ -147,7 +146,6 @@ class UserDbHelper(context: Context) :
      * @return true/false
      */
     fun checkUser(email: String): Boolean {
-
         // array of columns to fetch
         val columns = arrayOf(COLUMN_USER_ID)
         val db = this.readableDatabase

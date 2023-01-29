@@ -39,7 +39,7 @@ class SigninActivity : AppCompatActivity() {
             }
         }
 
-        val register = findViewById<Button>(R.id.btRegister)
+        val register = findViewById<Button>(R.id.btRegisterSignIn)
         register.setOnClickListener{
             var intent = Intent(this, Register::class.java)
             startActivity(intent)

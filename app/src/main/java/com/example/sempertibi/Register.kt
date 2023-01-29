@@ -1,19 +1,23 @@
 package com.example.sempertibi
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.RelativeLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.view.get
 import androidx.core.widget.NestedScrollView
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import java.util.regex.Pattern
 
 
-class Register : AppCompatActivity() {
+class Register : AppCompatActivity(), View.OnClickListener {
+    private val activity = this@Register
 
     private val PASSWORD_PATTERN: Pattern =
         Pattern.compile(
@@ -28,36 +32,38 @@ class Register : AppCompatActivity() {
                     "$"
         )
 
-    lateinit var relativeLayoutRegister: RelativeLayout
-    lateinit var userInputField: TextInputLayout
-    lateinit var passwordInputField: TextInputLayout
-    lateinit var passwordRepeatInputField: TextInputLayout
-    lateinit var emailInputField: TextInputLayout
+    lateinit var nestedScrollView: NestedScrollView
+    lateinit var userInputFieldLayout: TextInputLayout
+    lateinit var userInputFieldText: TextInputEditText
+    lateinit var passwordInputFieldLayout: TextInputLayout
+    lateinit var passwordInputFieldText: TextInputEditText
+    lateinit var passwordRepeatInputFieldLayout: TextInputLayout
+    lateinit var passwordRepeatInputFieldText: TextInputEditText
+    lateinit var emailInputFieldLayout: TextInputLayout
+    lateinit var emailInputFieldText: TextInputEditText
     lateinit var genderInputField: TextInputLayout
+    lateinit var btnRegister: Button
+    lateinit var icon: ImageView
+
+    private lateinit var appCompatTextViewLoginLink: AppCompatTextView
+
+    private lateinit var databaseHelper: UserDbHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        userInputField = findViewById(R.id.register_input_username)
-        passwordInputField = findViewById(R.id.register_input_password)
-        passwordRepeatInputField = findViewById(R.id.register_input_repeatPassword)
-        emailInputField = findViewById(R.id.register_input_email)
-        genderInputField = findViewById(R.id.register_input_setGender)
+        // initializing the views
+        initViews()
 
-        val register = findViewById<Button>(R.id.btRegister)
+        // initializing the listeners
+        initListeners()
 
-        register.setOnClickListener {
-            confirmInput()
-            //var intent = Intent(this, SigninActivity::class.java)
-            //startActivity(intent)
-        }
+        // initializing the objects
+        initObjects()
 
-        val icon = findViewById<ImageView>(R.id.logo)
         icon.bringToFront()
-
-        val scrollView = findViewById<NestedScrollView>(R.id.nestedScrollView)
-        scrollView.setOnScrollChangeListener { _, _, scrollY, _, _ ->
+        nestedScrollView.setOnScrollChangeListener { _, _, scrollY, _, _ ->
             if (scrollY > 0) {
                 icon.visibility = View.INVISIBLE
             } else {
@@ -66,63 +72,81 @@ class Register : AppCompatActivity() {
         }
     }
 
+
+    private fun initViews() {
+        userInputFieldLayout = findViewById(R.id.register_input_username)
+        userInputFieldText = findViewById(R.id.usernameInput)
+        passwordInputFieldLayout = findViewById(R.id.register_input_password)
+        passwordInputFieldText = findViewById(R.id.passwordInput)
+        passwordRepeatInputFieldLayout = findViewById(R.id.register_input_repeatPassword)
+        passwordRepeatInputFieldText = findViewById(R.id.repeatPasswordInput)
+        emailInputFieldLayout = findViewById(R.id.register_input_email)
+        emailInputFieldText = findViewById(R.id.emailInput)
+        genderInputField = findViewById(R.id.register_input_setGender)
+        btnRegister = findViewById(R.id.btRegister)
+        appCompatTextViewLoginLink = findViewById(R.id.appCompatTextViewLoginLink)
+        nestedScrollView = findViewById(R.id.nestedScrollView)
+        icon = findViewById(R.id.logo)
+    }
+
+
     // Validates the Username input in Registration process
     private fun validateUsername(): Boolean {
-        val userInput = userInputField.editText?.text.toString().trim()
+        val userInput = userInputFieldLayout.editText?.text.toString().trim()
         if (userInput.isEmpty()) {
-            userInputField.error = "Field can't be empty"
+            userInputFieldLayout.error = "Field can't be empty"
             return false
         } else if (userInput.length > 15) {
-            userInputField.error = "Username too long"
+            userInputFieldLayout.error = "Username too long"
             return false
         } else {
-            userInputField.error = null
+            userInputFieldLayout.error = null
             return true
         }
     }
 
     // Validates the Password input in Registration process
     private fun validatePassword(): Boolean {
-        val passwordInput = passwordInputField.editText?.text.toString().trim()
+        val passwordInput = passwordInputFieldLayout.editText?.text.toString().trim()
         if (passwordInput.isEmpty()) {
-            passwordInputField.error = "Field can't be empty"
+            passwordInputFieldLayout.error = "Field can't be empty"
             return false
-        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()){
-            passwordInputField.error = "Password too weak"
+        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
+            passwordInputFieldLayout.error = "Password too weak - min. 4 characters! Use upper and lowercase letters, numbers, and special symbols like @#\$%^&+="
             return false
         } else {
-            passwordInputField.error = null
+            passwordInputFieldLayout.error = null
             return true
         }
     }
 
     // Validates the repeated Password input in Registration process
     private fun validateRepeatedPassword(): Boolean {
-        val passwordInput = passwordInputField.editText?.text.toString().trim()
-        val repeatedPasswordInput = passwordRepeatInputField.editText?.text.toString().trim()
+        val passwordInput = passwordInputFieldLayout.editText?.text.toString().trim()
+        val repeatedPasswordInput = passwordRepeatInputFieldLayout.editText?.text.toString().trim()
         if (repeatedPasswordInput.isEmpty()) {
-            passwordRepeatInputField.error = "Field can't be empty"
+            passwordRepeatInputFieldLayout.error = "Field can't be empty"
             return false
         } else if (passwordInput != repeatedPasswordInput) {
-            passwordRepeatInputField.error = "Passwords must be equal"
+            passwordRepeatInputFieldLayout.error = "Passwords must be equal"
             return false
         } else {
-            passwordRepeatInputField.error = null
+            passwordRepeatInputFieldLayout.error = null
             return true
         }
     }
 
     // Validates the Email input in Registration process
     private fun validateEmail(): Boolean {
-        val emailInput = emailInputField.editText?.text.toString().trim()
+        val emailInput = emailInputFieldLayout.editText?.text.toString().trim()
         if (emailInput.isEmpty()) {
-            emailInputField.error = "Field can't be empty"
+            emailInputFieldLayout.error = "Field can't be empty"
             return false
         } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
-            emailInputField.error = "Please enter a valid email address"
+            emailInputFieldLayout.error = "Please enter a valid email address"
             return false
         } else {
-            emailInputField.error = null
+            emailInputFieldLayout.error = null
             return true
         }
     }
@@ -130,15 +154,86 @@ class Register : AppCompatActivity() {
     // Confirm all Input fields
     fun confirmInput() {
         if (!validateUsername() or !validatePassword() or !validateRepeatedPassword() or !validateEmail()) {
+            emailInputFieldLayout.error = null
+            passwordRepeatInputFieldLayout.error = null
+            passwordInputFieldLayout.error = null
+            userInputFieldLayout.error = null
             return
         }
-        var input = "Email: " + emailInputField.editText?.text.toString()
-        input += "\n"
-        input += "Username: " + userInputField.editText?.text.toString()
-        input += "\n"
-        input += "Password: " + passwordInputField.editText?.text.toString()
-        input += "\n"
-        input += "Password: " + passwordRepeatInputField.editText?.text.toString()
-        Toast.makeText(this, input, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * This method is to initialize listeners
+     */
+    private fun initListeners() {
+        btnRegister.setOnClickListener(this)
+        appCompatTextViewLoginLink.setOnClickListener(this)
+    }
+
+    /**
+     * This method is to initialize objects to be used
+     */
+    private fun initObjects() {
+        databaseHelper = UserDbHelper(activity)
+    }
+
+    /**
+     * This implemented method is to listen the click on view
+     *
+     * @param v
+     */
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.btRegister -> {
+                confirmInput()
+                postDataToSQLite()
+                startActivity(Intent(this, SigninActivity::class.java))
+            }
+            R.id.appCompatTextViewLoginLink -> finish()
+        }
+    }
+
+    /**
+     * This method is to validate the input text fields and post data to SQLite
+     */
+    private fun postDataToSQLite() {
+
+        //if (!databaseHelper.checkUser(emailInputFieldText.text.toString().trim())) {
+            var user = UserModel(
+                id = 1,
+                name = userInputFieldText.text.toString().trim(),
+                password = passwordInputFieldText.text.toString().trim(),
+                email = emailInputFieldText.text.toString().trim(),
+                gender = genderInputField.toString().trim()
+            )
+            databaseHelper.addUser(user)
+            // Snack Bar to show success message that record saved successfully
+            Snackbar.make(
+                nestedScrollView,
+                getString(R.string.success_message),
+                Snackbar.LENGTH_LONG
+            ).show()
+            emptyInputEditText()
+/*
+        //} else {
+            // Snack Bar to show error message that record already exists
+            Snackbar.make(
+                nestedScrollView,
+                getString(R.string.error_email_exists),
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
+*/
+    }
+
+    /**
+     * This method is to empty all input edit text
+     */
+    private fun emptyInputEditText() {
+        userInputFieldText.text = null
+        emailInputFieldText.text = null
+        passwordInputFieldText.text = null
+        passwordRepeatInputFieldText.text = null
+
     }
 }

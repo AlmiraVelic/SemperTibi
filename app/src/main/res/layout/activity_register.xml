@@ -113,27 +113,6 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/register_input_setGender"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:contentDescription="Select a Gender"
-                android:hint="@string/gender"
-                app:errorEnabled="true"
-                app:passwordToggleContentDescription="@string/passwordRepeat">
-
-                <AutoCompleteTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="12dp"
-                    android:inputType="none"
-                    android:minHeight="48dp"
-                    app:simpleItems="@array/gender_identity" />
-
-            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/register_input_email"
@@ -156,6 +135,27 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/register_input_setGender"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:contentDescription="Select a Gender"
+                android:hint="@string/gender"
+                app:errorEnabled="true">
+
+                <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="12dp"
+                    android:inputType="none"
+                    android:minHeight="48dp"
+                    app:simpleItems="@array/gender_identity" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <Button
                 android:id="@+id/btRegister"
                 android:layout_width="match_parent"
@@ -168,6 +168,15 @@
                 android:textColor="@color/gray"
                 android:textSize="24sp"
                 tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/appCompatTextViewLoginLink"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:text="@string/text_already_member"
+                android:textSize="16dp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

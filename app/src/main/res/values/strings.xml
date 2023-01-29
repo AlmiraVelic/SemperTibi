@@ -6,7 +6,7 @@
     <string name="mailHint">example@mail.com</string>
     <string name="register">Register</string>
     <string name="getStarted">Get Started</string>
-    <string name="newUserQuestion">New User?</string>
+    <string name="newUserQuestion">New User</string>
     <string name="skip">Skip >> </string>
     <string name="dashBoard">Dashboard</string>
     <string name="sevenDayMood">7-day Mood-Overview</string>
@@ -95,6 +95,11 @@
         <item>Non-conforming</item>
         <item>Prefer not to respond</item>
     </string-array>
+
+    <string name="success_message">Registration Successful</string>
+    <string name="text_not_member">No account yet? Create one</string>
+    <string name="text_already_member">Already a user? Login</string>
+    <string name="error_email_exists">Email Already Exists</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
