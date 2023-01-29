@@ -154,11 +154,13 @@ class Register : AppCompatActivity(), View.OnClickListener {
     // Confirm all Input fields
     fun confirmInput() {
         if (!validateUsername() or !validatePassword() or !validateRepeatedPassword() or !validateEmail()) {
+
+            return
+        } else {
             emailInputFieldLayout.error = null
             passwordRepeatInputFieldLayout.error = null
             passwordInputFieldLayout.error = null
             userInputFieldLayout.error = null
-            return
         }
     }
 
@@ -186,7 +188,7 @@ class Register : AppCompatActivity(), View.OnClickListener {
         when (v.id) {
             R.id.btRegister -> {
                 confirmInput()
-                postDataToSQLite()
+                //postDataToSQLite()
                 //startActivity(Intent(this, SigninActivity::class.java))
             }
             R.id.appCompatTextViewLoginLink -> finish()
