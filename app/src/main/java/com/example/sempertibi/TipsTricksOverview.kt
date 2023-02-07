@@ -27,8 +27,8 @@ class TipsTricksOverview : AppCompatActivity() {
 
         val scrollView = findViewById<NestedScrollView>(R.id.nestedScrollView)
         scrollView.setOnScrollChangeListener { _, _, scrollY, _, _ ->
-            if (scrollY > 0) {
-                icon.visibility = View.INVISIBLE
+            if (scrollY >= 0) {
+                icon.visibility = View.GONE
             } else {
                 icon.visibility = View.VISIBLE
             }

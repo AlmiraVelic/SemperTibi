@@ -135,6 +135,7 @@
         android:layout_marginBottom="16dp"
         android:scaleType="centerInside"
         android:src="@drawable/lotus"
-        android:contentDescription="@string/logoString" />
+        android:contentDescription="@string/logoString"
+        android:visibility="gone"/>
 
 </RelativeLayout>

@@ -33,7 +33,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tvMoodJournalOv2"
+                    android:id="@+id/tvNutrition2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/nutrition"
@@ -50,32 +50,30 @@
                     app:dividerThickness="3dp" />
 
                 <TextView
-                    android:id="@+id/tvNewEntry"
+                    android:id="@+id/tvNutrition"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="@string/nutrition"
+                    android:text="@string/tipNutrition"
                     android:textColor="@color/logo_font"
-                    android:textSize="20sp" />
-
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:textAlignment="viewStart"/>
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
 
-        <TextView
-            android:id="@+id/tvVideoHead"
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/VideoNutrition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:gravity="center"
             android:padding="8dp"
-            android:text="@string/youtubeVideo"
-            android:textAlignment="center"
-            android:textColor="@color/logo_font"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            app:videoId="r-sX4heBTVE"
+            app:autoPlay="false"/>
 
     </LinearLayout>
 

@@ -33,7 +33,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tvMoodJournalOv2"
+                    android:id="@+id/tvPlans2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/plans"
@@ -50,32 +50,33 @@
                     app:dividerThickness="3dp" />
 
                 <TextView
-                    android:id="@+id/tvNewEntry"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvPlans"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="@string/plans"
+                    android:text="@string/tipPlan"
                     android:textColor="@color/logo_font"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:textAlignment="viewStart"
+                    android:padding="20dp"/>
 
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
 
-        <TextView
-            android:id="@+id/tvVideoHead"
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/VideoPlans"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:gravity="center"
             android:padding="8dp"
-            android:text="@string/youtubeVideo"
-            android:textAlignment="center"
-            android:textColor="@color/logo_font"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            app:videoId="TK5KOXLT15g"
+            app:autoPlay="false"
+            tools:ignore="VisualLintBounds" />
 
     </LinearLayout>
 
@@ -87,7 +88,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
+        android:contentDescription="@string/logoString"
         android:scaleType="centerInside"
         android:src="@drawable/lotus"
-        android:contentDescription="@string/logoString" />
+        tools:ignore="ImageContrastCheck" />
 </RelativeLayout>

@@ -60,10 +60,22 @@
     <string name="start">Start</string>
     <string name="tipsHeader">Tips &amp; Tricks for your mental health</string>
     <string name="breaks">Make breaks</string>
+    <string name="tipBreak">Click <a href="https://thewellbeingthesis.org.uk/foundations-for-success/importance-of-taking-breaks-and-having-other-interests/">here</a> to read more about the importance of breaks in our daily wellbeing.\n\nPlease start the video below. It shows a meditation guide with relaxing music. Close your eyes and take a break…</string>
     <string name="breath">Breath</string>
+    <string name="tipBreath">Breathing evokes the relaxation response from our body.\n\nPlease click <a href="https://www.health.harvard.edu/mind-and-mood/relaxation-techniques-breath-control-helps-quell-errant-stress-response">here</a> for more information.</string>
     <string name="sports">Sports</string>
+    <string name="tipSports">Sports calm your mind, strengthen your muscles, and improve your overall well-being. There are a lot of ways to relieve stress with sports. Click <a href="https://www.runtastic.com/blog/en/exercise-against-stress/">here</a> or <a href="https://www.health.harvard.edu/staying-healthy/exercising-to-relax">here</a> to find out more.</string>
     <string name="plans">Plans</string>
+    <string name="tipPlan">It’s important to keep making plans – even if they turn out to be pointless.\n\nClick <a href="https://www.wikihow.health/Develop-a-Plan-to-Manage-Stress">here</a> to find in detail how to set up a plan to manage stress.</string>
     <string name="nutrition">Nutrition</string>
+    <string name="tipNutrition">Nutrition can manage your stress \n\n
+    • Eat regularly \n
+    • Get your unsaturated fats \n
+    • Eat your veggies \n
+    • Add high-fiber foods \n
+    • Trade caffeine for more sleep \n
+    • Stock up on nutrient-dense snacks \n\n
+For more information click <a href="https://campushealth.unc.edu/health-topic/nutrition-and-stress/">here</a> </string>
     <string name="gender">Gender</string>
     <string name="notification">Notifications</string>
     <string name="userName">User Name</string>
@@ -87,6 +99,8 @@
     <string name="title_activity_mood_journal_overview">MoodJournalOverview</string>
     <string name="signout">Sign out</string>
     <string name="logoString">Logo of semper tibi</string>
+    <string name="youtubeVideo">Youtube video</string>
+
 
     <string-array name="gender_identity">
         <item>Woman</item>
@@ -116,6 +130,5 @@
     <string name="test_mp3">"https://storage.googleapis.com/exoplayer-test-media-0/play.mp3"</string>
     <string name="media_url_mp4">https://storage.googleapis.com/exoplayer-test-media-0/BigBuckBunny_320x180.mp4</string>
     <string name="myTestMp4">"https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4"</string>
-    <string name="youtubeVideo">Youtube video</string>
-    <string name="tipBreak">Please start the video below. It shows a meditation guide with relaxing music. Close your eyes and take a break</string>
+
 </resources>

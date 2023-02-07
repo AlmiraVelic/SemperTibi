@@ -33,7 +33,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tvMoodJournalOv2"
+                    android:id="@+id/tvBreak2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/breaks"
@@ -50,13 +50,14 @@
                     app:dividerThickness="3dp" />
 
                 <TextView
-                    android:id="@+id/tvNewEntry"
+                    android:id="@+id/tvBreak"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:text="@string/tipBreak"
                     android:textColor="@color/logo_font"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:padding="20dp"/>
 
             </LinearLayout>
 
@@ -67,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:gravity="center"
             android:padding="8dp"
