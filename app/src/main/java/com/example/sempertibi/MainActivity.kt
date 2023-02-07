@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         val enterButton = findViewById<Button>(R.id.btnStart)
 
         enterButton.setOnClickListener{
-            var intent = Intent(this,SigninActivity::class.java)
+            val intent = Intent(this,SigninActivity::class.java)
             startActivity(intent)
         }
     }

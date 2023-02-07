@@ -1,14 +1,10 @@
 package com.example.sempertibi
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Message
 import android.widget.Button
-import android.widget.EditText
 import android.widget.RelativeLayout
-import android.widget.Toast
-import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 
@@ -26,14 +22,14 @@ class SigninActivity : AppCompatActivity() {
         passwordInputField = findViewById(R.id.passwordInput)
         relativeLayoutSignIn = findViewById(R.id.relativeLayout_signin)
 
-        var user = ""
+        var user: String
         val login = findViewById<Button>(R.id.btLogin)
 
         login.setOnClickListener{
             user = userInputField.text.toString()
             if (validateInput()){
                 showMessage("Login Successful")
-                var intent = Intent(this, SecondActivity::class.java)
+                val intent = Intent(this, SecondActivity::class.java)
                 intent.putExtra("USER", user)
                 startActivity(intent)
             }
@@ -41,7 +37,7 @@ class SigninActivity : AppCompatActivity() {
 
         val register = findViewById<Button>(R.id.btRegisterSignIn)
         register.setOnClickListener{
-            var intent = Intent(this, Register::class.java)
+            val intent = Intent(this, Register::class.java)
             startActivity(intent)
         }
     }

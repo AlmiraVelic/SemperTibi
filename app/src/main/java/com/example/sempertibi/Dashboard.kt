@@ -2,7 +2,6 @@ package com.example.sempertibi
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -12,7 +11,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.widget.NestedScrollView
-import com.google.android.material.appbar.MaterialToolbar
 
 class Dashboard : AppCompatActivity() {
 
@@ -23,23 +21,24 @@ class Dashboard : AppCompatActivity() {
         // Buttons
         val moodJournal = findViewById<Button>(R.id.btnMoodJournal)
         moodJournal.setOnClickListener {
-            var intent = Intent(this, MoodJournalOverview::class.java)
+            val intent = Intent(this, MoodJournalOverview::class.java)
             startActivity(intent)
         }
         val stressTracker = findViewById<Button>(R.id.btnStressTracker)
         stressTracker.setOnClickListener {
-            var intent = Intent(this, StressTrackerOverview::class.java)
+            val intent = Intent(this, StressTrackerOverview::class.java)
             startActivity(intent)
         }
-        val tippsTricks = findViewById<Button>(R.id.btnTippsTricks)
+
+        val tippsTricks = findViewById<Button>(R.id.btnTipsTricks)
         tippsTricks.setOnClickListener {
-            var intent = Intent(this, TippsTricksOverview::class.java)
+            val intent = Intent(this, TipsTricksOverview::class.java)
             startActivity(intent)
         }
         val settings = findViewById<Button>(R.id.btnSettings)
 
         settings.setOnClickListener {
-            var intent = Intent(this, Settings::class.java)
+            val intent = Intent(this, Settings::class.java)
             startActivity(intent)
         }
 

@@ -11,7 +11,7 @@ class Settings : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        val switch = findViewById<View>(R.id.switch1)
+        findViewById<View>(R.id.switch1)
 
         val icon = findViewById<ImageView>(R.id.logo)
         icon.bringToFront()

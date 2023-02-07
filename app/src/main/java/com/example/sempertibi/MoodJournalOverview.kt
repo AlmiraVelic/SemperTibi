@@ -11,7 +11,7 @@ class MoodJournalOverview : AppCompatActivity() {
         setContentView(R.layout.activity_mood_journal_overview)
         val newEntry = findViewById<Button>(R.id.btnNewEntry)
         newEntry.setOnClickListener{
-            var intent = Intent(this, MoodJournalNew::class.java)
+            val intent = Intent(this, MoodJournalNew::class.java)
             startActivity(intent)
         }
     }

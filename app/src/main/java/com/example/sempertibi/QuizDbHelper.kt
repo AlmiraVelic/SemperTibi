@@ -152,7 +152,7 @@ class QuizDbHelper(context: Context) :
     fun readAllQuestions(): ArrayList<QuestionModel> {
         val questions = ArrayList<QuestionModel>()
         val db = writableDatabase
-        var cursor: Cursor? = null
+        val cursor: Cursor? = null
         try {
             db.rawQuery("SELECT * FROM " + DBContract.QuestionsTable.TABLE_NAME, null)
         } catch (e: SQLiteException) {
