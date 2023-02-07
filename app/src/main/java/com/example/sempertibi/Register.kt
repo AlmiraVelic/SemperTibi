@@ -1,6 +1,5 @@
 package com.example.sempertibi
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
@@ -8,7 +7,6 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.view.get
 import androidx.core.widget.NestedScrollView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
@@ -54,26 +52,6 @@ class Register : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_register)
 
         // initializing the views
-        initViews()
-
-        // initializing the listeners
-        initListeners()
-
-        // initializing the objects
-        initObjects()
-
-        icon.bringToFront()
-        nestedScrollView.setOnScrollChangeListener { _, _, scrollY, _, _ ->
-            if (scrollY > 0) {
-                icon.visibility = View.INVISIBLE
-            } else {
-                icon.visibility = View.VISIBLE
-            }
-        }
-    }
-
-
-    private fun initViews() {
         userInputFieldLayout = findViewById(R.id.register_input_username)
         userInputFieldText = findViewById(R.id.usernameInput)
         passwordInputFieldLayout = findViewById(R.id.register_input_password)
@@ -87,8 +65,21 @@ class Register : AppCompatActivity(), View.OnClickListener {
         appCompatTextViewLoginLink = findViewById(R.id.appCompatTextViewLoginLink)
         nestedScrollView = findViewById(R.id.nestedScrollView)
         icon = findViewById(R.id.logo)
-    }
+        // initializing the objects
+        databaseHelper = UserDbHelper(this)
 
+        // initializing the listeners
+        initListeners()
+
+        icon.bringToFront()
+        nestedScrollView.setOnScrollChangeListener { _, _, scrollY, _, _ ->
+            if (scrollY > 0) {
+                icon.visibility = View.INVISIBLE
+            } else {
+                icon.visibility = View.VISIBLE
+            }
+        }
+    }
 
     // Validates the Username input in Registration process
     private fun validateUsername(): Boolean {
@@ -112,7 +103,8 @@ class Register : AppCompatActivity(), View.OnClickListener {
             passwordInputFieldLayout.error = "Field can't be empty"
             return false
         } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
-            passwordInputFieldLayout.error = "Password too weak - min. 4 characters! Use upper and lowercase letters, numbers, and special symbols like @#\$%^&+="
+            passwordInputFieldLayout.error =
+                "Password too weak - min. 4 characters! Use upper and lowercase letters, numbers, and special symbols like @#\$%^&+="
             return false
         } else {
             passwordInputFieldLayout.error = null
@@ -154,7 +146,6 @@ class Register : AppCompatActivity(), View.OnClickListener {
     // Confirm all Input fields
     fun confirmInput() {
         if (!validateUsername() or !validatePassword() or !validateRepeatedPassword() or !validateEmail()) {
-
             return
         } else {
             emailInputFieldLayout.error = null
@@ -176,7 +167,7 @@ class Register : AppCompatActivity(), View.OnClickListener {
      * This method is to initialize objects to be used
      */
     private fun initObjects() {
-        databaseHelper = UserDbHelper(activity)
+        databaseHelper = UserDbHelper(this)
     }
 
     /**
@@ -187,8 +178,8 @@ class Register : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btRegister -> {
-                confirmInput()
-                //postDataToSQLite()
+                //confirmInput()
+                postDataToSQLite(this)
                 //startActivity(Intent(this, SigninActivity::class.java))
             }
             R.id.appCompatTextViewLoginLink -> finish()
@@ -198,25 +189,25 @@ class Register : AppCompatActivity(), View.OnClickListener {
     /**
      * This method is to validate the input text fields and post data to SQLite
      */
-    private fun postDataToSQLite() {
+    fun postDataToSQLite(view: Register) {
 
         //if (!databaseHelper.checkUser(emailInputFieldText.text.toString().trim())) {
-            var user = UserModel(
-                id = 1,
-                name = userInputFieldText.text.toString().trim(),
-                password = passwordInputFieldText.text.toString().trim(),
-                email = emailInputFieldText.text.toString().trim(),
-                gender = genderInputField.toString().trim()
-            )
-            databaseHelper.addUser(user)
-            // Snack Bar to show success message that record saved successfully
-            Snackbar.make(
-                nestedScrollView,
-                getString(R.string.success_message),
-                Snackbar.LENGTH_LONG
-            ).show()
-            emptyInputEditText()
-
+        var user = UserModel(
+            id = 1,
+            name = userInputFieldText.text.toString().trim(),
+            password = passwordInputFieldText.text.toString().trim(),
+            email = emailInputFieldText.text.toString().trim(),
+            gender = genderInputField.toString().trim()
+        )
+        databaseHelper.addUser(user)
+        // Snack Bar to show success message that record saved successfully
+        Snackbar.make(
+            nestedScrollView,
+            getString(R.string.success_message),
+            Snackbar.LENGTH_LONG
+        ).show()
+        emptyInputEditText()
+    }
 /*
         //} else {
             // Snack Bar to show error message that record already exists
@@ -227,7 +218,7 @@ class Register : AppCompatActivity(), View.OnClickListener {
             ).show()
         }
 */
-    }
+
 
     /**
      * This method is to empty all input edit text

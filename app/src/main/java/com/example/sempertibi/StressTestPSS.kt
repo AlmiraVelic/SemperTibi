@@ -31,8 +31,6 @@ class StressTestPSS : AppCompatActivity() {
     var questionCounter: Int = 0
     var questionCountTotal: Int = 10
 
-
-
     @SuppressLint("Range")
     override fun onCreate(savedInstanceState: Bundle?) {
         var score: Int = 0

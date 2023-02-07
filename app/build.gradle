@@ -65,8 +65,6 @@ dependencies {
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$room_version"
 
-    // Youtube videos without branding or ads
-    // dependency for exoplayer
-    implementation 'com.google.android.exoplayer:exoplayer:2.18.2'
-
+    // Youtube video player (GitHub library)
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
 }

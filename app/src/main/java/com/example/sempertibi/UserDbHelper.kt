@@ -11,16 +11,38 @@ import kotlin.collections.ArrayList
 class UserDbHelper(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
-    // create table sql query
-    private val CREATE_USER_TABLE = ("CREATE TABLE " + TABLE_USER + "("
-            + COLUMN_USER_ID + " INTEGER PRIMARY KEY, " + COLUMN_USER_NAME + " TEXT, "
-            + COLUMN_USER_EMAIL + " TEXT, " + COLUMN_USER_PASSWORD + " TEXT, " + COLUMN_USER_GENDER + " TEXT" + ")")
-
-    // drop table sql query
-    private val DROP_USER_TABLE = "DROP TABLE IF EXISTS $TABLE_USER"
-
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(CREATE_USER_TABLE)
+    }
+
+    companion object {
+        // Database Version
+        private val DATABASE_VERSION = 1
+
+        // Database Name
+        private val DATABASE_NAME = "test.db"
+
+        // User table name
+        private val TABLE_USER = "user"
+
+        // User Table Columns names
+        private val COLUMN_USER_ID = "user_id"
+        private val COLUMN_USER_NAME = "user_name"
+        private val COLUMN_USER_EMAIL = "user_email"
+        private val COLUMN_USER_PASSWORD = "user_password"
+        private val COLUMN_USER_GENDER = "user_gender"
+
+        // create table sql query
+        private val CREATE_USER_TABLE = ("CREATE TABLE " + TABLE_USER + "("
+                + COLUMN_USER_ID + " INTEGER PRIMARY KEY, " + COLUMN_USER_NAME + " TEXT, "
+                + COLUMN_USER_EMAIL + " TEXT, " + COLUMN_USER_PASSWORD + " TEXT, " + COLUMN_USER_GENDER + " TEXT" + ")")
+
+        // drop table sql query
+        private val DROP_USER_TABLE = "DROP TABLE IF EXISTS $TABLE_USER"
+    }
+
+    fun open(): SQLiteDatabase {
+        return writableDatabase
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -28,6 +50,10 @@ class UserDbHelper(context: Context) :
         db.execSQL(DROP_USER_TABLE)
         // Create tables again
         onCreate(db)
+    }
+
+    override fun onDowngrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        onUpgrade(db, oldVersion, newVersion)
     }
 
     /**
@@ -86,7 +112,7 @@ class UserDbHelper(context: Context) :
      *
      * @param user
      */
-    fun addUser(user: UserModel) {
+    fun addUser(user: UserModel): Boolean {
         val db = this.writableDatabase
 
         val values = ContentValues()
@@ -98,7 +124,7 @@ class UserDbHelper(context: Context) :
 
         // Inserting Row
         db.insert(TABLE_USER, null, values)
-        db.close()
+        return true
     }
 
     /**
@@ -128,15 +154,14 @@ class UserDbHelper(context: Context) :
      *
      * @param user
      */
-    fun deleteUser(user: UserModel) {
-
+    fun deleteUser(user: UserModel): Boolean {
         val db = this.writableDatabase
         // delete user record by id
         db.delete(
             TABLE_USER, "$COLUMN_USER_ID = ?",
             arrayOf(user.id.toString())
         )
-        db.close()
+        return true
     }
 
     /**
@@ -191,7 +216,7 @@ class UserDbHelper(context: Context) :
      * @param password
      * @return true/false
      */
-    fun checkUser(email: String, password: String): Boolean {
+    fun checkUserAndPW (email: String, password: String): Boolean {
 
         // array of columns to fetch
         val columns = arrayOf(COLUMN_USER_ID)
@@ -228,23 +253,5 @@ class UserDbHelper(context: Context) :
             return true
 
         return false
-    }
-
-    companion object {
-        // Database Version
-        private val DATABASE_VERSION = 1
-
-        // Database Name
-        private val DATABASE_NAME = "test.db"
-
-        // User table name
-        private val TABLE_USER = "user"
-
-        // User Table Columns names
-        private val COLUMN_USER_ID = "user_id"
-        private val COLUMN_USER_NAME = "user_name"
-        private val COLUMN_USER_EMAIL = "user_email"
-        private val COLUMN_USER_PASSWORD = "user_password"
-        private val COLUMN_USER_GENDER = "user_gender"
     }
 }
