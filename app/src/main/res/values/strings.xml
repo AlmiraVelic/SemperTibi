@@ -12,7 +12,7 @@
     <string name="sevenDayMood">7-day Mood-Overview</string>
     <string name="moodJournal">Mood Journal</string>
     <string name="stressTracker">Stress Tracker</string>
-    <string name="tipps">Tipps &amp; Tricks</string>
+    <string name="tips">Tips &amp; Tricks</string>
     <string name="settings">Settings</string>
     <string name="newEntry">New Entry</string>
     <string name="yourMood">Your Mood Journal</string>
@@ -58,7 +58,7 @@
     <string name="outputPSS3">Your test results indicate that you had high perceived stress the last month. Check your health status at a medical institution as soon as you feel uncomfortable.</string>
     <string name="heartRateTest">Check your stress level with your heart rate</string>
     <string name="start">Start</string>
-    <string name="tippsHeader">Tipps &amp; Tricks for your mental health</string>
+    <string name="tipsHeader">Tips &amp; Tricks for your mental health</string>
     <string name="breaks">Make breaks</string>
     <string name="breath">Breath</string>
     <string name="sports">Sports</string>
@@ -86,6 +86,7 @@
     <string name="lotus">Logo of Semper Tibi that shows a blue lotus flower</string>
     <string name="title_activity_mood_journal_overview">MoodJournalOverview</string>
     <string name="signout">Sign out</string>
+    <string name="logoString">Logo of semper tibi</string>
 
     <string-array name="gender_identity">
         <item>Woman</item>
@@ -115,4 +116,6 @@
     <string name="test_mp3">"https://storage.googleapis.com/exoplayer-test-media-0/play.mp3"</string>
     <string name="media_url_mp4">https://storage.googleapis.com/exoplayer-test-media-0/BigBuckBunny_320x180.mp4</string>
     <string name="myTestMp4">"https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4"</string>
+    <string name="youtubeVideo">Youtube video</string>
+    <string name="tipBreak">Please start the video below. It shows a meditation guide with relaxing music. Close your eyes and take a break</string>
 </resources>
