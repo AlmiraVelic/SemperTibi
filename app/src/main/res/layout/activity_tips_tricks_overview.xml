@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/anti_flash_white"
-    tools:context=".TippsTricksOverview">
+    tools:context=".TipsTricksOverview">
 
     <include
         layout="@layout/top_app_bar"
@@ -29,10 +29,10 @@
             android:gravity="center">
 
             <TextView
-                android:id="@+id/tvTippsTricks"
+                android:id="@+id/tvTipsTricks"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tippsHeader"
+                android:text="@string/tipsHeader"
                 android:textColor="@color/logo_font"
                 android:textSize="34sp"
                 android:textStyle="bold"
@@ -46,6 +46,28 @@
                 app:dividerColor="@color/lotus_blue"
                 app:dividerThickness="3dp"/>
 
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                android:id="@+id/VideoOverview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center"
+                android:padding="8dp"
+                app:videoId="tJlcnyji9FY"
+                app:autoPlay="false"/>
+
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                android:id="@+id/VideoOverview2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center"
+                android:padding="8dp"
+                app:videoId="eGVWRvNe1-A"
+                app:autoPlay="false"/>
+
             <Button
                 android:id="@+id/btnBreaks"
                 android:layout_width="match_parent"
@@ -55,7 +77,7 @@
                 android:text="@string/breaks"
                 android:textColor="@color/logo_font"
                 android:textSize="24sp"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="5dp"/>
 
             <Button
                 android:id="@+id/btnBreath"
@@ -66,7 +88,7 @@
                 android:text="@string/breath"
                 android:textColor="@color/logo_font"
                 android:textSize="24sp"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="5dp"/>
 
             <Button
                 android:id="@+id/btnSports"
@@ -77,7 +99,7 @@
                 android:text="@string/sports"
                 android:textColor="@color/logo_font"
                 android:textSize="24sp"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="5dp"/>
 
             <Button
                 android:id="@+id/btnPlans"
@@ -88,7 +110,7 @@
                 android:text="@string/plans"
                 android:textColor="@color/logo_font"
                 android:textSize="24sp"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="5dp"/>
 
             <Button
                 android:id="@+id/btnNutrition"
@@ -107,11 +129,12 @@
         android:id="@+id/logo"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:scaleType="centerInside"
-        android:src="@drawable/lotus" />
+        android:src="@drawable/lotus"
+        android:contentDescription="@string/logoString" />
 
 </RelativeLayout>

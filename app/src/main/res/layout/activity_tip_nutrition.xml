@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/anti_flash_white"
-    tools:context=".tippBreaks">
+    tools:context=".TipNutrition">
 
     <include
         android:id="@+id/topAppBar11"
@@ -23,7 +23,6 @@
             android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/topAppBar"
             android:fillViewport="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -37,7 +36,7 @@
                     android:id="@+id/tvMoodJournalOv2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/breaks"
+                    android:text="@string/nutrition"
                     android:textColor="@color/logo_font"
                     android:textSize="34sp"
                     android:textStyle="bold" />
@@ -55,7 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="@string/breaks"
+                    android:text="@string/nutrition"
                     android:textColor="@color/logo_font"
                     android:textSize="20sp" />
 
@@ -67,13 +66,12 @@
             android:id="@+id/tvVideoHead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:layout_marginStart="20dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="20dp"
             android:gravity="center"
             android:padding="8dp"
-            android:text="Youtube video"
+            android:text="@string/youtubeVideo"
             android:textAlignment="center"
             android:textColor="@color/logo_font"
             android:textSize="20sp"
@@ -85,11 +83,11 @@
         android:id="@+id/logo"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:scaleType="centerInside"
-        android:src="@drawable/lotus" />
-
+        android:src="@drawable/lotus"
+        android:contentDescription="@string/logoString" />
 </RelativeLayout>
