@@ -74,8 +74,7 @@
             android:gravity="center"
             android:padding="8dp"
             app:videoId="tEmt1Znux58"
-            app:autoPlay="false"
-            />
+            app:autoPlay="false"/>
 
     </LinearLayout>
 
