@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/anti_flash_white"
+    android:id="@+id/relativeLayoutMoodJournal"
     tools:context=".MoodJournalNew">
 
     <include
@@ -70,7 +71,7 @@
                 app:helperText="@string/exampleAnswer1">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tvHappenTodayInput"
+                    android:id="@+id/tvSituationInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="12dp"
@@ -91,7 +92,7 @@
                 app:helperText="@string/exampleAnswer2">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tvFeelTodayInput"
+                    android:id="@+id/tvEmotionInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="12dp"
@@ -112,7 +113,7 @@
                 app:helperText="@string/exampleAnswer3">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tvGoalTodayInput"
+                    android:id="@+id/tvAchievementInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="12dp"

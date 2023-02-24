@@ -12,10 +12,15 @@ import android.widget.*
 import android.widget.Toast.LENGTH_SHORT
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import com.example.sempertibi.databinding.ActivityStressTestPssBinding
 
 
+//class StressTestPSS : AppCompatActivity(), LifecycleOwner {
 class StressTestPSS : AppCompatActivity() {
+
     var EXTRA_SCORE: String = "Extra Score"
     lateinit var tvQuestion: TextView
     lateinit var tvQuestionCount: TextView
@@ -33,6 +38,7 @@ class StressTestPSS : AppCompatActivity() {
 
     @SuppressLint("Range")
     override fun onCreate(savedInstanceState: Bundle?) {
+        //var viewModel = ViewModelProvider(this).get(StressTestPSSViewModel::class.java)
         var score: Int = 0
         val db = this.openOrCreateDatabase("test.db", Context.MODE_PRIVATE, null)
         var cursor: Cursor =
@@ -106,7 +112,7 @@ class StressTestPSS : AppCompatActivity() {
         //TODO("Check Sum")
         var selectedId: Int = rbGroup.checkedRadioButtonId
         if (selectedId == -1) {
-        } else{
+        } else {
             var selectedRadioButton: RadioButton = findViewById(selectedId)
             var selectedValue = selectedRadioButton.text
             score += selectedValue.toString().toInt()
