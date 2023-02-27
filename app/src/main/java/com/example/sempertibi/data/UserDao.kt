@@ -38,4 +38,7 @@ interface UserDao {
     @Query(value = "SELECT * FROM moodJournal WHERE user_id = :user_id AND entry_date = :entry_date")
     fun readMoodOfUserData(user_id: Int, entry_date: String): List<MoodJournal>
 
+    @Query("SELECT EXISTS(SELECT * FROM moodJournal Where user_id = :user_id AND entry_date = :entry_date)")
+    fun isRowIsExists(user_id: Int, entry_date: String): Boolean
+
 }
