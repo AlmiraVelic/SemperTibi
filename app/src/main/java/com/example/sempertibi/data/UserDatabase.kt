@@ -1,13 +1,12 @@
 package com.example.sempertibi.data
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 import com.example.sempertibi.data.entities.MoodJournal
 import com.example.sempertibi.data.entities.StressHRV
 import com.example.sempertibi.data.entities.StressPSS
 import com.example.sempertibi.data.entities.User
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 /*
 User Database contains the database holder and serves as the main access point
@@ -22,9 +21,11 @@ for the underlying connection to the app's persisted, relational data.
         StressHRV::class
     ],
     version = 1,
-    exportSchema = false
+    exportSchema = true
 )
 
+
+@TypeConverters(DateConverter::class)
 abstract class UserDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
