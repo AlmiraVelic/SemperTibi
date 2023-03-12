@@ -1,9 +1,8 @@
 package com.example.sempertibi.data.entities
 
 import androidx.room.Entity
-import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import java.sql.Date
+import java.util.*
 
 /*
 This class represents the user table within the database
@@ -14,7 +13,7 @@ data class MoodJournal(
     @PrimaryKey(autoGenerate = true)
     val entry_id: Int,
     val user_id: Int,
-    val entry_date: String,
+    val entry_date: Date,
     val situation: String,
     val emotion: String,
     val achievement: String,
