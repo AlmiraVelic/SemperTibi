@@ -89,4 +89,8 @@ dependencies {
     kapt "androidx.room:room-compiler:2.5.0"
     implementation "androidx.room:room-ktx:2.5.0"
     androidTestImplementation "androidx.room:room-testing:2.5.0"
+
+    // Cryptography
+    implementation "androidx.security:security-crypto:1.1.0-alpha05"
+    implementation 'org.mindrot:jbcrypt:0.4'
 }

@@ -17,10 +17,8 @@ import com.example.sempertibi.data.entities.User
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
-import java.security.SecureRandom
+import org.mindrot.jbcrypt.BCrypt
 import java.util.regex.Pattern
-import javax.crypto.SecretKeyFactory
-import javax.crypto.spec.PBEKeySpec
 
 class Register : AppCompatActivity() {
     private val passwordPattern: Pattern = Pattern.compile(
@@ -71,6 +69,40 @@ class Register : AppCompatActivity() {
         nestedScrollView = findViewById(R.id.nestedScrollView)
         icon = findViewById(R.id.logo)
 
+        btnRegister.setOnClickListener {
+            val saltValue = BCrypt.gensalt()
+            val insertUser = listOf(
+                User(
+                    user_id = 0,
+                    name = userInputFieldText.text.toString(),
+                    passwordHash = BCrypt.hashpw(passwordInputFieldText.text.toString(), saltValue),
+                    salt = saltValue,
+                    gender = genderInputField.text.toString(),
+                    email = emailInputFieldText.text.toString()
+                )
+            )
+
+            if (validateUsername() and validatePassword() and validateRepeatedPassword() and validateEmail()) {
+                lifecycleScope.launch {
+                    insertUser.forEach { dao.addUser(it) }
+                }
+                emptyInputEditText()
+                // Toast to show success message that record saved successfully
+                Toast.makeText(
+                    applicationContext, getString(R.string.success_message), Toast.LENGTH_SHORT
+                ).show()
+                btnRegister.visibility = View.INVISIBLE
+            } else {
+                validateUsername()
+                validateEmail()
+                validatePassword()
+                validateRepeatedPassword()
+            }
+        }
+
+/*
+
+This Solution works too with PBKDF2 algorithm
 
         btnRegister.setOnClickListener {
             val saltValue = generateSalt()
@@ -102,6 +134,8 @@ class Register : AppCompatActivity() {
                 validateRepeatedPassword()
             }
         }
+        */
+
 
         appCompatTextViewLoginLink.setOnClickListener {
             startActivity(Intent(this, SigninActivity::class.java))
@@ -198,25 +232,5 @@ class Register : AppCompatActivity() {
         genderInputField.text = null
     }
 
-    /*
-    The salt value should be unique for each user and should be generated using a secure random number generator.
-    This helps to prevent attackers from using precomputed tables of hashes to attack multiple passwords at once.
-     */
-    fun generateSalt(): ByteArray {
-        val salt = ByteArray(16)
-        SecureRandom().nextBytes(salt)
-        return salt
-    }
-
-    /*
-    hash the password using a key derivation function called PBKDF2
-     */
-    fun hashPassword(password: String, salt: ByteArray): ByteArray {
-        val iterations = 10000
-        val keyLength = 256
-        val spec = PBEKeySpec(password.toCharArray(), salt, iterations, keyLength)
-        val factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256")
-        return factory.generateSecret(spec).encoded
-    }
 
 }
