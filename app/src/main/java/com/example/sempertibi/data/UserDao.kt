@@ -23,6 +23,9 @@ interface UserDao {
     @Query("SELECT * FROM user ORDER BY user_id ASC")
     fun readAllUserData(): LiveData<List<User>>
 
+    @Query("SELECT * FROM user WHERE name = :name")
+    fun getUserByUsername(name: String): User?
+
     @Update
     suspend fun updateUser(user: User)
 
