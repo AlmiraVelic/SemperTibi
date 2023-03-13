@@ -22,20 +22,18 @@ import java.util.regex.Pattern
 import javax.crypto.SecretKeyFactory
 import javax.crypto.spec.PBEKeySpec
 
-
 class Register : AppCompatActivity() {
-    private val passwordPattern: Pattern =
-        Pattern.compile(
-            "^" +
-                    //"(?=.*[0-9])" +           //at least 1 digit
-                    //"(?=.*[a-z])" +           //at least 1 lower case letter
-                    //"(?=.*[A-Z])" +           //at least 1 upper case letter
-                    "(?=.*[a-zA-Z])" +          //any letter
-                    "(?=.*[@#$%^&+=])" +        //at least 1 special character
-                    "(?=\\S+$)" +               //no white spaces
-                    ".{4,}" +                   //at least 4 characters
-                    "$"
-        )
+    private val passwordPattern: Pattern = Pattern.compile(
+        "^" +
+                //"(?=.*[0-9])" +           //at least 1 digit
+                //"(?=.*[a-z])" +           //at least 1 lower case letter
+                //"(?=.*[A-Z])" +           //at least 1 upper case letter
+                "(?=.*[a-zA-Z])" +          //any letter
+                "(?=.*[@#$%^&+=])" +        //at least 1 special character
+                "(?=\\S+$)" +               //no white spaces
+                ".{4,}" +                   //at least 4 characters
+                "$"
+    )
 
     lateinit var nestedScrollView: NestedScrollView
     lateinit var userInputFieldLayout: TextInputLayout
@@ -94,9 +92,7 @@ class Register : AppCompatActivity() {
                 emptyInputEditText()
                 // Toast to show success message that record saved successfully
                 Toast.makeText(
-                    applicationContext,
-                    getString(R.string.success_message),
-                    Toast.LENGTH_SHORT
+                    applicationContext, getString(R.string.success_message), Toast.LENGTH_SHORT
                 ).show()
                 btnRegister.visibility = View.INVISIBLE
             } else {
@@ -224,82 +220,3 @@ class Register : AppCompatActivity() {
     }
 
 }
-
-
-/*
-    // Confirm all Input fields
-    private fun confirmInput() {
-        if (!validateUsername() or !validatePassword() or !validateRepeatedPassword() or !validateEmail()) {
-            return
-        } else {
-            emailInputFieldLayout.error = null
-            passwordRepeatInputFieldLayout.error = null
-            passwordInputFieldLayout.error = null
-            userInputFieldLayout.error = null
-        }
-    }
-
-
-
-    /**
-     * This method is to initialize listeners
-     */
-    private fun initListeners() {
-        btnRegister.setOnClickListener(this)
-        appCompatTextViewLoginLink.setOnClickListener(this)
-    }
-
-    /**
-     * This implemented method is to listen the click on view
-     *
-     * @param v
-     */
-    override fun onClick(v: View) {
-        when (v.id) {
-            R.id.btRegister -> {
-                confirmInput()
-                //postDataToRoom(this)
-            }
-            //R.id.appCompatTextViewLoginLink -> finish()
-        }
-    }
-
-    /**
-     * This method is to validate the input text fields and post data to SQLite
-     */
-    private fun postDataToRoom(view: Register) {
-        //if (!databaseHelper.checkUser(emailInputFieldText.text.toString().trim())) {
-        var insertUser = listOf(
-            User(
-                user_id = 0,
-                name = userInputFieldText.text.toString().trim(),
-                password = passwordInputFieldText.text.toString().trim(),
-                gender = genderInputField.toString().trim(),
-                email = emailInputFieldText.text.toString().trim()
-            )
-        )
-
-        lifecycleScope.launch {
-            insertUser.forEach { dao.addUser(it) }
-        }
-
-        // Snack Bar to show success message that record saved successfully
-        Snackbar.make(
-            nestedScrollView,
-            getString(R.string.success_message),
-            Snackbar.LENGTH_LONG
-        ).show()
-        emptyInputEditText()
-        //startActivity(Intent(this, SigninActivity::class.java))
-    }
-
-        //} else {
-            // Snack Bar to show error message that record already exists
-            Snackbar.make(
-                nestedScrollView,
-                getString(R.string.error_email_exists),
-                Snackbar.LENGTH_LONG
-            ).show()
-        }
-}
-*/
