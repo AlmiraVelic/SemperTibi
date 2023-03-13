@@ -11,7 +11,8 @@ data class User(
     @PrimaryKey(autoGenerate = true)
     val user_id: Int,
     val name: String,
-    val password: String,
+    val passwordHash: ByteArray,
+    val salt: ByteArray,
     val gender: String,
     val email: String,
 )

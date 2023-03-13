@@ -17,7 +17,10 @@ import com.example.sempertibi.data.entities.User
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
+import java.security.SecureRandom
 import java.util.regex.Pattern
+import javax.crypto.SecretKeyFactory
+import javax.crypto.spec.PBEKeySpec
 
 
 class Register : AppCompatActivity() {
@@ -46,8 +49,7 @@ class Register : AppCompatActivity() {
     lateinit var genderInputField: AutoCompleteTextView
     lateinit var btnRegister: Button
     lateinit var icon: ImageView
-
-    private lateinit var appCompatTextViewLoginLink: AppCompatTextView
+    lateinit var appCompatTextViewLoginLink: AppCompatTextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,12 +75,13 @@ class Register : AppCompatActivity() {
 
 
         btnRegister.setOnClickListener {
-
+            val saltValue = generateSalt()
             val insertUser = listOf(
                 User(
                     user_id = 0,
                     name = userInputFieldText.text.toString(),
-                    password = passwordInputFieldText.text.toString(),
+                    passwordHash = hashPassword(passwordInputFieldText.text.toString(), saltValue),
+                    salt = saltValue,
                     gender = genderInputField.text.toString(),
                     email = emailInputFieldText.text.toString()
                 )
@@ -104,7 +107,7 @@ class Register : AppCompatActivity() {
             }
         }
 
-        appCompatTextViewLoginLink.setOnClickListener{
+        appCompatTextViewLoginLink.setOnClickListener {
             startActivity(Intent(this, SigninActivity::class.java))
         }
 
@@ -118,7 +121,9 @@ class Register : AppCompatActivity() {
         }
     }
 
-    // Validates the Username input in Registration process
+    /*
+    Validates the Username input in Registration process
+     */
     private fun validateUsername(): Boolean {
         val userInput = userInputFieldLayout.editText?.text.toString().trim()
         return if (userInput.isEmpty()) {
@@ -133,7 +138,9 @@ class Register : AppCompatActivity() {
         }
     }
 
-    // Validates the Password input in Registration process
+    /*
+    Validates the Password input in Registration process
+     */
     private fun validatePassword(): Boolean {
         val passwordInput = passwordInputFieldLayout.editText?.text.toString().trim()
         return if (passwordInput.isEmpty()) {
@@ -149,7 +156,9 @@ class Register : AppCompatActivity() {
         }
     }
 
-    // Validates the repeated Password input in Registration process
+    /*
+    Validates the repeated Password input in Registration process
+     */
     private fun validateRepeatedPassword(): Boolean {
         val passwordInput = passwordInputFieldLayout.editText?.text.toString().trim()
         val repeatedPasswordInput = passwordRepeatInputFieldLayout.editText?.text.toString().trim()
@@ -165,7 +174,9 @@ class Register : AppCompatActivity() {
         }
     }
 
-    // Validates the Email input in Registration process
+    /*
+    Validates the Email input in Registration process
+     */
     private fun validateEmail(): Boolean {
         val emailInput = emailInputFieldLayout.editText?.text.toString().trim()
         return if (emailInput.isEmpty()) {
@@ -180,9 +191,9 @@ class Register : AppCompatActivity() {
         }
     }
 
-    /**
-     * This method is to empty all input edit text
-     */
+    /*
+     This method is to empty all input edit text
+    */
     private fun emptyInputEditText() {
         userInputFieldText.text = null
         emailInputFieldText.text = null
@@ -190,6 +201,28 @@ class Register : AppCompatActivity() {
         passwordRepeatInputFieldText.text = null
         genderInputField.text = null
     }
+
+    /*
+    The salt value should be unique for each user and should be generated using a secure random number generator.
+    This helps to prevent attackers from using precomputed tables of hashes to attack multiple passwords at once.
+     */
+    fun generateSalt(): ByteArray {
+        val salt = ByteArray(16)
+        SecureRandom().nextBytes(salt)
+        return salt
+    }
+
+    /*
+    hash the password using a key derivation function called PBKDF2
+     */
+    fun hashPassword(password: String, salt: ByteArray): ByteArray {
+        val iterations = 10000
+        val keyLength = 256
+        val spec = PBEKeySpec(password.toCharArray(), salt, iterations, keyLength)
+        val factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256")
+        return factory.generateSecret(spec).encoded
+    }
+
 }
 
 
