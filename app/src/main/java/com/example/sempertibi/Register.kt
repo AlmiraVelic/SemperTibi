@@ -78,7 +78,8 @@ class Register : AppCompatActivity() {
                     passwordHash = BCrypt.hashpw(passwordInputFieldText.text.toString(), saltValue),
                     salt = saltValue,
                     gender = genderInputField.text.toString(),
-                    email = emailInputFieldText.text.toString()
+                    email = emailInputFieldText.text.toString(),
+                    notification = false,
                 )
             )
 

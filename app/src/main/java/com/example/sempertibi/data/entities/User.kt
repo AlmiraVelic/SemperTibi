@@ -10,11 +10,12 @@ This class represents the user table within the database
 data class User(
     @PrimaryKey(autoGenerate = true)
     val user_id: Int,
-    val name: String,
-    val passwordHash: String,
-    val salt: String,
-    val gender: String,
-    val email: String,
+    var name: String,
+    var passwordHash: String,
+    var salt: String,
+    var gender: String,
+    var email: String,
+    var notification: Boolean,
 )/* {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
