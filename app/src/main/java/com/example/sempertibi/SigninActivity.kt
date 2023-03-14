@@ -52,10 +52,19 @@ class SigninActivity : AppCompatActivity() {
                     if (userInDB != null && BCrypt.checkpw(password,userInDB.passwordHash)) {
                         Log.d("CoroutineDebug", "Authentication succeeded")
                         // Authentication succeeded
+
+                        // set Global Data for Settings Activity
+                        GlobalData.userID = userInDB.user_id
+                        GlobalData.loggedInUser = user
+                        GlobalData.passwordUser = password
+                        GlobalData.emailUser = userInDB.email
+                        GlobalData.notificationUser = userInDB.notification
+                        GlobalData.genderUser = userInDB.gender
+
                         showMessage("Login Successful")
                         withContext(Dispatchers.Main) {
                             val intent = Intent(this@SigninActivity, Dashboard::class.java)
-                            intent.putExtra("USER", user)
+                            //intent.putExtra("USER", user)
                             startActivity(intent)
                             finish()
                         }
