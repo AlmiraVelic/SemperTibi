@@ -6,6 +6,7 @@ import com.example.sempertibi.data.entities.MoodJournal
 import com.example.sempertibi.data.entities.StressHRV
 import com.example.sempertibi.data.entities.StressPSS
 import com.example.sempertibi.data.entities.User
+import java.util.*
 
 /*
 Dao = Data Access Object
@@ -56,8 +57,11 @@ interface UserDao {
     @Query("SELECT * FROM stressPSS ORDER BY user_id ASC")
     fun readStressTestPSS(): LiveData<List<StressPSS>>
 
-    @Query("SELECT * FROM stressPSS WHERE user_id = :userId")
-    fun getPSSByUserId(userId: Int): List<StressPSS>
+    @Query("SELECT * FROM stressPSS WHERE user_id = :userId ORDER BY testPSS_date DESC LIMIT 7")
+    fun getPSSLast7Entries(userId: Int): List<StressPSS>
+
+    @Query("SELECT * FROM stressPSS WHERE user_id = :userId AND testPSS_date = :date")
+    fun getStressPSSByUserIdAndDate(userId: Int, date: String): StressPSS?
 
     @Update
     suspend fun updateStressTestPSS(testPSS: StressPSS)
@@ -72,8 +76,8 @@ interface UserDao {
     @Query("SELECT * FROM stressHRV ORDER BY user_id ASC")
     fun readStressTestHRV(): LiveData<List<StressHRV>>
 
-    @Query("SELECT * FROM stressPSS WHERE user_id = :userId")
-    fun getHRVByUserId(userId: Int): List<StressPSS>
+    @Query("SELECT * FROM stressHRV WHERE user_id = :userId ORDER BY testHRV_date DESC LIMIT 7")
+    fun getHRVLast7Entries(userId: Int): List<StressHRV>
 
     @Update
     suspend fun updateStressTestHRV(testHRV: StressHRV)

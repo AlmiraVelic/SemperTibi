@@ -1,7 +1,10 @@
 package com.example.sempertibi
 
+import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.RadioButton
@@ -13,7 +16,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.sempertibi.data.UserDatabase
 import com.example.sempertibi.data.entities.StressPSS
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
 import java.util.*
 
 class StressTestPSS : AppCompatActivity(), View.OnClickListener {
@@ -49,6 +55,8 @@ class StressTestPSS : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_stress_test_pss)
 
+        GlobalData.pssScore = 0
+
         rbGroup = findViewById(R.id.radioGroup)
         rb1 = findViewById(R.id.radio_button_1)
         rb2 = findViewById(R.id.radio_button_2)
@@ -68,8 +76,7 @@ class StressTestPSS : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btNext -> {
-                val checkedButton =
-                    rbGroup.findViewById<RadioButton>(rbGroup.checkedRadioButtonId)
+                val checkedButton = rbGroup.findViewById<RadioButton>(rbGroup.checkedRadioButtonId)
                 if (checkedButton != null) {
                     answers.add(rbGroup.indexOfChild(checkedButton))
                 } else {
@@ -84,47 +91,81 @@ class StressTestPSS : AppCompatActivity(), View.OnClickListener {
                     finishTest()
 
                     // If user wants to restart the test for today
-                    btnNext.text = getString(R.string.restartTest)
-                    btnNext.setOnClickListener {
-                        AlertDialog.Builder(this)
-                            .setTitle("Confirm")
+                    var btnRestart = btnNext
+                    btnRestart.text = getString(R.string.restartTest)
+                    btnRestart.setOnClickListener {
+                        AlertDialog.Builder(this).setTitle("Confirm")
                             .setMessage("Are you sure you want to restart the test?")
                             .setPositiveButton("Yes") { _, _ ->
                                 // User confirmed
                                 // Reset the activity if the button text is "Restart Test"
                                 startActivity(Intent(this, StressTestPSS::class.java))
                                 finish()
-                            }
-                            .setNegativeButton("No", null)
-                            .show()
+                            }.setNegativeButton("No", null).show()
                     }
+
                     btnSave.setOnClickListener {
-                        AlertDialog.Builder(this)
-                            .setTitle("Confirm")
-                            .setMessage("Do you want to save the test data?")
-                            .setPositiveButton("Yes") { _, _ ->
-                                // User confirmed
-                                val dao = UserDatabase.getInstance(this).userDao()
-                                val stressPSS = StressPSS(
-                                    testPSS_id = 0,
-                                    user_id = GlobalData.userID!!,
-                                    testPSS_date = Date(),
-                                    PSS_score = GlobalData.pssScore!!
+                        Log.d("PSS", "Button clicked")
+                        // User confirmed
+                        val dao = UserDatabase.getInstance(this).userDao()
+                        Log.d("PSS", "DB accessed")
+                        // First, get the current date and time
+                        val currentDate = Date()
+                        Log.d("PSS", "Current Date set")
+                        // format the date to just the day, month, and year
+                        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+                        Log.d("PSS", "Date format set")
+                        val dateString = dateFormat.format(currentDate)
+                        Log.d("PSS", "Date formated and set to dateString")
+
+                        val stressPSS = StressPSS(
+                            testPSS_id = 0,
+                            user_id = GlobalData.userID!!,
+                            testPSS_date = dateString,
+                            PSS_score = GlobalData.pssScore
+                        )
+                        Log.d("PSS", "New stressPSS object created")
+
+                        lifecycleScope.launch {
+                            Log.d("PSS", "Coroutines lifecycleScope started")
+                            // Check the existing entry in Database
+                            val existingEntry = withContext(Dispatchers.IO) {
+                                dao.getStressPSSByUserIdAndDate(
+                                    GlobalData.userID!!, dateString
                                 )
-
-                                lifecycleScope.launch {
-                                    dao.addStressPSS(stressPSS)
-                                }
-
-                                Toast.makeText(applicationContext, "Results saved", Toast.LENGTH_SHORT).show()
-                                startActivity(Intent(this, StressTrackerOverview::class.java))
-                                finish()
                             }
-                            .setNegativeButton("No"){ _, _ ->
-                                startActivity(Intent(this, StressTrackerOverview::class.java))
-                                finish()
+                            Log.d("PSS", "get existing Entry")
+                            // If there is no entry, pass the entry to the database
+                            if (existingEntry == null) {
+                                dao.addStressPSS(stressPSS)
+                                Toast.makeText(
+                                    applicationContext, "Results saved", Toast.LENGTH_SHORT
+                                ).show()
+                                Log.d("PSS", "New entry done")
+
+                            } else {
+                                // If there is an entry for this day, then user is notified
+                                AlertDialog.Builder(this@StressTestPSS).setTitle("Duplicate entry")
+                                    .setMessage("There is already an entry for today. Do you want to update it?")
+                                    .setPositiveButton("Update") { _, _ ->
+                                        // update the existing entry
+                                        lifecycleScope.launch {
+                                            dao.updateStressTestPSS(stressPSS)
+                                        }
+                                        Toast.makeText(
+                                            applicationContext, "Results updated", Toast.LENGTH_SHORT
+                                        ).show()
+                                    }.setNegativeButton("Cancel") { _, _ ->
+                                        startActivity(
+                                            Intent(
+                                                this@StressTestPSS,
+                                                StressTrackerOverview::class.java
+                                            )
+                                        )
+                                        finish()
+                                    }.show()
                             }
-                            .show()
+                        }
                     }
                 }
             }
@@ -133,7 +174,7 @@ class StressTestPSS : AppCompatActivity(), View.OnClickListener {
 
     private fun setQuestion(index: Int) {
         tvQuestion.text = questions[index]
-        var myindex = index+1
+        var myindex = index + 1
         tvQuestionCount.text = "Question $myindex/10"
         btnNext.text = if (index == questions.size - 1) "Finish" else "Next"
     }
@@ -147,6 +188,7 @@ class StressTestPSS : AppCompatActivity(), View.OnClickListener {
 
         // Calculate the PSS score using the answers
         var pssScore = 0
+
         for (answer in answers) when (answer) {
             0, 1 -> {
                 pssScore += 1
@@ -179,4 +221,7 @@ class StressTestPSS : AppCompatActivity(), View.OnClickListener {
         // For saving the results a button is set visible
         btnSave.visibility = View.VISIBLE
     }
+
 }
+
+

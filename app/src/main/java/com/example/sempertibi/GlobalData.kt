@@ -10,6 +10,6 @@ object GlobalData {
     var genderUser: String? = null
 
     /* TODO Stress Test global data */
-    var pssScore: Int? = null
+    var pssScore: Int = 0
 
 }
