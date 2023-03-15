@@ -45,6 +45,7 @@
                 app:dividerThickness="3dp" />
 
             <TextView
+                android:id="@+id/informationText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
@@ -117,8 +118,25 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="12dp"
-        android:contentDescription="Button to register. Press after registration form is completed."
+        android:contentDescription="Button to get the next question. After finishing the 10 questions, you can restart the test by clicking the button."
         android:text="Next"
+        android:textColor="@color/gray"
+        android:textSize="24sp"
+        tools:ignore="TextContrastCheck"
+        android:onClick="checkAnswersPSS"/>
+
+
+    <Button
+        android:id="@+id/btSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btNext"
+        android:visibility="gone"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="12dp"
+        android:contentDescription="Button to save your results"
+        android:text="Save Results"
         android:textColor="@color/gray"
         android:textSize="24sp"
         tools:ignore="TextContrastCheck"
