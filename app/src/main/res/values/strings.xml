@@ -47,6 +47,7 @@
     <string name="questionPSS8">In the last month, how often have you felt that you were on top of things?</string>
     <string name="questionPSS9">In the last month, how often have you been angered because of things that happened that were outside of your control?</string>
     <string name="questionPSS10">In the last month, how often have you felt difficulties were piling up so high that you could not overcome them?</string>
+    <string name="restartTest">Restart Test</string>
     <string name="explanation" tools:ignore="ExtraTranslation">The Perceived Stress Scale (PSS) is the most widely used psychological instrument for measuring the perception of stress. It is a measure of the degree to which situations in one’s life are appraised as stressful. Items were designed to tap how unpredictable, uncontrollable, and overloaded respondents find their lives. The scale also includes a number of direct queries about current levels of experienced stress. The PSS was designed for use in community samples with at least a junior high school education. The items are easy to understand, and the response alternatives are simple to grasp. Moreover, the questions are of a general nature and hence are relatively free of content specific to any subpopulation group. The questions in the PSS ask about feelings and thoughts during the last month.</string>
     <string name="answerPSS1">Never</string>
     <string name="answerPSS2">Almost never</string>
