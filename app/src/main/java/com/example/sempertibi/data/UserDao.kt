@@ -56,6 +56,9 @@ interface UserDao {
     @Query("SELECT * FROM stressPSS ORDER BY user_id ASC")
     fun readStressTestPSS(): LiveData<List<StressPSS>>
 
+    @Query("SELECT * FROM stressPSS WHERE user_id = :userId")
+    fun getPSSByUserId(userId: Int): List<StressPSS>
+
     @Update
     suspend fun updateStressTestPSS(testPSS: StressPSS)
 
@@ -69,14 +72,12 @@ interface UserDao {
     @Query("SELECT * FROM stressHRV ORDER BY user_id ASC")
     fun readStressTestHRV(): LiveData<List<StressHRV>>
 
+    @Query("SELECT * FROM stressPSS WHERE user_id = :userId")
+    fun getHRVByUserId(userId: Int): List<StressPSS>
+
     @Update
     suspend fun updateStressTestHRV(testHRV: StressHRV)
 
     @Delete
     suspend fun deleteStressTestHRV(testHRV: StressHRV)
-
-
-    @Query("SELECT EXISTS(SELECT * FROM moodJournal Where user_id = :user_id AND entry_date = :entry_date)")
-    fun isRowIsExists(user_id: Int, entry_date: String): Boolean
-
 }
