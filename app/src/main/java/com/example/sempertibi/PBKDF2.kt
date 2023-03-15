@@ -5,7 +5,6 @@ import javax.crypto.SecretKeyFactory
 import javax.crypto.spec.PBEKeySpec
 
 class PBKDF2 {
-
     companion object {
         /*
       The salt value should be unique for each user and should be generated using a secure random number generator.
