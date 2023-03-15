@@ -4,10 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
-import android.widget.AutoCompleteTextView
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.NestedScrollView
@@ -23,7 +20,7 @@ import java.util.regex.Pattern
 class Register : AppCompatActivity() {
     private val passwordPattern: Pattern = Pattern.compile(
         "^" +
-                //"(?=.*[0-9])" +           //at least 1 digit
+                "(?=.*[0-9])" +           //at least 1 digit
                 //"(?=.*[a-z])" +           //at least 1 lower case letter
                 //"(?=.*[A-Z])" +           //at least 1 upper case letter
                 "(?=.*[a-zA-Z])" +          //any letter
@@ -83,6 +80,7 @@ class Register : AppCompatActivity() {
                 )
             )
 
+            // implement checks on the input data
             if (validateUsername() and validatePassword() and validateRepeatedPassword() and validateEmail()) {
                 lifecycleScope.launch {
                     insertUser.forEach { dao.addUser(it) }
@@ -93,6 +91,7 @@ class Register : AppCompatActivity() {
                     applicationContext, getString(R.string.success_message), Toast.LENGTH_SHORT
                 ).show()
                 btnRegister.visibility = View.INVISIBLE
+
             } else {
                 validateUsername()
                 validateEmail()
@@ -100,42 +99,6 @@ class Register : AppCompatActivity() {
                 validateRepeatedPassword()
             }
         }
-
-/*
-
-This Solution works too with PBKDF2 algorithm
-
-        btnRegister.setOnClickListener {
-            val saltValue = generateSalt()
-            val insertUser = listOf(
-                User(
-                    user_id = 0,
-                    name = userInputFieldText.text.toString(),
-                    passwordHash = hashPassword(passwordInputFieldText.text.toString(), saltValue),
-                    salt = saltValue,
-                    gender = genderInputField.text.toString(),
-                    email = emailInputFieldText.text.toString()
-                )
-            )
-
-            if (validateUsername() and validatePassword() and validateRepeatedPassword() and validateEmail()) {
-                lifecycleScope.launch {
-                    insertUser.forEach { dao.addUser(it) }
-                }
-                emptyInputEditText()
-                // Toast to show success message that record saved successfully
-                Toast.makeText(
-                    applicationContext, getString(R.string.success_message), Toast.LENGTH_SHORT
-                ).show()
-                btnRegister.visibility = View.INVISIBLE
-            } else {
-                validateUsername()
-                validateEmail()
-                validatePassword()
-                validateRepeatedPassword()
-            }
-        }
-        */
 
 
         appCompatTextViewLoginLink.setOnClickListener {
@@ -232,6 +195,4 @@ This Solution works too with PBKDF2 algorithm
         passwordRepeatInputFieldText.text = null
         genderInputField.text = null
     }
-
-
 }
