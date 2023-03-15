@@ -73,6 +73,8 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
                 android:hint="@string/userName"
+                app:counterEnabled="true"
+                app:counterMaxLength="15"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true">
 
