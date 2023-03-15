@@ -1,149 +1,182 @@
 package com.example.sempertibi
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import android.database.Cursor
-import android.database.sqlite.SQLiteException
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.*
-import android.widget.Toast.LENGTH_SHORT
+import android.widget.Button
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
-import com.example.sempertibi.databinding.ActivityStressTestPssBinding
+import androidx.lifecycle.lifecycleScope
+import com.example.sempertibi.data.UserDatabase
+import com.example.sempertibi.data.entities.StressPSS
+import kotlinx.coroutines.launch
+import java.util.*
 
+class StressTestPSS : AppCompatActivity(), View.OnClickListener {
 
-//class StressTestPSS : AppCompatActivity(), LifecycleOwner {
-class StressTestPSS : AppCompatActivity() {
+    private lateinit var informationText: TextView
+    private lateinit var tvQuestion: TextView
+    private lateinit var tvQuestionCount: TextView
+    private lateinit var rbGroup: RadioGroup
+    private lateinit var rb1: RadioButton
+    private lateinit var rb2: RadioButton
+    private lateinit var rb3: RadioButton
+    private lateinit var rb4: RadioButton
+    private lateinit var rb5: RadioButton
+    private lateinit var btnNext: Button
+    private lateinit var btnSave: Button
 
-    var EXTRA_SCORE: String = "Extra Score"
-    lateinit var tvQuestion: TextView
-    lateinit var tvQuestionCount: TextView
-    lateinit var rbGroup: RadioGroup
-    lateinit var rb1: RadioButton
-    lateinit var rb2: RadioButton
-    lateinit var rb3: RadioButton
-    lateinit var rb4: RadioButton
-    lateinit var rb5: RadioButton
-    lateinit var btnNext: Button
-    lateinit var binding: ActivityStressTestPssBinding
-    lateinit var currentQuestion: QuestionModel
-    var questionCounter: Int = 0
-    var questionCountTotal: Int = 10
+    private val questions = listOf(
+        "In the last month, how often have you been upset because of something that happened unexpectedly?",
+        "In the last month, how often have you felt that you were unable to control the important things in your life?",
+        "In the last month, how often have you felt nervous and stressed?",
+        "In the last month, how often have you felt confident about your ability to handle your personal problems?",
+        "In the last month, how often have you felt that things were going your way?",
+        "In the last month, how often have you found that you could not cope with all the things that you had to do?",
+        "In the last month, how often have you been able to control irritations in your life?",
+        "In the last month, how often have you felt that you were on top of things?",
+        "In the last month, how often have you been angered because of things that happened that were outside of your control?",
+        "In the last month, how often have you felt difficulties were piling up so high that you could not overcome them?"
+    )
 
-    @SuppressLint("Range")
+    private val answers = mutableListOf<Int>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        //var viewModel = ViewModelProvider(this).get(StressTestPSSViewModel::class.java)
-        var score: Int = 0
-        val db = this.openOrCreateDatabase("test.db", Context.MODE_PRIVATE, null)
-        var cursor: Cursor =
-            db.rawQuery("SELECT * FROM " + DBContract.QuestionsTable.TABLE_NAME, null)
-        var questions = ArrayList<QuestionModel>()
-        var id: String
-        var question: String
-        var answer1: String
-        var answer2: String
-        var answer3: String
-        var answer4: String
-        var answer5: String
-        var answerNr: String
-
-        try {
-            if (cursor.moveToFirst()) {
-                do {
-                    id =
-                        cursor.getString(cursor.getColumnIndex(DBContract.QuestionsTable.COLUMN_ID))
-                    question =
-                        cursor.getString(cursor.getColumnIndex(DBContract.QuestionsTable.COLUMN_QUESTION))
-                    answer1 =
-                        cursor.getString(cursor.getColumnIndex(DBContract.QuestionsTable.COLUMN_OPTION1))
-                    answer2 =
-                        cursor.getString(cursor.getColumnIndex(DBContract.QuestionsTable.COLUMN_OPTION2))
-                    answer3 =
-                        cursor.getString(cursor.getColumnIndex(DBContract.QuestionsTable.COLUMN_OPTION3))
-                    answer4 =
-                        cursor.getString(cursor.getColumnIndex(DBContract.QuestionsTable.COLUMN_OPTION4))
-                    answer5 =
-                        cursor.getString(cursor.getColumnIndex(DBContract.QuestionsTable.COLUMN_OPTION5))
-                    answerNr =
-                        cursor.getString(cursor.getColumnIndex(DBContract.QuestionsTable.COLUMN_ANSWER_NR))
-                    questions.add(
-                        QuestionModel(
-                            id, question,
-                            answer1,
-                            answer2,
-                            answer3,
-                            answer4,
-                            answer5,
-                            answerNr
-                        )
-                    )
-                } while (cursor.moveToNext())
-            }
-        } finally {
-            cursor.close()
-        }
-
         super.onCreate(savedInstanceState)
-        binding = ActivityStressTestPssBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_stress_test_pss)
 
-        tvQuestion = binding.tvQuestion
-        tvQuestionCount = binding.tvQuestionCount
-        rbGroup = binding.radioGroup
-        rb1 = binding.radioButton1
-        rb2 = binding.radioButton2
-        rb3 = binding.radioButton3
-        rb4 = binding.radioButton4
-        rb5 = binding.radioButton5
-        btnNext = binding.btNext
+        rbGroup = findViewById(R.id.radioGroup)
+        rb1 = findViewById(R.id.radio_button_1)
+        rb2 = findViewById(R.id.radio_button_2)
+        rb3 = findViewById(R.id.radio_button_3)
+        rb4 = findViewById(R.id.radio_button_4)
+        rb5 = findViewById(R.id.radio_button_5)
+        informationText = findViewById(R.id.informationText)
+        tvQuestion = findViewById(R.id.tvQuestion)
+        tvQuestionCount = findViewById(R.id.tvQuestionCount)
+        btnNext = findViewById(R.id.btNext)
+        btnSave = findViewById(R.id.btSave)
 
-        currentQuestion = questions[questionCounter]
-        tvQuestion.text = currentQuestion.question
-        questionCounter += 1
-        tvQuestionCount.text = "Question: " + questionCounter + "/" + questionCountTotal
+        btnNext.setOnClickListener(this)
+        setQuestion(0)
+    }
 
-        rbGroup.clearCheck()
-        //TODO("Check Sum")
-        var selectedId: Int = rbGroup.checkedRadioButtonId
-        if (selectedId == -1) {
-        } else {
-            var selectedRadioButton: RadioButton = findViewById(selectedId)
-            var selectedValue = selectedRadioButton.text
-            score += selectedValue.toString().toInt()
-        }
-
-        btnNext.setOnClickListener {
-            rbGroup.clearCheck()
-
-            if (questionCounter < questionCountTotal) {
-                //Toast.makeText(this, "Score: $score", LENGTH_SHORT).show()
-                currentQuestion = questions[questionCounter]
-                tvQuestion.text = currentQuestion.question
-                questionCounter += 1
-                tvQuestionCount.text = "Question: " + questionCounter + "/" + questionCountTotal
-               // TODO("Check Sum")
-                var selectedId: Int = rbGroup.checkedRadioButtonId
-                if (selectedId == -1) {
-                } else{
-                    var selectedRadioButton: RadioButton = findViewById(selectedId)
-                    var selectedValue = selectedRadioButton.text
-                    score += selectedValue.toString().toInt()
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btNext -> {
+                val checkedButton =
+                    rbGroup.findViewById<RadioButton>(rbGroup.checkedRadioButtonId)
+                if (checkedButton != null) {
+                    answers.add(rbGroup.indexOfChild(checkedButton))
+                } else {
+                    answers.add(-1)
                 }
-            } else {
-            //} else if (questionCountTotal == 10) {
-                btnNext.text = "Finish"
-                var resultIntent = Intent(this, StressTrackerOverview::class.java)
-                startActivity(resultIntent)
-                //resultIntent.putExtra(EXTRA_SCORE, score)
-                //setResult(RESULT_OK, resultIntent)
+                rbGroup.clearCheck()
+
+                val currentQuestionIndex = answers.size
+                if (currentQuestionIndex < questions.size) {
+                    setQuestion(currentQuestionIndex)
+                } else {
+                    finishTest()
+
+                    // If user wants to restart the test for today
+                    btnNext.text = getString(R.string.restartTest)
+                    btnNext.setOnClickListener {
+                        AlertDialog.Builder(this)
+                            .setTitle("Confirm")
+                            .setMessage("Are you sure you want to restart the test?")
+                            .setPositiveButton("Yes") { _, _ ->
+                                // User confirmed
+                                // Reset the activity if the button text is "Restart Test"
+                                startActivity(Intent(this, StressTestPSS::class.java))
+                                finish()
+                            }
+                            .setNegativeButton("No", null)
+                            .show()
+                    }
+                    btnSave.setOnClickListener {
+                        AlertDialog.Builder(this)
+                            .setTitle("Confirm")
+                            .setMessage("Do you want to save the test data?")
+                            .setPositiveButton("Yes") { _, _ ->
+                                // User confirmed
+                                val dao = UserDatabase.getInstance(this).userDao()
+                                val stressPSS = StressPSS(
+                                    testPSS_id = 0,
+                                    user_id = GlobalData.userID!!,
+                                    testPSS_date = Date(),
+                                    PSS_score = GlobalData.pssScore!!
+                                )
+
+                                lifecycleScope.launch {
+                                    dao.addStressPSS(stressPSS)
+                                }
+
+                                Toast.makeText(applicationContext, "Results saved", Toast.LENGTH_SHORT).show()
+                                startActivity(Intent(this, StressTrackerOverview::class.java))
+                                finish()
+                            }
+                            .setNegativeButton("No"){ _, _ ->
+                                startActivity(Intent(this, StressTrackerOverview::class.java))
+                                finish()
+                            }
+                            .show()
+                    }
+                }
             }
         }
     }
-}
 
+    private fun setQuestion(index: Int) {
+        tvQuestion.text = questions[index]
+        var myindex = index+1
+        tvQuestionCount.text = "Question $myindex/10"
+        btnNext.text = if (index == questions.size - 1) "Finish" else "Next"
+    }
+
+    private fun finishTest() {
+        // Reverse score the positively stated items 4,5,7,8
+        answers[3] = 4 - answers[3]
+        answers[4] = 4 - answers[4]
+        answers[6] = 4 - answers[6]
+        answers[7] = 4 - answers[7]
+
+        // Calculate the PSS score using the answers
+        var pssScore = 0
+        for (answer in answers) when (answer) {
+            0, 1 -> {
+                pssScore += 1
+            }
+            2, 3 -> {
+                pssScore += 2
+            }
+            4 -> {
+                pssScore += 3
+            }
+        }
+
+        // Return a text response based on the score
+        val response = when (pssScore) {
+            in 0..13 -> "You're doing well! Keep up the good work!"
+            in 14..26 -> "You're experiencing moderate stress. Try to manage your stress levels."
+            in 27..40 -> "You're experiencing high stress. Take some time to relax and seek support if needed."
+            else -> "Invalid score"
+        }
+
+        // Add score to GlobalData for reuse
+        GlobalData.pssScore = pssScore
+
+        // Display the PSS score
+        tvQuestion.text = "Your PSS score is $pssScore \n \n$response"
+        // Not needed Views and rbGroup set invisible
+        tvQuestionCount.visibility = View.GONE
+        rbGroup.visibility = View.GONE
+        informationText.visibility = View.GONE
+        // For saving the results a button is set visible
+        btnSave.visibility = View.VISIBLE
+    }
+}
