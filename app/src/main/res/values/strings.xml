@@ -30,8 +30,7 @@
     <string name="newMeasurePSS">New Measurement PSS</string>
     <string name="newMeasureHRV">New Measurement HRV</string>
     <string name="sevenDayStress">7-day Stress-Curve</string>
-    <string name="learnMore">Learn more about the Tracker</string>
-    <string name="stressLevel">Your Stress-Level</string>
+    <string name="learnMore">Learn more about the Tracker</string><string name="stressLevel">Your Stress-Level</string>
     <string name="testStress">Test Stress-Level</string>
     <string name="heartRate">Detect heart rate</string>
     <string name="testStressPSS">Stress Test with PSS</string>
@@ -48,7 +47,6 @@
     <string name="questionPSS9">In the last month, how often have you been angered because of things that happened that were outside of your control?</string>
     <string name="questionPSS10">In the last month, how often have you felt difficulties were piling up so high that you could not overcome them?</string>
     <string name="restartTest">Restart Test</string>
-    <string name="explanation" tools:ignore="ExtraTranslation">The Perceived Stress Scale (PSS) is the most widely used psychological instrument for measuring the perception of stress. It is a measure of the degree to which situations in one’s life are appraised as stressful. Items were designed to tap how unpredictable, uncontrollable, and overloaded respondents find their lives. The scale also includes a number of direct queries about current levels of experienced stress. The PSS was designed for use in community samples with at least a junior high school education. The items are easy to understand, and the response alternatives are simple to grasp. Moreover, the questions are of a general nature and hence are relatively free of content specific to any subpopulation group. The questions in the PSS ask about feelings and thoughts during the last month.</string>
     <string name="answerPSS1">Never</string>
     <string name="answerPSS2">Almost never</string>
     <string name="answerPSS3">Sometimes</string>
@@ -58,6 +56,10 @@
     <string name="outputPSS2">Your test results indicate that you had moderate stress the last month. Please try to reduce your stress level. See the Tipps and Tricks for more information on how to self-control the stress. </string>
     <string name="outputPSS3">Your test results indicate that you had high perceived stress the last month. Check your health status at a medical institution as soon as you feel uncomfortable.</string>
     <string name="heartRateTest">Check your stress level with your heart rate</string>
+    <string name="whatPSS">What is a stress test PSS?</string>
+    <string name="explainPSS">The Perceived Stress Scale (PSS) is the most widely used psychological instrument for measuring the perception of stress. \nIt is a measure of the degree to which situations in one’s life are appraised as stressful. Items were designed to tap how unpredictable, uncontrollable, and overloaded respondents find their lives. The scale also includes a number of direct queries about current levels of experienced stress. \nThe items are easy to understand, and the response alternatives are simple to grasp. Moreover, the questions are of a general nature and hence are relatively free of content specific to any subpopulation group.\nThe questions in the PSS ask about feelings and thoughts during the last month.</string>
+    <string name="whatHRV">What is a stress test HRV?</string>
+    <string name="explainHRV">Heart Rate Variability (HRV) is a measure of the variation in time between successive heartbeats. A higher HRV indicates that the body\'s autonomic nervous system is functioning well and the body is better equipped to handle stress.\n The resulting stress score is displayed as a number from 0 to 100, with a lower number indicating a lower stress state. \nYou are required to stand to take the HRV stress test, because that makes the test more sensitive to low and medium levels of stress. When you are lying down, moderate levels of stress may not be revealed, but standing puts a slight load on your cardiovascular system. That load causes a meaningful drop in HRV when you have a moderate amount of stress compared to very low stress.</string>
     <string name="start">Start</string>
     <string name="tipsHeader">Tips &amp; Tricks for your mental health</string>
     <string name="breaks">Make breaks</string>

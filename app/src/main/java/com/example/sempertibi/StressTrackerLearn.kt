@@ -11,16 +11,5 @@ class StressTrackerLearn : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_stress_tracker_learn)
 
-        val icon = findViewById<ImageView>(R.id.logo)
-        icon.bringToFront()
-
-        val scrollView = findViewById<NestedScrollView>(R.id.nestedScrollView)
-        scrollView.setOnScrollChangeListener { _, _, scrollY, _, _ ->
-            if (scrollY > 0) {
-                icon.visibility = View.INVISIBLE
-            } else {
-                icon.visibility = View.VISIBLE
-            }
-        }
     }
 }
