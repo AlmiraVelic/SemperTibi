@@ -53,13 +53,11 @@
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
-            <SeekBar
-                android:id="@+id/seekBar"
-                style="@style/Widget.AppCompat.SeekBar.Discrete"
-                android:layout_width="299dp"
-                android:layout_height="63dp"
-                android:max="40"
-                android:progress="0" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/lineChart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <TextView
                 android:id="@+id/tvStressOutput"
@@ -77,7 +75,6 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="10dp"
-                android:onClick="addQuestionsToTable"
                 android:text="@string/newMeasurePSS"
                 android:textColor="@color/logo_font"
                 android:textSize="24sp" />
@@ -111,11 +108,12 @@
         android:id="@+id/logo"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:scaleType="centerInside"
-        android:src="@drawable/lotus" />
+        android:src="@drawable/lotus"
+        android:contentDescription="@string/logoString" />
 
 </RelativeLayout>
