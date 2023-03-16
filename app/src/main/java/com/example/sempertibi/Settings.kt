@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Patterns
 import android.view.View
 import android.widget.*
-import androidx.appcompat.widget.SwitchCompat
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.lifecycleScope
 import com.example.sempertibi.data.UserDatabase
@@ -15,6 +14,7 @@ import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
 import org.mindrot.jbcrypt.BCrypt
 import java.util.regex.Pattern
+import android.widget.ArrayAdapter
 
 class Settings : AppCompatActivity() {
 
@@ -36,6 +36,7 @@ class Settings : AppCompatActivity() {
     lateinit var passwordInputFieldLayout: TextInputLayout
     lateinit var passwordRepeatInputFieldLayout: TextInputLayout
     lateinit var emailInputFieldLayout: TextInputLayout
+    lateinit var genderInputLayout: TextInputLayout
 
     lateinit var usernameInputEditText: TextInputEditText
     lateinit var passwordInputEditText: TextInputEditText
@@ -59,12 +60,9 @@ class Settings : AppCompatActivity() {
         passwordInputEditText = findViewById(R.id.passwordInput)
         passwordRepeatEditText = findViewById(R.id.repeatPasswordInput)
         emailInputEditText = findViewById(R.id.emailInput)
+        genderInputLayout = findViewById(R.id.setGender)
         genderInputField = findViewById(R.id.input_gender)
         btnSaveChanges = findViewById(R.id.btSave)
-
-        /*
-        TODO Implement user input checks as in registration
-         */
 
         notificationSwitch.isChecked = GlobalData.notificationUser ?: false
         usernameInputEditText.setText(GlobalData.loggedInUser)
@@ -72,6 +70,18 @@ class Settings : AppCompatActivity() {
         passwordRepeatEditText.setText(GlobalData.passwordUser)
         emailInputEditText.setText(GlobalData.emailUser)
         genderInputField.setText(GlobalData.genderUser)
+
+        val genders = listOf(
+            "Woman",
+            "Man",
+            "Transgender",
+            "Non-binary",
+            "Non-conforming",
+            "Prefer not to respond"
+        )
+
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, genders)
+        genderInputField.setAdapter(adapter)
 
         notificationSwitch.setOnCheckedChangeListener { _, isChecked ->
             GlobalData.notificationUser = isChecked
