@@ -29,8 +29,9 @@ class MoodJournalNew : AppCompatActivity() {
         var dao = UserDatabase.getInstance(this).userDao()
 
         // Date of the entry
-        val currentDate = SimpleDateFormat("dd-MM-yyy").format(Date())
-        val dateCalendar = intent.getStringExtra("DATE").toString()
+        //val currentDate = SimpleDateFormat("dd-MM-yyy").format(Date())
+        //val dateCalendar = intent.getStringExtra("DATE").toString()
+        val dateCalendar = Date()
         // Entry fields
         moodSituationInput = findViewById(R.id.tvSituationInput)
         moodEmotionInput = findViewById(R.id.tvEmotionInput)
@@ -44,7 +45,8 @@ class MoodJournalNew : AppCompatActivity() {
             val moodAchievement = moodAchievementInput.text.toString()
 
             val insertMood = listOf(
-                MoodJournal(0, 1, dateCalendar, moodSituation, moodEmotion, moodAchievement, 1)
+                MoodJournal(0, 1,
+                    dateCalendar, moodSituation, moodEmotion, moodAchievement, 1)
             )
 
             lifecycleScope.launch {
