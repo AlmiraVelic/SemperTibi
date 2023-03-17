@@ -84,13 +84,13 @@ class StressTrackerOverview : AppCompatActivity() {
                 val pssDates = mutableListOf<String>()
 
                 // process the fetched data into a format that can be displayed on the chart
-                pssEntries.forEachIndexed { index, stressPSS ->
+                pssEntries.reversed().forEachIndexed { index, stressPSS ->
                     pssScores.add(Entry(index.toFloat(), stressPSS.PSS_score.toFloat()))
                     pssDates.add(stressPSS.testPSS_date)
                 }
 
                 // configure the chart dataset with the processed data
-                val dataSet = LineDataSet(pssScores, "PSS Scores")
+                val dataSet = LineDataSet(pssScores,"PSS Scores")
                 dataSet.setCircleColor(Color.rgb(0, 128, 128))
                 dataSet.color = Color.rgb(0, 128, 128)
                 dataSet.lineWidth = 3f
