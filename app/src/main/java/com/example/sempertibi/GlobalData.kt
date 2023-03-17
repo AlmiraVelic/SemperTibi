@@ -9,7 +9,9 @@ object GlobalData {
     var notificationUser: Boolean? = null
     var genderUser: String? = null
 
-    /* TODO Stress Test global data */
     var pssScore: Int = 0
+    var hrvScore: Int = 0
 
+    var moodEntryID: Int? = null
+    var dateInCalendar: String? = null
 }
