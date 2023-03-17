@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.SemperTibi" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
@@ -22,4 +22,10 @@
     <style name="Theme.SemperTibi.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.SemperTibi.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="CalendarViewDefaultText">
+        <item name="android:textColor">@color/anti_flash_white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundColor">@color/lotus_blue</item>
+    </style>
 </resources>
