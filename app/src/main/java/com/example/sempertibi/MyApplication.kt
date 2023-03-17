@@ -14,13 +14,12 @@ class MyApplication : Application() {
         GlobalData.emailUser = null
         GlobalData.notificationUser = null
         GlobalData.genderUser = null
-
-        /* TODO insert attributes from GlobalData.kt */
+        GlobalData.pssScore = 0
+        GlobalData.hrvScore = 0
     }
 
     override fun onTerminate() {
         super.onTerminate()
         clearGlobalData()
     }
-
 }
