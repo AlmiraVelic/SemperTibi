@@ -57,7 +57,7 @@ interface UserDao {
     @Query("SELECT * FROM stressPSS ORDER BY user_id ASC")
     fun readStressTestPSS(): LiveData<List<StressPSS>>
 
-    @Query("SELECT * FROM stressPSS WHERE user_id = :user_id ORDER BY testPSS_date ASC LIMIT 7")
+    @Query("SELECT * FROM stressPSS WHERE user_id = :user_id ORDER BY testPSS_date DESC LIMIT 7")
     fun getPSSLast7Entries(user_id: Int): List<StressPSS>
 
     @Query("SELECT COUNT(*) FROM stressPSS WHERE user_id = :user_id")
