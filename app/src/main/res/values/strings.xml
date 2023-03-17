@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">Semper Tibi</string>
     <string name="hello_message">Always with you</string>
     <string name="johndoe">johndoe</string>
@@ -135,5 +135,6 @@ For more information click <a href="https://campushealth.unc.edu/health-topic/nu
     <string name="myTestMp4">"https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4"</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="edit">Edit</string>
 
 </resources>
