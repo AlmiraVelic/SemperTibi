@@ -27,8 +27,8 @@ interface UserDao {
     @Query("SELECT * FROM user WHERE name = :name")
     fun getUserByUsername(name: String): User?
 
-    @Query("SELECT * FROM user WHERE user_id = :id")
-    fun getUserByID(id: Int): User?
+    @Query("SELECT * FROM user WHERE user_id = :user_id")
+    fun getUserByID(user_id: Int): User?
 
     @Update
     suspend fun updateUser(user: User)
@@ -42,13 +42,13 @@ interface UserDao {
 
     @Transaction    // Thread safe manner
     @Query("SELECT * FROM moodJournal WHERE user_id = :user_id AND entry_date = :entry_date")// Query the situation, that is inserted in the Moodjournal for a specific day
-    fun readMoodOfUser(user_id: Int, entry_date: String): List<MoodJournal>
+    fun readMoodOfUser(user_id: Int, entry_date: String): MoodJournal?
 
     @Update
-    suspend fun updateMood(user: User)
+    suspend fun updateMood(moodJournal: MoodJournal)
 
     @Delete
-    suspend fun deleteMood(user: User)
+    suspend fun deleteMood(moodJournal: MoodJournal)
 
     // Stress Test PSS database interactions
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -57,14 +57,14 @@ interface UserDao {
     @Query("SELECT * FROM stressPSS ORDER BY user_id ASC")
     fun readStressTestPSS(): LiveData<List<StressPSS>>
 
-    @Query("SELECT * FROM stressPSS WHERE user_id = :userId ORDER BY testPSS_date ASC LIMIT 7")
-    fun getPSSLast7Entries(userId: Int): List<StressPSS>
+    @Query("SELECT * FROM stressPSS WHERE user_id = :user_id ORDER BY testPSS_date ASC LIMIT 7")
+    fun getPSSLast7Entries(user_id: Int): List<StressPSS>
 
-    @Query("SELECT COUNT(*) FROM stressPSS WHERE user_id = :userId")
-    fun getPSSNumEntries(userId: Int): Int
+    @Query("SELECT COUNT(*) FROM stressPSS WHERE user_id = :user_id")
+    fun getPSSNumEntries(user_id: Int): Int
 
-    @Query("SELECT * FROM stressPSS WHERE user_id = :userId AND testPSS_date = :date")
-    fun getStressPSSByUserIdAndDate(userId: Int, date: String): StressPSS?
+    @Query("SELECT * FROM stressPSS WHERE user_id = :user_id AND testPSS_date = :date")
+    fun getStressPSSByUserIdAndDate(user_id: Int, date: String): StressPSS?
 
     @Update
     suspend fun updateStressTestPSS(testPSS: StressPSS)
@@ -79,8 +79,8 @@ interface UserDao {
     @Query("SELECT * FROM stressHRV ORDER BY user_id ASC")
     fun readStressTestHRV(): LiveData<List<StressHRV>>
 
-    @Query("SELECT * FROM stressHRV WHERE user_id = :userId ORDER BY testHRV_date DESC LIMIT 7")
-    fun getHRVLast7Entries(userId: Int): List<StressHRV>
+    @Query("SELECT * FROM stressHRV WHERE user_id = :user_id ORDER BY testHRV_date DESC LIMIT 7")
+    fun getHRVLast7Entries(user_id: Int): List<StressHRV>
 
     @Update
     suspend fun updateStressTestHRV(testHRV: StressHRV)
