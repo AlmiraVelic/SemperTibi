@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Patterns
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.NestedScrollView
@@ -13,8 +14,11 @@ import com.example.sempertibi.data.UserDatabase
 import com.example.sempertibi.data.entities.User
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.mindrot.jbcrypt.BCrypt
+import java.util.*
 import java.util.regex.Pattern
 
 class Register : AppCompatActivity() {
@@ -43,6 +47,7 @@ class Register : AppCompatActivity() {
     lateinit var btnRegister: Button
     lateinit var icon: ImageView
     lateinit var appCompatTextViewLoginLink: AppCompatTextView
+    private lateinit var timer: Timer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,38 +70,69 @@ class Register : AppCompatActivity() {
         appCompatTextViewLoginLink = findViewById(R.id.appCompatTextViewLoginLink)
         nestedScrollView = findViewById(R.id.nestedScrollView)
         icon = findViewById(R.id.logo)
+        timer = Timer()
 
         btnRegister.setOnClickListener {
-            val saltValue = BCrypt.gensalt()
-            val insertUser = listOf(
-                User(
-                    user_id = 0,
-                    name = userInputFieldText.text.toString(),
-                    passwordHash = BCrypt.hashpw(passwordInputFieldText.text.toString(), saltValue),
-                    salt = saltValue,
-                    gender = genderInputField.text.toString(),
-                    email = emailInputFieldText.text.toString(),
-                    notification = false,
+            lifecycleScope.launch {
+                val saltValue = BCrypt.gensalt()
+
+                val insertUser = listOf(
+                    User(
+                        user_id = 0,
+                        name = userInputFieldText.text.toString(),
+                        passwordHash = BCrypt.hashpw(
+                            passwordInputFieldText.text.toString(),
+                            saltValue
+                        ),
+                        salt = saltValue,
+                        gender = genderInputField.text.toString(),
+                        email = emailInputFieldText.text.toString(),
+                        notification = false,
+                    )
                 )
-            )
 
-            // implement checks on the input data
-            if (validateUsername() and validatePassword() and validateRepeatedPassword() and validateEmail()) {
-                lifecycleScope.launch {
-                    insertUser.forEach { dao.addUser(it) }
+                val existingEntry =
+                    withContext(Dispatchers.IO) { dao.getUserByMail(emailInputFieldText.text.toString()) }
+
+                if (existingEntry == null) {
+                    // implement checks on the input data
+                    if (validateUsername() and validatePassword() and validateRepeatedPassword() and validateEmail()) {
+                        lifecycleScope.launch {
+                            insertUser.forEach { dao.addUser(it) }
+                        }
+                        emptyInputEditText()
+                        // Toast to show success message that record saved successfully
+                        Toast.makeText(
+                            applicationContext,
+                            getString(R.string.success_message),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        btnRegister.visibility = View.INVISIBLE
+                        timer.schedule(object : TimerTask() {
+                            override fun run() {
+                                val intent = Intent(this@Register, SigninActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+                        }, 2000)
+                    } else {
+                        validateUsername()
+                        validateEmail()
+                        validatePassword()
+                        validateRepeatedPassword()
+                    }
+                } else {
+                    // If there is an entry for this email address, then user is notified
+                    AlertDialog.Builder(this@Register).setTitle("E-Mail found")
+                        .setMessage("There is already an entry for this E-Mail address. Please use another email address")
+                        .setPositiveButton("Cancel") { _, _ ->
+
+                            Toast.makeText(
+                                applicationContext, "Please use another email address", Toast.LENGTH_SHORT
+                            ).show()
+
+                        }.show()
                 }
-                emptyInputEditText()
-                // Toast to show success message that record saved successfully
-                Toast.makeText(
-                    applicationContext, getString(R.string.success_message), Toast.LENGTH_SHORT
-                ).show()
-                btnRegister.visibility = View.INVISIBLE
-
-            } else {
-                validateUsername()
-                validateEmail()
-                validatePassword()
-                validateRepeatedPassword()
             }
         }
 
