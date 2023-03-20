@@ -63,8 +63,7 @@ class SigninActivity : AppCompatActivity() {
 
                         showMessage("Login Successful")
                         withContext(Dispatchers.Main) {
-                            val intent = Intent(this@SigninActivity, Dashboard::class.java)
-                            //intent.putExtra("USER", user)
+                            val intent = Intent(this@SigninActivity, MoodTracker::class.java)
                             startActivity(intent)
                             finish()
                         }
