@@ -41,6 +41,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+
 }
 
 
@@ -96,4 +97,16 @@ dependencies {
 
     // LineChart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    /*
+    // HRV
+    implementation 'org.tensorflow:tensorflow-lite:2.11.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    implementation 'com.github.kibotu:Heart-Rate-Ometer:-SNAPSHOT'
+    implementation 'com.github.phishman3579:android-heart-rate-monitor:v1.3'
+
+    // Add CameraX dependency to your build.gradle file
+    implementation "androidx.camera:camera-core:1.2.1"
+    implementation 'androidx.camera:camera-lifecycle:1.2.1'
+    implementation 'androidx.camera:camera-view:1.2.1'
+    */
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,24 +8,26 @@
     tools:context=".StressTestHRV">
 
     <include
-        layout="@layout/top_app_bar"
         android:id="@+id/topAppBar7"
+        layout="@layout/top_app_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/topAppBar7"
         android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_below="@id/topAppBar7">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
+
+
 
             <TextView
                 android:id="@+id/tvStressTracker"
@@ -35,36 +36,103 @@
                 android:text="@string/heartRate"
                 android:textColor="@color/logo_font"
                 android:textSize="34sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 android:layout_gravity="center"
+                android:layout_margin="10dp"
                 app:dividerColor="@color/lotus_blue"
-                app:dividerThickness="3dp"/>
+                app:dividerThickness="3dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
                 android:text="@string/heartRateTest"
-                android:textSize="20sp"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+            <SurfaceView
+                android:id="@+id/preview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/label"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/finger"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/finger"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/label"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextureView
+                android:id="@+id/previewView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/hrvTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textColor="@android:color/black"
+                android:text="HRV: " />
+
+            <TextView
+                android:id="@+id/stressLevelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Stress Level: "
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/preview" />
+
+            <TextView
+                android:id="@+id/heartRateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/previewView"
+                tools:text="Heart Rate: 0 bpm" />
 
             <ProgressBar
-                android:id="@+id/indeterminateBar"
+                android:id="@+id/hrvProgressBar"
+                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
-                android:layout_margin="50dp"
-                android:layout_height="50dp"/>
-
-            <ProgressBar
-                android:id="@+id/determinateBar"
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                android:layout_width="match_parent"
-                android:layout_margin="10dp"
-                android:layout_height="20dp"/>
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:progress="0" />
 
             <Button
                 android:id="@+id/btnNewMeasurePSS"
@@ -72,10 +140,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/start"
                 android:textColor="@color/logo_font"
-                android:textSize="24sp"
-                android:layout_marginBottom="10dp"/>
+                android:textSize="24sp" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
