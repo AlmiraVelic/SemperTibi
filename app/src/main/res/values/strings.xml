@@ -139,5 +139,11 @@ For more information click <a href="https://campushealth.unc.edu/health-topic/nu
     <string name="edit">Edit</string>
     <string name="moodTracker">Mood Tracker</string>
     <string name="submit">Submit</string>
+    <string name="happy">😊 Happy</string>
+    <string name="sad">😔 Sad</string>
+    <string name="angry">😠 Angry</string>
+    <string name="surprised">😲 Surprised</string>
+    <string name="scared">😱 Scared</string>
+    <string name="disgusted">🤢 Disgusted</string>
 
 </resources>
