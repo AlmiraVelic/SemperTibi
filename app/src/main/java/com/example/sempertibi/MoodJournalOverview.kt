@@ -31,6 +31,7 @@ class MoodJournalOverview : AppCompatActivity() {
         val dateString = dateFormat.format(currentDate)
 
         GlobalData.dateInCalendar = dateString
+        GlobalData.dateToday = dateString
 
         updateFabBtn(dateString)
 
@@ -44,6 +45,7 @@ class MoodJournalOverview : AppCompatActivity() {
 
     private fun initViews() {
         calendarView = findViewById(R.id.calendarView)
+        calendarView.firstDayOfWeek = Calendar.MONDAY
         fabButton = findViewById(R.id.ext_fab)
     }
 
@@ -57,21 +59,7 @@ class MoodJournalOverview : AppCompatActivity() {
             val dateInCalendar = formatDate(dayOfMonth, month, year)
             GlobalData.dateInCalendar = dateInCalendar
 
-            lifecycleScope.launch {
-                val existingEntry = withContext(Dispatchers.IO) {
-                    userDao.readMoodOfUser(GlobalData.userID!!, dateInCalendar)
-                }
-
-                if (existingEntry == null) {
-                    fabButton.setIconResource(R.drawable.ic_add)
-                    fabButton.text = getString(R.string.newEntry)
-                } else {
-                    GlobalData.moodEntryID = existingEntry.entry_id
-                    GlobalData.moodEntryID = existingEntry.entry_id
-                    fabButton.setIconResource(R.drawable.ic_edit)
-                    fabButton.text = getString(R.string.editEntry)
-                }
-            }
+            updateFabBtn(dateInCalendar)
         }
     }
 

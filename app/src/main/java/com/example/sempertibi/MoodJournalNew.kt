@@ -1,5 +1,6 @@
 package com.example.sempertibi
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -35,7 +36,7 @@ class MoodJournalNew : AppCompatActivity() {
 
         btnSave.setOnClickListener {
             lifecycleScope.launch {
-                //  If either of these values is null, then the dao.readMoodOfUser() method will not be called, and existingEntry will be null.
+
                 val existingEntry = withContext(Dispatchers.IO) {
                     GlobalData.userID?.let { userID ->
                         GlobalData.dateInCalendar?.let { dateInCalendar ->
@@ -48,6 +49,11 @@ class MoodJournalNew : AppCompatActivity() {
                     val moodSituation = moodSituationInput.text.toString()
                     val moodEmotion = moodEmotionInput.text.toString()
                     val moodAchievement = moodAchievementInput.text.toString()
+                    var moodValue = 0
+
+                    if (GlobalData.dateInCalendar.equals(GlobalData.dateToday)){
+                        moodValue = GlobalData.moodValue
+                    }
 
                     val moodJournal =
                         MoodJournal(
@@ -57,7 +63,7 @@ class MoodJournalNew : AppCompatActivity() {
                             moodSituation,
                             moodEmotion,
                             moodAchievement,
-                            1
+                            moodValue
                         )
 
                     lifecycleScope.launch {
@@ -69,7 +75,6 @@ class MoodJournalNew : AppCompatActivity() {
                     val moodSituation = moodSituationInput.text.toString()
                     val moodEmotion = moodEmotionInput.text.toString()
                     val moodAchievement = moodAchievementInput.text.toString()
-                    Toast.makeText(applicationContext, "Data Saved", Toast.LENGTH_SHORT).show()
 
                     val moodJournal =
                         MoodJournal(
@@ -79,7 +84,7 @@ class MoodJournalNew : AppCompatActivity() {
                             moodSituation,
                             moodEmotion,
                             moodAchievement,
-                            1
+                            existingEntry.mood_score
                         )
 
                     lifecycleScope.launch {
@@ -88,6 +93,10 @@ class MoodJournalNew : AppCompatActivity() {
                         }
                     }
                 }
+                Toast.makeText(applicationContext, "Data Saved", Toast.LENGTH_SHORT).show()
+
+                val intent = Intent(this@MoodJournalNew, MoodJournalOverview::class.java)
+                startActivity(intent)
             }
         }
 
