@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/anti_flash_white"
+    tools:context=".MoodTracker">
+
+    <include
+        android:id="@+id/topAppBar4"
+        layout="@layout/top_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topAppBar4"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvMoodTracker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/moodTracker"
+                android:textColor="@color/logo_font"
+                android:textSize="34sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                app:dividerColor="@color/lotus_blue"
+                app:dividerThickness="3dp" />
+
+
+            <TextView
+                android:id="@+id/mood_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/questionFeelings"
+                android:textSize="20sp" />
+
+            <RadioGroup
+                android:id="@+id/mood_radiogroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp">
+
+                <RadioButton
+                    android:id="@+id/happy_radio_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="happy"
+                    android:text="@string/happy"
+                    android:textSize="20sp" />
+
+                <RadioButton
+                    android:id="@+id/sad_radio_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="sad"
+                    android:text="@string/sad"
+                    android:textSize="20sp" />
+
+                <RadioButton
+                    android:id="@+id/angry_radio_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="angry"
+                    android:text="@string/angry"
+                    android:textSize="20sp" />
+
+                <RadioButton
+                    android:id="@+id/surprised_radio_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="surprised"
+                    android:text="@string/surprised"
+                    android:textSize="20sp" />
+
+                <RadioButton
+                    android:id="@+id/scared_radio_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="scared"
+                    android:text="@string/scared"
+                    android:textSize="20sp" />
+
+                <RadioButton
+                    android:id="@+id/disgusted_radio_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="disgusted"
+                    android:text="@string/disgusted"
+                    android:textSize="20sp" />
+
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/submit_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/submit"
+                android:textColor="@color/logo_font"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@string/logoString"
+        android:scaleType="centerInside"
+        android:src="@drawable/lotus" />
+</RelativeLayout>
