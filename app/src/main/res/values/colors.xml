@@ -2,11 +2,14 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="green_sheen">#67AB9F</color> <!--Buttons-->
+    <!--Buttons-->
     <color name="anti_flash_white">#EAF4F7</color> <!--Background-->
     <color name="gray">#5E5D5D</color> <!--Grey Text on Background-->
-    <color name="bright_gray">#EEEEEE</color> <!--Bright grey in text views-->
+    <!--Bright grey in text views-->
     <color name="lotus_blue">#117182</color> <!-- Lotus -->
     <color name="lotus_lightblue">#42afc2</color> <!-- Lotus light Font = Gabriela-->
     <color name="logo_font">#455a5c</color> <!-- Logo Font color -->
+    <color name="stress_indicator_scale_low">#80CBC1</color>
+    <color name="stress_indicator_scale_medium">#80CCC1</color>
+    <color name="stress_indicator_scale_high">#009688</color>
 </resources>
