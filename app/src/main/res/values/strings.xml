@@ -1,15 +1,10 @@
 <resources>
     <string name="app_name">Semper Tibi</string>
     <string name="hello_message">Always with you</string>
-    <string name="johndoe">johndoe</string>
-    <string name="pwHint">*******</string>
     <string name="mailHint">example@mail.com</string>
     <string name="register">Register</string>
-    <string name="getStarted">Get Started</string>
     <string name="newUserQuestion">New User</string>
-    <string name="skip">Skip >> </string>
     <string name="dashBoard">Dashboard</string>
-    <string name="sevenDayMood">7-day Mood-Overview</string>
     <string name="moodJournal">Mood Journal</string>
     <string name="stressTracker">Stress Tracker</string>
     <string name="tips">Tips &amp; Tricks</string>
@@ -20,45 +15,25 @@
     <string name="chooseDate">Please choose a Date</string>
     <string name="questionFeelings">How do you feel today?</string>
     <string name="questionHappening">What happened today?</string>
-    <string name="questionGoals">Which goals did you achieve?</string>
     <string name="exampleAnswer1">Example: When [SITUATION] happened, I felt [EMOTION].</string>
     <string name="exampleAnswer2">Example: I feel [EMOTION], because [EXPERIENCE].</string>
     <string name="exampleAnswer3">Example: I was able to [ACHIEVEMENT].</string>
-    <string name="happenings">Happenings</string>
-    <string name="feelings">Feelings</string>
-    <string name="goals">Goals</string>
-    <string name="textHint">Type here your Text</string>
     <string name="newMeasurePSS">New Measurement PSS</string>
     <string name="newMeasureHRV">New Measurement HRV</string>
-    <string name="sevenDayStress">7-day Stress-Curve</string>
     <string name="learnMore">Learn more about the Tracker</string><string name="stressLevel">Your Stress-Level</string>
-    <string name="testStress">Test Stress-Level</string>
     <string name="heartRate">Detect heart rate</string>
     <string name="testStressPSS">Stress Test with PSS</string>
     <string name="answerQuestions">Please answer the following 10 questions</string>
     <string name="lastMonth">In the last month, how often have you </string>
-    <string name="questionPSS1">In the last month, how often have you been upset because of something that happened unexpectedly?</string>
-    <string name="questionPSS2">In the last month, how often have you felt that you were unable to control the important things in your life?</string>
-    <string name="questionPSS3">In the last month, how often have you felt nervous and stressed?</string>
-    <string name="questionPSS4">In the last month, how often have you felt confident about your ability to handle your personal problems?</string>
-    <string name="questionPSS5">In the last month, how often have you felt that things were going your way?</string>
-    <string name="questionPSS6">In the last month, how often have you found that you could not cope with all the things that you had to do?</string>
-    <string name="questionPSS7">In the last month, how often have you been able to control irritations in your life?</string>
-    <string name="questionPSS8">In the last month, how often have you felt that you were on top of things?</string>
-    <string name="questionPSS9">In the last month, how often have you been angered because of things that happened that were outside of your control?</string>
-    <string name="questionPSS10">In the last month, how often have you felt difficulties were piling up so high that you could not overcome them?</string>
     <string name="restartTest">Restart Test</string>
     <string name="answerPSS1">Never</string>
     <string name="answerPSS2">Almost never</string>
     <string name="answerPSS3">Sometimes</string>
     <string name="answerPSS4">Fairly often</string>
     <string name="answerPSS5">Very often</string>
-    <string name="outputPSS1">Your test results indicate that you had low stress the last month. Keep this pace in life! You are doing a great job!</string>
-    <string name="outputPSS2">Your test results indicate that you had moderate stress the last month. Please try to reduce your stress level. See the Tipps and Tricks for more information on how to self-control the stress. </string>
-    <string name="outputPSS3">Your test results indicate that you had high perceived stress the last month. Check your health status at a medical institution as soon as you feel uncomfortable.</string>
     <string name="heartRateTest">Check your stress level with your heart rate</string>
     <string name="whatPSS">What is a stress test PSS?</string>
-    <string name="explainPSS">The Perceived Stress Scale (PSS) is the most widely used psychological instrument for measuring the perception of stress. \nIt is a measure of the degree to which situations in one’s life are appraised as stressful. Items were designed to tap how unpredictable, uncontrollable, and overloaded respondents find their lives. The scale also includes a number of direct queries about current levels of experienced stress. \nThe items are easy to understand, and the response alternatives are simple to grasp. Moreover, the questions are of a general nature and hence are relatively free of content specific to any subpopulation group.\nThe questions in the PSS ask about feelings and thoughts during the last month.</string>
+    <string name="explainPSS">The Perceived Stress Scale (PSS) is the most widely used psychological instrument for measuring the perception of stress. \nIt is a measure of the degree to which situations in one’s life are appraised as stressful. Items were designed to tap how unpredictable, uncontrollable, and overloaded respondents find their lives. The scale also includes a number of direct queries about current levels of experienced stress. \nThe items are easy to understand, and the response alternatives are simple to grasp. Moreover, the questions are of a general nature and hence are relatively free of content specific to any subpopulation group.\nThe questions in the PSS ask about feelings and thoughts during the last month.\n\nFor more information about the PSS Score click <a href="https://www.corc.uk.net/outcome-experience-measures/perceived-stress-scale-pss-10/">here</a></string>
     <string name="whatHRV">What is a stress test HRV?</string>
     <string name="explainHRV">Heart Rate Variability (HRV) is a measure of the variation in time between successive heartbeats. A higher HRV indicates that the body\'s autonomic nervous system is functioning well and the body is better equipped to handle stress.\n The resulting stress score is displayed as a number from 0 to 100, with a lower number indicating a lower stress state. \nYou are required to stand to take the HRV stress test, because that makes the test more sensitive to low and medium levels of stress. When you are lying down, moderate levels of stress may not be revealed, but standing puts a slight load on your cardiovascular system. That load causes a meaningful drop in HRV when you have a moderate amount of stress compared to very low stress.</string>
     <string name="start">Start</string>
@@ -81,30 +56,16 @@
     • Stock up on nutrient-dense snacks \n\n
 For more information click <a href="https://campushealth.unc.edu/health-topic/nutrition-and-stress/">here</a> </string>
     <string name="gender">Gender</string>
-    <string name="notification">Notifications</string>
     <string name="userName">User Name</string>
     <string name="password">Password</string>
     <string name="passwordRepeat">Repeat password</string>
     <string name="mail">E-Mail address</string>
     <string name="saveChanges">Save changes</string>
-    <string name="on">ON</string>
-    <string name="off">OFF</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="action_register">Register</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
     <string name="lotus">Logo of Semper Tibi that shows a blue lotus flower</string>
     <string name="title_activity_mood_journal_overview">MoodJournalOverview</string>
     <string name="signout">Sign out</string>
     <string name="logoString">Logo of semper tibi</string>
-    <string name="youtubeVideo">Youtube video</string>
-
 
     <string-array name="gender_identity">
         <item>Woman</item>
@@ -118,24 +79,6 @@ For more information click <a href="https://campushealth.unc.edu/health-topic/nu
     <string name="success_message">Registration Successful</string>
     <string name="text_not_member">No account yet? Create one</string>
     <string name="text_already_member">Already a user? Click here to Login</string>
-    <string name="error_email_exists">Email Already Exists</string>
-
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="title_activity_tipp_breath">tippBreath</string>
-    <!--    <string name=""></string>-->
-    <!-- Video strings -->
-    <string name="test_mp3">"https://storage.googleapis.com/exoplayer-test-media-0/play.mp3"</string>
-    <string name="media_url_mp4">https://storage.googleapis.com/exoplayer-test-media-0/BigBuckBunny_320x180.mp4</string>
-    <string name="myTestMp4">"https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4"</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="edit">Edit</string>
     <string name="moodTracker">Mood Tracker</string>
     <string name="submit">Submit</string>
@@ -146,4 +89,28 @@ For more information click <a href="https://campushealth.unc.edu/health-topic/nu
     <string name="scared">😱 Scared</string>
     <string name="disgusted">🤢 Disgusted</string>
 
+    <string name="low">Low</string>
+    <string name="medium">Medium</string>
+    <string name="high">High</string>
+
+    <string name="hintPSS"><b>Note:</b>\n\nThe PSS score is divided into the categories low, medium and high stress with the following allocation:\n\n
+        • <b>Low:</b> Scores 0–13 \n
+        • <b>Medium:</b> Scores 14–26 \n
+        • <b>High:</b> Scores 27–40 \n\nFor more information about the PSS Score click <a href="https://www.corc.uk.net/outcome-experience-measures/perceived-stress-scale-pss-10/">here</a>
+    </string>
+
+    <string name="channel_id">Reminder</string>
+    <string name="channel_name">SemperTibi Reminder</string>
+    <string name="channel_description">Reminder to use SemperTibi today</string>
+    <string name="reminderContentText">Don\'t forget to use SemperTibi today!</string>
+    <string name="faq_stress_tracker">FAQ Stress Tracker</string>
+    <string name="question_1_x">Question: 1/x</string>
+    <string name="button_explanation_PSSTest">Button to get the next question. After finishing the 9th question, button is set to finish.</string>
+    <string name="next">Next</string>
+    <string name="stress_level">Stress Level</string>
+    <string name="arrow_PSS_Score">This arrow moves along a bar to show the PSS Score between 0 and 40</string>
+    <string name="button_explanation_restart">Button to restart your PSS Test</string>
+    <string name="restart_test">Restart Test</string>
+    <string name="button_explanation_save_results">Button to save your results</string>
+    <string name="save_results">Save Results</string>
 </resources>

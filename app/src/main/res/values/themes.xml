@@ -19,13 +19,4 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.SemperTibi.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.SemperTibi.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="CalendarViewDefaultText">
-        <item name="android:textColor">@color/anti_flash_white</item>
-        <item name="android:textStyle">bold</item>
-        <item name="backgroundColor">@color/lotus_blue</item>
-    </style>
 </resources>
