@@ -1,84 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/anti_flash_white"
+    android:padding="12dp"
     tools:context=".StressTrackerLearn">
-    <include
-        layout="@layout/top_app_bar"
-        android:id="@+id/topAppBar9"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
+    <include
+        android:id="@+id/topAppBar9"
+        layout="@layout/top_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/LLStress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_below="@id/topAppBar9">
+        android:layout_below="@id/topAppBar9"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvSports2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/faq_stress_tracker"
+            android:textColor="@color/logo_font"
+            android:textSize="34sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            app:dividerColor="@color/lotus_blue"
+            app:dividerThickness="3dp" />
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvStressTracker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/whatPSS"
-                android:textColor="@color/logo_font"
-                android:textSize="34sp"
-                android:textStyle="bold"
-                android:textAlignment="center"/>
+    <ExpandableListView
+        android:id="@+id/expandableListView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/LLStress"
+        android:divider="@color/lotus_blue"
+        android:groupIndicator="@drawable/settings_selector"
+        android:indicatorStart="-10dp"
+        android:indicatorEnd="40dp"
+        android:dividerHeight="0.5dp"
+        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft" />
 
-            <com.google.android.material.divider.MaterialDivider
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_gravity="center"
-                app:dividerColor="@color/lotus_blue"
-                app:dividerThickness="3dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:text="@string/explainPSS"
-                android:textSize="20sp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/whatHRV"
-                android:textColor="@color/logo_font"
-                android:textSize="34sp"
-                android:textStyle="bold"
-                android:textAlignment="center"/>
-
-            <com.google.android.material.divider.MaterialDivider
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_gravity="center"
-                app:dividerColor="@color/lotus_blue"
-                app:dividerThickness="3dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:text="@string/explainHRV"
-                android:textSize="20sp"
-                />
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_below="@id/expandableListView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:contentDescription="@string/logoString"
+        android:scaleType="centerInside"
+        android:src="@drawable/lotus"
+        tools:visibility="visible" />
 </RelativeLayout>
+
