@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var timer: Timer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        this.setContentView(R.layout.activity_main)
 
         timer = Timer()
         timer.schedule(object : TimerTask() {
@@ -21,6 +21,6 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
-        }, 3500)
+        }, 2500)
     }
 }
