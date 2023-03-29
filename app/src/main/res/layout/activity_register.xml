@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/register"
                 android:textColor="@color/gray"
-                android:textSize="34sp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
             <com.google.android.material.divider.MaterialDivider
@@ -48,6 +48,21 @@
                 android:layout_margin="10dp"
                 app:dividerColor="@color/lotus_blue"
                 app:dividerThickness="3dp" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:minHeight="48dp"
+                android:switchMinWidth="60dp"
+                android:text="@string/notifications"
+                android:textColor="@color/gray"
+                android:textOff="@string/show_off"
+                android:textOn="@string/show_on"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:switchPadding="20dp"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/register_input_username"
@@ -142,7 +157,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
-                android:hint="@string/gender"
                 app:errorEnabled="true">
 
                 <AutoCompleteTextView
@@ -150,9 +164,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="12dp"
+                    android:hint="@string/gender"
                     android:inputType="none"
                     android:minHeight="48dp"
-                    android:hint="@string/gender"
                     app:simpleItems="@array/gender_identity" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -162,9 +176,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginEnd="12dp"
-                android:contentDescription="Button to register. Press after registration form is completed."
+                android:contentDescription="@string/button_to_register"
                 android:text="@string/register"
                 android:textColor="@color/gray"
                 android:textSize="24sp"
@@ -174,22 +187,11 @@
                 android:id="@+id/appCompatTextViewLoginLink"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="@string/text_already_member"
                 android:textSize="16sp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/lotus" />
 
 </RelativeLayout>

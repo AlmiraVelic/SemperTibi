@@ -1,5 +1,13 @@
 package com.example.sempertibi
 
+import android.Manifest
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_IMMUTABLE
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
@@ -15,12 +23,15 @@ import kotlinx.coroutines.launch
 import org.mindrot.jbcrypt.BCrypt
 import java.util.regex.Pattern
 import android.widget.ArrayAdapter
+import androidx.core.content.ContextCompat
+import com.google.android.material.switchmaterial.SwitchMaterial
+import java.util.*
 
 class Settings : AppCompatActivity() {
 
     private val passwordPattern: Pattern = Pattern.compile(
         "^" +
-                "(?=.*[0-9])" +           //at least 1 digit
+                "(?=.*\\d)" +               //at least 1 digit
                 //"(?=.*[a-z])" +           //at least 1 lower case letter
                 //"(?=.*[A-Z])" +           //at least 1 upper case letter
                 "(?=.*[a-zA-Z])" +          //any letter
@@ -30,7 +41,7 @@ class Settings : AppCompatActivity() {
                 "$"
     )
 
-    lateinit var notificationSwitch: Switch
+    lateinit var notificationSwitch: SwitchMaterial
 
     lateinit var userInputFieldLayout: TextInputLayout
     lateinit var passwordInputFieldLayout: TextInputLayout
@@ -88,6 +99,12 @@ class Settings : AppCompatActivity() {
         }
 
         btnSaveChanges.setOnClickListener {
+
+            if (notificationSwitch.isChecked && !hasNotificationPermission()) {
+                    requestPermission()
+                    scheduleNotify()
+                }
+
             val saltValue = BCrypt.gensalt()
 
             // Update user's information and notification settings based on UI input
@@ -120,17 +137,6 @@ class Settings : AppCompatActivity() {
                 validateEmail()
                 validatePassword()
                 validateRepeatedPassword()
-            }
-        }
-        val icon = findViewById<ImageView>(R.id.logo)
-        icon.bringToFront()
-
-        val scrollView = findViewById<NestedScrollView>(R.id.nestedScrollView)
-        scrollView.setOnScrollChangeListener { _, _, scrollY, _, _ ->
-            if (scrollY > 0) {
-                icon.visibility = View.INVISIBLE
-            } else {
-                icon.visibility = View.VISIBLE
             }
         }
     }
@@ -205,4 +211,56 @@ class Settings : AppCompatActivity() {
         }
     }
 
+    private fun hasNotificationPermission(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
+        } else true
+    }
+
+    private fun requestPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestPermissions(
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                REQUEST_CODE_PERMISSIONS
+            )
+        }
+    }
+
+    companion object {
+        private const val REQUEST_CODE_PERMISSIONS = 1
+    }
+
+    private fun scheduleNotify() {
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val notificationIntent = Intent(this, AlarmReceiver::class.java)
+        notificationIntent.putExtra("message", "Please use the app SemperTibi today")
+        val pendingIntent = PendingIntent.getBroadcast(
+            this,
+            0,
+            notificationIntent,
+            PendingIntent.FLAG_IMMUTABLE
+        )
+
+        // Set the time to trigger the alarm
+        val calendar = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, 13) // Set the hour of the day (24-hour clock)
+            set(Calendar.MINUTE, 50) // Set the minute of the hour
+            set(Calendar.SECOND, 0) // Set the second of the minute
+        }
+
+        // Set the alarm to trigger at the specified time
+        val triggerTime = calendar.timeInMillis
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent)
+
+        // Set the alarm to repeat every day
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            triggerTime,
+            AlarmManager.INTERVAL_DAY,
+            pendingIntent
+        )
+    }
 }

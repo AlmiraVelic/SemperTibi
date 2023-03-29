@@ -1,6 +1,13 @@
 package com.example.sempertibi
 
+import android.Manifest
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_IMMUTABLE
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
@@ -8,10 +15,12 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.lifecycleScope
 import com.example.sempertibi.data.UserDatabase
 import com.example.sempertibi.data.entities.User
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.Dispatchers
@@ -21,10 +30,12 @@ import org.mindrot.jbcrypt.BCrypt
 import java.util.*
 import java.util.regex.Pattern
 
+
 class Register : AppCompatActivity() {
+
     private val passwordPattern: Pattern = Pattern.compile(
         "^" +
-                "(?=.*[0-9])" +           //at least 1 digit
+                "(?=.*\\d)" +           //at least 1 digit
                 //"(?=.*[a-z])" +           //at least 1 lower case letter
                 //"(?=.*[A-Z])" +           //at least 1 upper case letter
                 "(?=.*[a-zA-Z])" +          //any letter
@@ -35,18 +46,18 @@ class Register : AppCompatActivity() {
     )
 
     lateinit var nestedScrollView: NestedScrollView
-    lateinit var userInputFieldLayout: TextInputLayout
-    lateinit var userInputFieldText: TextInputEditText
-    lateinit var passwordInputFieldLayout: TextInputLayout
-    lateinit var passwordInputFieldText: TextInputEditText
-    lateinit var passwordRepeatInputFieldLayout: TextInputLayout
-    lateinit var passwordRepeatInputFieldText: TextInputEditText
-    lateinit var emailInputFieldLayout: TextInputLayout
-    lateinit var emailInputFieldText: TextInputEditText
-    lateinit var genderInputField: AutoCompleteTextView
-    lateinit var btnRegister: Button
-    lateinit var icon: ImageView
-    lateinit var appCompatTextViewLoginLink: AppCompatTextView
+    private lateinit var notificationSwitch: SwitchMaterial
+    private lateinit var userInputFieldLayout: TextInputLayout
+    private lateinit var userInputFieldText: TextInputEditText
+    private lateinit var passwordInputFieldLayout: TextInputLayout
+    private lateinit var passwordInputFieldText: TextInputEditText
+    private lateinit var passwordRepeatInputFieldLayout: TextInputLayout
+    private lateinit var passwordRepeatInputFieldText: TextInputEditText
+    private lateinit var emailInputFieldLayout: TextInputLayout
+    private lateinit var emailInputFieldText: TextInputEditText
+    private lateinit var genderInputField: AutoCompleteTextView
+    private lateinit var btnRegister: Button
+    private lateinit var appCompatTextViewLoginLink: AppCompatTextView
     private lateinit var timer: Timer
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +68,7 @@ class Register : AppCompatActivity() {
         val dao = UserDatabase.getInstance(this).userDao()
 
         // initializing the views
+        notificationSwitch = findViewById(R.id.switch1)
         userInputFieldLayout = findViewById(R.id.register_input_username)
         userInputFieldText = findViewById(R.id.usernameInput)
         passwordInputFieldLayout = findViewById(R.id.register_input_password)
@@ -69,87 +81,108 @@ class Register : AppCompatActivity() {
         btnRegister = findViewById(R.id.btRegister)
         appCompatTextViewLoginLink = findViewById(R.id.appCompatTextViewLoginLink)
         nestedScrollView = findViewById(R.id.nestedScrollView)
-        icon = findViewById(R.id.logo)
         timer = Timer()
 
-        btnRegister.setOnClickListener {
-            lifecycleScope.launch {
-                val saltValue = BCrypt.gensalt()
+        var notificationSetting = true
 
-                val insertUser = listOf(
-                    User(
-                        user_id = 0,
-                        name = userInputFieldText.text.toString(),
-                        passwordHash = BCrypt.hashpw(
-                            passwordInputFieldText.text.toString(),
-                            saltValue
-                        ),
-                        salt = saltValue,
-                        gender = genderInputField.text.toString(),
-                        email = emailInputFieldText.text.toString(),
-                        notification = false,
-                    )
-                )
-
-                val existingEntry =
-                    withContext(Dispatchers.IO) { dao.getUserByMail(emailInputFieldText.text.toString()) }
-
-                if (existingEntry == null) {
-                    // implement checks on the input data
-                    if (validateUsername() and validatePassword() and validateRepeatedPassword() and validateEmail()) {
-                        lifecycleScope.launch {
-                            insertUser.forEach { dao.addUser(it) }
-                        }
-                        emptyInputEditText()
-                        // Toast to show success message that record saved successfully
+        notificationSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (!isChecked) {
+                // If the notification is set false, user should get alert dialogue
+                AlertDialog.Builder(this@Register).setTitle("Notification")
+                    .setMessage("Please enable notifications to get a daily reminder for the app to be used")
+                    .setNegativeButton("Cancel") { _, _ ->
                         Toast.makeText(
                             applicationContext,
-                            getString(R.string.success_message),
+                            "Notifications disabled",
                             Toast.LENGTH_SHORT
                         ).show()
-                        btnRegister.visibility = View.INVISIBLE
-                        timer.schedule(object : TimerTask() {
-                            override fun run() {
-                                val intent = Intent(this@Register, SigninActivity::class.java)
-                                startActivity(intent)
-                                finish()
-                            }
-                        }, 2000)
-                    } else {
-                        validateUsername()
-                        validateEmail()
-                        validatePassword()
-                        validateRepeatedPassword()
                     }
-                } else {
-                    // If there is an entry for this email address, then user is notified
-                    AlertDialog.Builder(this@Register).setTitle("E-Mail found")
-                        .setMessage("There is already an entry for this E-Mail address. Please use another email address")
-                        .setPositiveButton("Cancel") { _, _ ->
+                    .setPositiveButton("Accept") { _, _ ->
+                        requestPermission()
+                        notificationSwitch.isChecked = true
+                    }.show()
+            }
+            notificationSetting = isChecked
+        }
 
+        btnRegister.setOnClickListener {
+            if (!hasNotificationPermission()) {
+                requestPermission()
+            } else {
+                scheduleNotify()
+                lifecycleScope.launch {
+
+                    // Instead of PBKDF2 -> BCrypt used
+                    val saltValue = BCrypt.gensalt()
+
+                    val insertUser = listOf(
+                        User(
+                            user_id = 0,
+                            name = userInputFieldText.text.toString(),
+                            passwordHash = BCrypt.hashpw(
+                                passwordInputFieldText.text.toString(),
+                                saltValue
+                            ),
+                            salt = saltValue,
+                            gender = genderInputField.text.toString(),
+                            email = emailInputFieldText.text.toString(),
+                            notification = notificationSetting,
+                        )
+                    )
+
+                    val existingEntry =
+                        withContext(Dispatchers.IO) { dao.getUserByMail(emailInputFieldText.text.toString()) }
+
+                    if (existingEntry == null) {
+                        // implement checks on the input data
+                        if (validateUsername() and validatePassword() and validateRepeatedPassword() and validateEmail()) {
+                            lifecycleScope.launch {
+                                insertUser.forEach { dao.addUser(it) }
+                            }
+                            emptyInputEditText()
+                            // Toast to show success message that record saved successfully
                             Toast.makeText(
-                                applicationContext, "Please use another email address", Toast.LENGTH_SHORT
+                                applicationContext,
+                                getString(R.string.success_message),
+                                Toast.LENGTH_SHORT
                             ).show()
+                            btnRegister.visibility = View.GONE
+                            timer.schedule(object : TimerTask() {
+                                override fun run() {
+                                    val intent = Intent(this@Register, SigninActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                }
+                            }, 2000)
+                        } else {
+                            validateUsername()
+                            validateEmail()
+                            validatePassword()
+                            validateRepeatedPassword()
+                        }
+                    } else {
+                        // If there is an entry for this email address, then user is notified
+                        AlertDialog.Builder(this@Register).setTitle("E-Mail found")
+                            .setMessage("There is already an entry for this E-Mail address. Please use another email address")
+                            .setPositiveButton("Cancel") { _, _ ->
 
-                        }.show()
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Please use another email address",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
+                            }.show()
+                    }
                 }
             }
         }
 
-
         appCompatTextViewLoginLink.setOnClickListener {
             startActivity(Intent(this, SigninActivity::class.java))
         }
-
-        icon.bringToFront()
-        nestedScrollView.setOnScrollChangeListener { _, _, scrollY, _, _ ->
-            if (scrollY > 0) {
-                icon.visibility = View.INVISIBLE
-            } else {
-                icon.visibility = View.VISIBLE
-            }
-        }
     }
+
 
     /*
     Validates the Username input in Registration process
@@ -230,5 +263,58 @@ class Register : AppCompatActivity() {
         passwordInputFieldText.text = null
         passwordRepeatInputFieldText.text = null
         genderInputField.text = null
+    }
+
+    private fun hasNotificationPermission(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
+        } else true
+    }
+
+    private fun requestPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestPermissions(
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                REQUEST_CODE_PERMISSIONS
+            )
+        }
+    }
+
+    companion object {
+        private const val REQUEST_CODE_PERMISSIONS = 1
+    }
+
+    private fun scheduleNotify() {
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val notificationIntent = Intent(this, AlarmReceiver::class.java)
+        notificationIntent.putExtra("message", "Please use the app SemperTibi today")
+        val pendingIntent = PendingIntent.getBroadcast(
+            this,
+            0,
+            notificationIntent,
+            FLAG_IMMUTABLE
+        )
+
+        // Set the time to trigger the alarm
+        val calendar = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, 13) // Set the hour of the day (24-hour clock)
+            set(Calendar.MINUTE, 50) // Set the minute of the hour
+            set(Calendar.SECOND, 0) // Set the second of the minute
+        }
+
+        // Set the alarm to trigger at the specified time
+        val triggerTime = calendar.timeInMillis
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent)
+
+        // Set the alarm to repeat every day
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            triggerTime,
+            AlarmManager.INTERVAL_DAY,
+            pendingIntent
+        )
     }
 }

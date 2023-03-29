@@ -16,13 +16,10 @@ class MyApplication : Application() {
 
         super.onCreate()
         // Create the NotificationChannel
-        val channelID = getString(R.string.channel_id)
-        val name = getString(R.string.channel_name)
-        val descriptionText = getString(R.string.channel_description)
+        val channelID = "Reminder"
+        val channelName = getString(R.string.channel_name)
         val importance = NotificationManager.IMPORTANCE_HIGH
-        val channel =
-            NotificationChannel(channelID, name, importance).apply { description = descriptionText }
-
+        val channel = NotificationChannel(channelID, channelName, importance)
         // Register the channel with the system
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
