@@ -12,4 +12,5 @@
     <color name="stress_indicator_scale_low">#80CBC1</color>
     <color name="stress_indicator_scale_medium">#80CCC1</color>
     <color name="stress_indicator_scale_high">#009688</color>
+
 </resources>

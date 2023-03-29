@@ -40,6 +40,11 @@ android {
     }
     buildFeatures {
         viewBinding true
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.4.2"
     }
 
 }
@@ -62,10 +67,10 @@ dependencies {
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 
     // Lifecycle components
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.0'
-    implementation "androidx.lifecycle:lifecycle-common-java8:2.6.0"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
 
     // Navigation Component
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
@@ -75,21 +80,16 @@ dependencies {
     implementation 'com.google.android.material:material:1.8.0'
 
     // Visualisation
-    def room_version = "2.5.0"
+    // Room components
+    def room_version = "2.5.1"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
-
+    androidTestImplementation "androidx.room:room-testing:2.5.1"
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$room_version"
 
     // Youtube video player (GitHub library)
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:12.0.0'
-
-    // Room components
-    implementation "androidx.room:room-runtime:2.5.0"
-    kapt "androidx.room:room-compiler:2.5.0"
-    implementation "androidx.room:room-ktx:2.5.0"
-    androidTestImplementation "androidx.room:room-testing:2.5.0"
 
     // Cryptography
     implementation "androidx.security:security-crypto:1.1.0-alpha05"
@@ -97,6 +97,34 @@ dependencies {
 
     // LineChart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    // JetPack Compose
+    implementation(platform("androidx.compose:compose-bom:2023.01.00"))
+    androidTestImplementation(platform("androidx.compose:compose-bom:2023.01.00"))
+
+    // Choose one of the following:
+    // Material Design 3
+    implementation("androidx.compose.material3:material3")
+    // or Material Design 2
+    implementation("androidx.compose.material:material")
+    // or skip Material Design and build directly on top of foundational components
+    implementation("androidx.compose.foundation:foundation")
+    // or only import the main APIs for the underlying toolkit systems,
+    // such as input and measurement/layout
+    implementation("androidx.compose.ui:ui")
+
+    // Android Studio Preview support
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+
+    // UI Tests
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // Biometric informations
+    implementation("androidx.biometric:biometric:1.2.0-alpha05")
+
+
     /*
     // HRV
     implementation 'org.tensorflow:tensorflow-lite:2.11.0'

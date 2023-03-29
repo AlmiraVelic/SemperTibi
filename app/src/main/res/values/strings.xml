@@ -33,7 +33,7 @@
     <string name="answerPSS5">Very often</string>
     <string name="heartRateTest">Check your stress level with your heart rate</string>
     <string name="whatPSS">What is a stress test PSS?</string>
-    <string name="explainPSS">The Perceived Stress Scale (PSS) is the most widely used psychological instrument for measuring the perception of stress. \nIt is a measure of the degree to which situations in one’s life are appraised as stressful. Items were designed to tap how unpredictable, uncontrollable, and overloaded respondents find their lives. The scale also includes a number of direct queries about current levels of experienced stress. \nThe items are easy to understand, and the response alternatives are simple to grasp. Moreover, the questions are of a general nature and hence are relatively free of content specific to any subpopulation group.\nThe questions in the PSS ask about feelings and thoughts during the last month.\n\nFor more information about the PSS Score click <a href="https://www.corc.uk.net/outcome-experience-measures/perceived-stress-scale-pss-10/">here</a></string>
+    <string name="explainPSS">The Perceived Stress Scale (PSS) is the most widely used psychological instrument for measuring the perception of stress. \nIt is a measure of the degree to which situations in one’s life are appraised as stressful. Items were designed to tap how unpredictable, uncontrollable, and overloaded respondents find their lives. The scale also includes a number of direct queries about current levels of experienced stress. \nThe items are easy to understand, and the response alternatives are simple to grasp. Moreover, the questions are of a general nature and hence are relatively free of content specific to any subpopulation group.\nThe questions in the PSS ask about feelings and thoughts during the last month.</string>
     <string name="whatHRV">What is a stress test HRV?</string>
     <string name="explainHRV">Heart Rate Variability (HRV) is a measure of the variation in time between successive heartbeats. A higher HRV indicates that the body\'s autonomic nervous system is functioning well and the body is better equipped to handle stress.\n The resulting stress score is displayed as a number from 0 to 100, with a lower number indicating a lower stress state. \nYou are required to stand to take the HRV stress test, because that makes the test more sensitive to low and medium levels of stress. When you are lying down, moderate levels of stress may not be revealed, but standing puts a slight load on your cardiovascular system. That load causes a meaningful drop in HRV when you have a moderate amount of stress compared to very low stress.</string>
     <string name="start">Start</string>
@@ -113,4 +113,12 @@ For more information click <a href="https://campushealth.unc.edu/health-topic/nu
     <string name="restart_test">Restart Test</string>
     <string name="button_explanation_save_results">Button to save your results</string>
     <string name="save_results">Save Results</string>
+    <string name="notifications">Notifications</string>
+    <string name="show_off">OFF</string>
+    <string name="show_on">ON</string>
+    <string name="select_a_gender">Select a Gender</string>
+    <string name="button_to_register">Button to register. Press after registration form is completed.</string>
+    <string name="button_to_save">Button to save user changes.</string>
+    <string name="user_info_HRV">Dear user, \n\nthis page is under construction. \nThank you for using SemperTibi. \n\nWish you a nice day 😊</string>
+    <string name="stress_level_head">Stress Level:</string>
 </resources>
