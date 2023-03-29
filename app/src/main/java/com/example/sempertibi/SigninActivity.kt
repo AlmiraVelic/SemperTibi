@@ -1,11 +1,13 @@
 package com.example.sempertibi
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.sempertibi.data.UserDatabase
 import com.google.android.material.snackbar.Snackbar
@@ -14,6 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.mindrot.jbcrypt.BCrypt
+import java.util.concurrent.Executor
 
 class SigninActivity : AppCompatActivity() {
 
@@ -22,6 +25,10 @@ class SigninActivity : AppCompatActivity() {
     private lateinit var relativeLayoutSignIn: RelativeLayout
     private lateinit var loginButton: Button
     private lateinit var registerButton: Button
+
+    private lateinit var executor: Executor
+    private lateinit var biometricPrompt: androidx.biometric.BiometricPrompt
+    private lateinit var promptInfo: androidx.biometric.BiometricPrompt.PromptInfo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,24 +56,60 @@ class SigninActivity : AppCompatActivity() {
 
                 if (validateInput()) {
                     //Verify the password against the stored hash using secure hashing algorithm BCrypt
-                    if (userInDB != null && BCrypt.checkpw(password,userInDB.passwordHash)) {
-                        Log.d("CoroutineDebug", "Authentication succeeded")
-                        // Authentication succeeded
+                    if (userInDB != null && BCrypt.checkpw(password, userInDB.passwordHash)) {
 
-                        // set Global Data for Settings Activity
-                        GlobalData.userID = userInDB.user_id
-                        GlobalData.loggedInUser = user
-                        GlobalData.passwordUser = password
-                        GlobalData.emailUser = userInDB.email
-                        GlobalData.notificationUser = userInDB.notification
-                        GlobalData.genderUser = userInDB.gender
+                        executor = ContextCompat.getMainExecutor(this@SigninActivity)
 
-                        showMessage("Login Successful")
-                        withContext(Dispatchers.Main) {
-                            val intent = Intent(this@SigninActivity, MoodTracker::class.java)
-                            startActivity(intent)
-                            finish()
-                        }
+                        biometricPrompt = androidx.biometric.BiometricPrompt(
+                            this@SigninActivity,
+                            executor,
+                            object : androidx.biometric.BiometricPrompt.AuthenticationCallback() {
+                                @SuppressLint("SetTextI18n")
+                                override fun onAuthenticationError(
+                                    errorCode: Int,
+                                    errString: CharSequence
+                                ) {
+                                    super.onAuthenticationError(errorCode, errString)
+                                    showMessage("Error, $errString")
+                                }
+
+                                @SuppressLint("SetTextI18n")
+                                override fun onAuthenticationSucceeded(result: androidx.biometric.BiometricPrompt.AuthenticationResult) {
+                                    super.onAuthenticationSucceeded(result)
+                                    showMessage("Successful auth")
+
+                                    // Authentication succeeded
+                                    // set Global Data for Settings Activity
+                                    GlobalData.userID = userInDB.user_id
+                                    GlobalData.loggedInUser = user
+                                    GlobalData.passwordUser = password
+                                    GlobalData.emailUser = userInDB.email
+                                    GlobalData.notificationUser = userInDB.notification
+                                    GlobalData.genderUser = userInDB.gender
+
+                                    showMessage("Login Successful")
+
+                                    val intent =
+                                        Intent(this@SigninActivity, MoodTracker::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                }
+
+                                @SuppressLint("SetTextI18n")
+                                override fun onAuthenticationFailed() {
+                                    super.onAuthenticationFailed()
+                                    showMessage("Authentication Failed")
+                                }
+                            })
+
+                        promptInfo = androidx.biometric.BiometricPrompt.PromptInfo.Builder()
+                            .setTitle("Biometric Authentication")
+                            .setSubtitle("Login using fingerprint or face")
+                            .setNegativeButtonText("Cancel")
+                            .build()
+
+                        biometricPrompt.authenticate(promptInfo)
+
                     } else {
                         Log.d("CoroutineDebug", "Authentication failed")
                         // Authentication failed
@@ -75,6 +118,7 @@ class SigninActivity : AppCompatActivity() {
                 }
             }
         }
+
 
         registerButton.setOnClickListener {
             val intent = Intent(this, Register::class.java)
@@ -98,4 +142,9 @@ class SigninActivity : AppCompatActivity() {
         }
         return true
     }
+
+    private fun authenticateWithFingerprint(){
+
+    }
+
 }
