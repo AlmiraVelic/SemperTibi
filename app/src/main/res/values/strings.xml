@@ -119,6 +119,7 @@ For more information click <a href="https://campushealth.unc.edu/health-topic/nu
     <string name="select_a_gender">Select a Gender</string>
     <string name="button_to_register">Button to register. Press after registration form is completed.</string>
     <string name="button_to_save">Button to save user changes.</string>
-    <string name="user_info_HRV">Dear user, \n\nthis page is under construction. \nThank you for using SemperTibi. \n\nWish you a nice day 😊</string>
+    <string name="user_info_HRV">Dear user, \n\nthis page is under construction. \nThank you for using SemperTibi. \n\nWish you a nice day 😊\n\nTime for a <a href="https://pbs.twimg.com/media/DNp_ZOIVAAA7wQh?format=jpg&amp;name=large">joke?</a></string>
     <string name="stress_level_head">Stress Level:</string>
+
 </resources>

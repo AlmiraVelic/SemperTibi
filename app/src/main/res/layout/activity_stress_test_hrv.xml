@@ -27,8 +27,6 @@
             android:gravity="center"
             android:orientation="vertical">
 
-
-
             <TextView
                 android:id="@+id/tvStressTracker"
                 android:layout_width="wrap_content"
@@ -58,11 +56,11 @@
                 android:id="@+id/preview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/label"
@@ -76,7 +74,8 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/finger"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/finger"
@@ -88,31 +87,36 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/label"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"/>
 
             <TextureView
                 android:id="@+id/previewView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/hrvTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
-                android:textColor="@android:color/black"
-                android:text="HRV: " />
+                android:layout_marginTop="20dp"
+                android:text="@string/user_info_HRV"
+                android:background="@drawable/tv_background"
+                android:padding="10dp" />
 
             <TextView
                 android:id="@+id/stressLevelTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Stress Level: "
+                android:text="@string/stress_level_head"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/preview" />
+                app:layout_constraintTop_toBottomOf="@id/preview"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/heartRateTextView"
@@ -124,7 +128,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/previewView"
-                tools:text="Heart Rate: 0 bpm" />
+                tools:text="Heart Rate: 0 bpm"
+                android:visibility="gone"/>
 
             <ProgressBar
                 android:id="@+id/hrvProgressBar"
@@ -132,7 +137,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:max="100"
-                android:progress="0" />
+                android:progress="0"
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/btnNewMeasurePSS"
@@ -143,7 +149,8 @@
                 android:layout_marginBottom="10dp"
                 android:text="@string/start"
                 android:textColor="@color/logo_font"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:visibility="gone"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
