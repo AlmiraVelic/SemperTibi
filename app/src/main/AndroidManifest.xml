@@ -3,13 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="ExtraText">
 
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission
+        android:name="android.permission.SCHEDULE_EXACT_ALARM"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
 
     <application
         android:name=".MyApplication"
@@ -18,11 +24,11 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/logo_icon"
         android:label="@string/app_name"
+        android:localeConfig="@xml/locales_config"
         android:roundIcon="@drawable/logo_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.SemperTibi"
-        android:localeConfig="@xml/locales_config"
-        tools:targetApi="31">
+        tools:targetApi="33">
         <activity
             android:name=".StressTrackerLearn"
             android:exported="false"
@@ -125,8 +131,8 @@
             android:name=".MoodJournalOverview"
             android:exported="false"
             android:label="@string/title_activity_mood_journal_overview"
-            android:theme="@style/Theme.SemperTibi.NoActionBar"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.SemperTibi.NoActionBar"
             tools:ignore="LockedOrientationActivity">
             <meta-data
                 android:name="android.app.lib_name"
@@ -163,8 +169,12 @@
             android:name=".StressTestHRV"
             android:exported="false"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-        <receiver android:name=".ReminderBroadcastReceiver"/>
+            tools:ignore="LockedOrientationActivity" />
+
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>

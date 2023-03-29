@@ -17,11 +17,11 @@ import org.mindrot.jbcrypt.BCrypt
 
 class SigninActivity : AppCompatActivity() {
 
-    lateinit var userInputField: TextInputEditText
-    lateinit var passwordInputField: TextInputEditText
-    lateinit var relativeLayoutSignIn: RelativeLayout
-    lateinit var loginbtn: Button
-    lateinit var registerbtn: Button
+    private lateinit var userInputField: TextInputEditText
+    private lateinit var passwordInputField: TextInputEditText
+    private lateinit var relativeLayoutSignIn: RelativeLayout
+    private lateinit var loginButton: Button
+    private lateinit var registerButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,11 +30,11 @@ class SigninActivity : AppCompatActivity() {
         userInputField = findViewById(R.id.usernameInput)
         passwordInputField = findViewById(R.id.passwordInput)
         relativeLayoutSignIn = findViewById(R.id.relativeLayout_signin)
-        loginbtn = findViewById(R.id.btLogin)
-        registerbtn = findViewById(R.id.btRegisterSignIn)
+        loginButton = findViewById(R.id.btLogin)
+        registerButton = findViewById(R.id.btRegisterSignIn)
 
         val userDao = UserDatabase.getInstance(this).userDao()
-        loginbtn.setOnClickListener {
+        loginButton.setOnClickListener {
 
             val user = userInputField.text.toString().trim()
             val password = passwordInputField.text.toString().trim()
@@ -76,7 +76,7 @@ class SigninActivity : AppCompatActivity() {
             }
         }
 
-        registerbtn.setOnClickListener {
+        registerButton.setOnClickListener {
             val intent = Intent(this, Register::class.java)
             startActivity(intent)
         }
