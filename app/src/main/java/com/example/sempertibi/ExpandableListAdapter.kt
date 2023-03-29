@@ -37,26 +37,6 @@ class ExpandableListAdapter(private val context: Context, private val faqList: L
     override fun hasStableIds(): Boolean {
         return false
     }
-/*
-    override fun getGroupView(
-        groupPosition: Int,
-        isExpanded: Boolean,
-        convertView: View?,
-        parent: ViewGroup?,
-    ): View {
-
-        var convertView = convertView
-        if (convertView == null) {
-            val inflater =
-                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            convertView = inflater.inflate(R.layout.list_questions_stresstracker, null)
-        }
-        val title = convertView!!.findViewById<TextView>(R.id.listTitle)
-        title.text = faqList[groupPosition].question
-        return convertView
-    }
-
- */
 
     override fun getGroupView(groupPosition: Int, isExpanded: Boolean, convertView: View?, parent: ViewGroup?): View {
         val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.list_questions_stresstracker, parent, false)
