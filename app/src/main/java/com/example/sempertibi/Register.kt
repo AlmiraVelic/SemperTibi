@@ -163,16 +163,19 @@ class Register : AppCompatActivity() {
                     } else {
                         // If there is an entry for this email address, then user is notified
                         AlertDialog.Builder(this@Register).setTitle("E-Mail found")
-                            .setMessage("There is already an entry for this E-Mail address. Please use another email address")
-                            .setPositiveButton("Cancel") { _, _ ->
-
+                            .setMessage("There is already an entry for this E-Mail address. Please use another email address or reset password")
+                            .setPositiveButton("Reset Password") { _, _ ->
+                                startActivity(Intent(this@Register, ForgotPassword::class.java))
+                            }
+                            .setNegativeButton("Registration"){_,_->
                                 Toast.makeText(
                                     applicationContext,
                                     "Please use another email address",
                                     Toast.LENGTH_SHORT
                                 ).show()
-
-                            }.show()
+                                startActivity(Intent(this@Register, Register::class.java))
+                            }
+                            .show()
                     }
                 }
             }

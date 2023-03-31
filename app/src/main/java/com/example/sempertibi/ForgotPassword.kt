@@ -1,13 +1,12 @@
 package com.example.sempertibi
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
-import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.sempertibi.data.UserDatabase
 import com.example.sempertibi.data.entities.User
@@ -17,13 +16,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.mindrot.jbcrypt.BCrypt
+import uk.co.jakebreen.sendgridandroid.SendGrid
+import uk.co.jakebreen.sendgridandroid.SendGridMail
+import uk.co.jakebreen.sendgridandroid.SendTask
 import java.security.SecureRandom
-import java.util.*
 
 class ForgotPassword : AppCompatActivity() {
 
     private lateinit var resetInputLayout: TextInputLayout
-    private lateinit var resetInputEmail:TextInputEditText
+    private lateinit var resetInputEmail: TextInputEditText
     private lateinit var resetButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,16 +36,14 @@ class ForgotPassword : AppCompatActivity() {
         resetInputEmail = findViewById(R.id.emailInput)
         resetButton = findViewById(R.id.btReset)
 
-        val email = resetInputEmail.text.toString().trim()
-        val emailInput = resetInputLayout.editText?.text.toString().trim()
-
         // initializing the objects
         val dao = UserDatabase.getInstance(this).userDao()
 
         resetButton.setOnClickListener {
             if (validateEmail()) {
                 lifecycleScope.launch {
-                    val existingEntry = withContext(Dispatchers.IO) { dao.getUserByMail(email) }
+                    val existingEntry =
+                        withContext(Dispatchers.IO) { dao.getUserByMail(resetInputEmail.text.toString()) }
 
                     if (existingEntry == null) {
                         // If there is no Entry, the user
@@ -54,7 +53,12 @@ class ForgotPassword : AppCompatActivity() {
                                 startActivity(Intent(this@ForgotPassword, Register::class.java))
                             }
                             .setNegativeButton("Login") { _, _ ->
-                                startActivity(Intent(this@ForgotPassword,SigninActivity::class.java))
+                                startActivity(
+                                    Intent(
+                                        this@ForgotPassword,
+                                        SigninActivity::class.java
+                                    )
+                                )
                             }
                             .show()
                     } else {
@@ -63,35 +67,64 @@ class ForgotPassword : AppCompatActivity() {
                             .setMessage("There is an entry for this E-Mail address. Do you wish to reset password?")
                             .setPositiveButton("Yes") { _, _ ->
                                 val saltValue = BCrypt.gensalt()
+                                val newPassword = generateRandomPassword()
                                 // Update user's information and notification settings based on UI input
                                 val updatedUser = User(
                                     user_id = existingEntry.user_id,
                                     name = existingEntry.name,
-                                    passwordHash = BCrypt.hashpw(generateRandomPassword(), saltValue),
+                                    passwordHash = BCrypt.hashpw(
+                                        newPassword,
+                                        saltValue
+                                    ),
                                     salt = saltValue,
                                     email = existingEntry.email,
                                     gender = existingEntry.gender,
                                     notification = existingEntry.notification
                                 )
-                                lifecycleScope.launch {dao.updateUser(updatedUser)}
+                                lifecycleScope.launch { dao.updateUser(updatedUser) }
+
+                                val user = existingEntry.name
+                                val mailMessage =
+                                    "<h1>Reset Password</h1>" +
+                                            "<p>Dear $user,<br><br>Your new password is $newPassword <br><br>" +
+                                            "Enjoy the usage of <b>SemperTibi!</b></p><br><br>"+
+                                            "<p>Please change this password in your settings after login. Thank you!</p>"
+                                sendEmail(resetInputEmail.text.toString(), user, mailMessage)
 
                                 // Show success message
-                                Toast.makeText(applicationContext, "Please check your E-Mails", Toast.LENGTH_LONG).show()
-                                startActivity(Intent(this@ForgotPassword,SigninActivity::class.java))
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Please check your E-Mails",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                startActivity(
+                                    Intent(
+                                        this@ForgotPassword,
+                                        SigninActivity::class.java
+                                    )
+                                )
                             }
-                            .setNegativeButton("No"){_,_ ->
-                                startActivity(Intent(this@ForgotPassword,SigninActivity::class.java))
+                            .setNegativeButton("No") { _, _ ->
+                                startActivity(
+                                    Intent(
+                                        this@ForgotPassword,
+                                        SigninActivity::class.java
+                                    )
+                                )
                             }
                             .show()
                     }
                 }
-            }else{
+            } else {
                 validateEmail()
             }
         }
 
     }
 
+    /**
+     * Generates a random password that is secure
+     */
     private fun generateRandomPassword(): String {
         // Generate a random password of length 5 with letters, special chars and numbers
         val passwordLength = 5
@@ -109,35 +142,24 @@ class ForgotPassword : AppCompatActivity() {
         }
         return password.toString()
     }
-/*
-    // TODO Send E-Mail to User -> Make an email address and check this
-    private fun sendEmail(to: String, subject: String, message: String) {
-        // Send email using your preferred email sending library
-        // This is just an example using the JavaMail API
-        val props = Properties()
-        props.put("mail.smtp.host", "smtp.gmail.com")
-        props.put("mail.smtp.socketFactory.port", "465")
-        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory")
-        props.put("mail.smtp.auth", "true")
-        props.put("mail.smtp.port", "465")
 
-        val session = Session.getDefaultInstance(props,
-            object : Authenticator() {
-                override fun getPasswordAuthentication(): PasswordAuthentication {
-                    return PasswordAuthentication("your-email@gmail.com", "your-email-password")
-                }
-            })
+    /**
+     * Sends Mails to Users saved mail address
+     */
+    private fun sendEmail(email: String, name: String, message: String) {
+        val sendgridAPIKey = BuildConfig.API_KEY
+        val sendGrid = SendGrid.create(sendgridAPIKey)
 
-        val messageToSend = MimeMessage(session)
-        messageToSend.setFrom(InternetAddress("your-email@gmail.com"))
-        messageToSend.setRecipient(Message.RecipientType.TO, InternetAddress(to))
-        messageToSend.setSubject(subject)
-        messageToSend.setText(message)
+        val mail = SendGridMail()
+        mail.addRecipient(email, name)
+        mail.setFrom("sempertibi.app@gmail.com", "SemperTibi App")
+        mail.setSubject("Password Reset for SemperTibi")
+        mail.setHtmlContent(message)
 
-        Transport.send(messageToSend)
+        val task = SendTask(sendGrid)
+        task.send(mail)
     }
 
- */
 
     /*
     Validates the Email input in Registration process
