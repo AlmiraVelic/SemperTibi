@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout_signin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/anti_flash_white"
-    android:id="@+id/relativeLayout_signin"
     tools:context=".SigninActivity">
 
     <include
-        layout="@layout/top_app_bar"
         android:id="@+id/topAppBar6"
+        layout="@layout/top_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/topAppBar6"
         android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_below="@id/topAppBar6">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,15 +40,15 @@
                 android:text="@string/action_sign_in_short"
                 android:textColor="@color/gray"
                 android:textSize="34sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 android:layout_gravity="center"
+                android:layout_margin="10dp"
                 app:dividerColor="@color/lotus_blue"
-                app:dividerThickness="3dp"/>
+                app:dividerThickness="3dp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/username"
@@ -59,16 +58,16 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
                 android:hint="@string/userName"
-                app:errorEnabled="true"
-                app:endIconMode="clear_text">
+                app:endIconMode="clear_text"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/usernameInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="12dp"
-                    android:maxLines="1"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -79,18 +78,28 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
                 android:hint="@string/password"
+                app:endIconMode="password_toggle"
                 app:errorEnabled="true"
-                app:passwordToggleContentDescription="@string/password"
-                app:endIconMode="password_toggle">
+                app:passwordToggleContentDescription="@string/password">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/passwordInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="12dp"
-                    android:maxLines="1"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword"
+                    android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tvForgotPW"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="12dp"
+                android:text="@string/forgot_password"
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/btLogin"
@@ -107,35 +116,36 @@
                 android:id="@+id/tvNewUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:text="@string/newUserQuestion"
                 android:textColor="@color/gray"
                 android:textSize="34sp"
-                android:textStyle="bold"
-                android:layout_marginTop="20dp"/>
+                android:textStyle="bold" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 android:layout_gravity="center"
+                android:layout_margin="10dp"
                 app:dividerColor="@color/lotus_blue"
-                app:dividerThickness="3dp"/>
+                app:dividerThickness="3dp" />
 
             <TextView
-                android:id="@+id/appCompatTextViewLoginLink"
+                android:id="@+id/tvRegister"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:gravity="center"
                 android:text="@string/text_not_member"
-                android:textSize="16dp" />
+                android:textSize="16sp" />
+
             <Button
                 android:id="@+id/btRegisterSignIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/register"
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
+                android:text="@string/register"
                 android:textColor="@color/gray"
                 android:textSize="24sp"
                 tools:ignore="TextContrastCheck" />

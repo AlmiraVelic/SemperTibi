@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
@@ -23,6 +24,7 @@ class SigninActivity : AppCompatActivity() {
     private lateinit var userInputField: TextInputEditText
     private lateinit var passwordInputField: TextInputEditText
     private lateinit var relativeLayoutSignIn: RelativeLayout
+    private lateinit var tvForgotPassword: TextView
     private lateinit var loginButton: Button
     private lateinit var registerButton: Button
 
@@ -36,6 +38,7 @@ class SigninActivity : AppCompatActivity() {
 
         userInputField = findViewById(R.id.usernameInput)
         passwordInputField = findViewById(R.id.passwordInput)
+        tvForgotPassword = findViewById(R.id.tvForgotPW)
         relativeLayoutSignIn = findViewById(R.id.relativeLayout_signin)
         loginButton = findViewById(R.id.btLogin)
         registerButton = findViewById(R.id.btRegisterSignIn)
@@ -119,10 +122,12 @@ class SigninActivity : AppCompatActivity() {
             }
         }
 
+        tvForgotPassword.setOnClickListener{
+            startActivity(Intent(this, ForgotPassword::class.java))
+        }
 
         registerButton.setOnClickListener {
-            val intent = Intent(this, Register::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, Register::class.java))
         }
     }
 

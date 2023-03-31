@@ -20,7 +20,8 @@
     <string name="exampleAnswer3">Example: I was able to [ACHIEVEMENT].</string>
     <string name="newMeasurePSS">New Measurement PSS</string>
     <string name="newMeasureHRV">New Measurement HRV</string>
-    <string name="learnMore">Learn more about the Tracker</string><string name="stressLevel">Your Stress-Level</string>
+    <string name="learnMore">Learn more about the Tracker</string>
+    <string name="stressLevel">Your Stress-Level</string>
     <string name="heartRate">Detect heart rate</string>
     <string name="testStressPSS">Stress Test with PSS</string>
     <string name="answerQuestions">Please answer the following 10 questions</string>
@@ -121,5 +122,9 @@ For more information click <a href="https://campushealth.unc.edu/health-topic/nu
     <string name="button_to_save">Button to save user changes.</string>
     <string name="user_info_HRV">Dear user, \n\nthis page is under construction. \nThank you for using SemperTibi. \n\nWish you a nice day 😊\n\nTime for a <a href="https://pbs.twimg.com/media/DNp_ZOIVAAA7wQh?format=jpg&amp;name=large">joke?</a></string>
     <string name="stress_level_head">Stress Level:</string>
+    <string name="forgot_password">Forgot Password? Click here</string>
+    <string name="reset_password_info">Please enter your e-mail address to reset your password</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="button_to_reset_password_info">Button to reset the password. Press to reset password.</string>
 
 </resources>

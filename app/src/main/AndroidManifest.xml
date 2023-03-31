@@ -30,6 +30,9 @@
         android:theme="@style/Theme.SemperTibi"
         tools:targetApi="33">
         <activity
+            android:name=".ForgotPassword"
+            android:exported="false" />
+        <activity
             android:name=".StressTrackerLearn"
             android:exported="false"
             android:screenOrientation="portrait"
@@ -66,6 +69,7 @@
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
