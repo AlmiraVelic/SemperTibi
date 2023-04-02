@@ -7,24 +7,17 @@
     android:background="@color/anti_flash_white"
     tools:context=".MoodJournalOverview">
 
-
-    <include
-        android:id="@+id/topAppBar3"
-        layout="@layout/top_app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/topAppBar3"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -49,31 +42,31 @@
                 android:id="@+id/tvChooseDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:text="@string/chooseDate"
                 android:textColor="@color/logo_font"
-                android:textSize="20sp"
-                android:textStyle="" />
+                android:textSize="20sp" />
 
-
-               <CalendarView
+            <CalendarView
                 android:id="@+id/calendarView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content" />
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/ext_fab"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end|center"
-                android:layout_margin="30dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:backgroundTint="@color/lotus_lightblue"
                 android:contentDescription="@string/edit"
                 android:text="@string/edit"
-                android:textSize="20sp"
-                android:textStyle="bold"
+                android:textAlignment="center"
                 android:textColor="@color/logo_font"
-                android:backgroundTint="@color/lotus_lightblue"
-                app:icon="@drawable/ic_edit" />
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:icon="@drawable/ic_edit"
+                app:iconGravity="textStart" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
@@ -82,11 +75,22 @@
         android:id="@+id/logo"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
+        android:layout_alignBottom="@id/bottom_nav"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:scaleType="centerInside"
+        android:layout_marginBottom="66dp"
+        android:contentDescription="@string/logoString"
         android:src="@drawable/lotus" />
+
+    <!-- Bottom navigation view -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/anti_flash_white"
+        app:itemIconTint="@color/lotus_blue"
+        app:itemTextColor="@color/logo_font"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/my_menu" />
 
 </RelativeLayout>

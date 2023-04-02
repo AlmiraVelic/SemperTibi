@@ -8,17 +8,11 @@
     android:padding="12dp"
     tools:context=".StressTrackerLearn">
 
-    <include
-        android:id="@+id/topAppBar9"
-        layout="@layout/top_app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <LinearLayout
         android:id="@+id/LLStress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/topAppBar9"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -52,16 +46,28 @@
         android:dividerHeight="0.5dp"
         android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft" />
 
+
     <ImageView
         android:id="@+id/logo"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_below="@id/expandableListView"
-        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@id/bottom_nav"
         android:layout_marginStart="16dp"
+        android:layout_marginBottom="66dp"
         android:contentDescription="@string/logoString"
-        android:scaleType="centerInside"
         android:src="@drawable/lotus"
-        tools:visibility="visible" />
+        android:visibility="gone"/>
+
+    <!-- Bottom navigation view -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/anti_flash_white"
+        app:itemIconTint="@color/lotus_blue"
+        app:itemTextColor="@color/logo_font"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/my_menu" />
 </RelativeLayout>
 

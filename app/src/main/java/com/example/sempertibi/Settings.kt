@@ -2,30 +2,32 @@ package com.example.sempertibi
 
 import android.Manifest
 import android.app.AlarmManager
+import android.app.AlertDialog
 import android.app.PendingIntent
-import android.app.PendingIntent.FLAG_IMMUTABLE
+import android.app.PendingIntent.*
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
-import android.view.View
-import android.widget.*
-import androidx.core.widget.NestedScrollView
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.sempertibi.data.UserDatabase
 import com.example.sempertibi.data.entities.User
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
 import org.mindrot.jbcrypt.BCrypt
-import java.util.regex.Pattern
-import android.widget.ArrayAdapter
-import androidx.core.content.ContextCompat
-import com.google.android.material.switchmaterial.SwitchMaterial
 import java.util.*
+import java.util.regex.Pattern
 
 class Settings : AppCompatActivity() {
 
@@ -139,6 +141,54 @@ class Settings : AppCompatActivity() {
                 validateRepeatedPassword()
             }
         }
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
+        bottomNavigationView.setOnItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menuDashboard -> {
+                    val intent = Intent(this, Dashboard::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.menuMoodJournal -> {
+                    val intent = Intent(this, MoodJournalOverview::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.menuStressTracker -> {
+                    val intent = Intent(this, StressTrackerOverview::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.menuSettings -> {
+                    val intent = Intent(this, Settings::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.menuSignOut -> {
+                    AlertDialog.Builder(this).setTitle("Sign Out")
+                        .setMessage("Do you really want to sign out?")
+                        .setPositiveButton("Yes") { _, _ ->
+                            // Handle sign out here
+                            val myApplication = applicationContext as MyApplication
+                            myApplication.clearGlobalData()
+                            val packageManager = applicationContext.packageManager
+                            val intent =
+                                packageManager.getLaunchIntentForPackage(applicationContext.packageName)
+                            val componentName = intent!!.component
+                            val mainIntent = Intent.makeRestartActivityTask(componentName)
+                            applicationContext.startActivity(mainIntent)
+                        }
+                        .setNegativeButton("No"){_,_->
+                            val intent = Intent(this, Dashboard::class.java)
+                            startActivity(intent)
+                        }
+                        .show()
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     /*
@@ -237,11 +287,11 @@ class Settings : AppCompatActivity() {
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val notificationIntent = Intent(this, AlarmReceiver::class.java)
         notificationIntent.putExtra("message", "Please use the app SemperTibi today")
-        val pendingIntent = PendingIntent.getBroadcast(
+        val pendingIntent = getBroadcast(
             this,
             0,
             notificationIntent,
-            PendingIntent.FLAG_IMMUTABLE
+            FLAG_IMMUTABLE
         )
 
         // Set the time to trigger the alarm

@@ -1,37 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/menuDashboard"
+    <item
+        android:id="@+id/menuDashboard"
+        android:contentDescription="@string/dashBoard"
         android:icon="@drawable/ic_home"
         android:title="@string/dashBoard"
-        android:contentDescription="@string/dashBoard"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 
-    <item android:id="@+id/menuMoodJournal"
+    <item
+        android:id="@+id/menuMoodJournal"
+        android:contentDescription="@string/journal"
         android:icon="@drawable/ic_menu_book"
-        android:title="@string/moodJournal"
-        android:contentDescription="@string/moodJournal"
-        app:showAsAction="never"
-        />
+        android:title="@string/journal"
+        app:showAsAction="never" />
 
-    <item android:id="@+id/menuStressTracker"
+    <item
+        android:id="@+id/menuStressTracker"
+        android:contentDescription="@string/tracker"
         android:icon="@drawable/ic_tracker"
-        android:title="@string/stressTracker"
-        android:contentDescription="@string/stressTracker"
-        app:showAsAction="never"/>
+        android:title="@string/tracker"
+        app:showAsAction="never" />
 
     <!-- Settings, should always be in the overflow -->
-    <item android:id="@+id/menuSettings"
+    <item
+        android:id="@+id/menuSettings"
+        android:contentDescription="@string/settings"
         android:icon="@drawable/ic_settings"
         android:title="@string/settings"
-        android:contentDescription="@string/settings"
-        app:showAsAction="never"
-        />
+        app:showAsAction="never" />
 
-    <item android:id="@+id/menuSignout"
+    <item
+        android:id="@+id/menuSignOut"
+        android:contentDescription="@string/signOut"
         android:icon="@drawable/ic_logout"
-        android:title="@string/signout"
-        android:contentDescription="@string/signout"
-        app:showAsAction="never"/>
+        android:title="@string/signOut"
+        app:showAsAction="never" />
 </menu>

@@ -9,23 +9,17 @@
     android:id="@+id/relativeLayoutMoodJournal"
     tools:context=".MoodJournalNew">
 
-    <include
-        layout="@layout/top_app_bar"
-        android:id="@+id/topAppBar2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_below="@id/topAppBar2">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -127,8 +121,8 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="12dp"
-                android:contentDescription="Button to save your input in the Mood Journal"
-                android:text="Save entry"
+                android:contentDescription="@string/button_save_moodjournal"
+                android:text="@string/save_entry"
                 android:textColor="@color/gray"
                 android:textSize="24sp"
                 tools:ignore="TextContrastCheck" />
@@ -139,11 +133,22 @@
         android:id="@+id/logo"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
+        android:layout_alignBottom="@id/bottom_nav"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/lotus" />
+        android:layout_marginBottom="66dp"
+        android:src="@drawable/lotus"
+        android:contentDescription="@string/logoString" />
+
+    <!-- Bottom navigation view -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/anti_flash_white"
+        app:itemIconTint="@color/lotus_blue"
+        app:itemTextColor="@color/logo_font"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/my_menu"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

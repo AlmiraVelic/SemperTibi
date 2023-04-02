@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.sempertibi.data.UserDatabase
 import com.example.sempertibi.data.entities.StressPSS
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -69,6 +70,54 @@ class StressTestPSS : AppCompatActivity(), View.OnClickListener {
         setQuestion(0)
         btnRestart.setOnClickListener(this)
         btnSave.setOnClickListener(this)
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
+        bottomNavigationView.setOnItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menuDashboard -> {
+                    val intent = Intent(this, Dashboard::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.menuMoodJournal -> {
+                    val intent = Intent(this, MoodJournalOverview::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.menuStressTracker -> {
+                    val intent = Intent(this, StressTrackerOverview::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.menuSettings -> {
+                    val intent = Intent(this, Settings::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.menuSignOut -> {
+                    android.app.AlertDialog.Builder(this).setTitle("Sign Out")
+                        .setMessage("Do you really want to sign out?")
+                        .setPositiveButton("Yes") { _, _ ->
+                            // Handle sign out here
+                            val myApplication = applicationContext as MyApplication
+                            myApplication.clearGlobalData()
+                            val packageManager = applicationContext.packageManager
+                            val intent =
+                                packageManager.getLaunchIntentForPackage(applicationContext.packageName)
+                            val componentName = intent!!.component
+                            val mainIntent = Intent.makeRestartActivityTask(componentName)
+                            applicationContext.startActivity(mainIntent)
+                        }
+                        .setNegativeButton("No"){_,_->
+                            val intent = Intent(this, Dashboard::class.java)
+                            startActivity(intent)
+                        }
+                        .show()
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun initViews() {

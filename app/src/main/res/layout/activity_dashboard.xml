@@ -1,44 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_dashboard"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/anti_flash_white"
-    android:backgroundTint="@color/anti_flash_white"
     tools:context=".Dashboard">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/toolbar_dashboard_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:backgroundTint="@color/anti_flash_white"
-        android:minHeight="?attr/actionBarSize"
-        app:layout_anchorGravity="top"
-        app:layout_scrollFlags="scroll"
-        app:liftOnScroll="true">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar_dashboard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:menu="@menu/my_menu"
-            app:navigationIcon="@drawable/ic_back" />
-    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbar_dashboard_layout"
+        android:layout_height="wrap_content"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:id="@+id/linearLayout"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="top|center"
             android:orientation="vertical">
 
@@ -63,6 +44,7 @@
                 android:id="@+id/btnMoodJournal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="10dp"
@@ -102,17 +84,30 @@
                 android:textColor="@color/logo_font"
                 android:textSize="24sp" />
         </LinearLayout>
+
     </androidx.core.widget.NestedScrollView>
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
+        android:layout_alignBottom="@id/bottom_nav"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:scaleType="centerInside"
+        android:layout_marginBottom="66dp"
+        android:contentDescription="@string/logoString"
         android:src="@drawable/lotus" />
 
+    <!-- Bottom navigation view -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/anti_flash_white"
+        app:itemIconTint="@color/lotus_blue"
+        app:itemTextColor="@color/logo_font"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/my_menu" />
+
 </RelativeLayout>
+

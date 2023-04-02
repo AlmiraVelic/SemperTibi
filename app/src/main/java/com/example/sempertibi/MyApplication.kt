@@ -5,9 +5,6 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 
-/*
-TODO check the Manifest implementation for this class, so app does not crash
- */
 class MyApplication : Application() {
 
     // Notifications to the User as Reminder to use the App (As this app needs to be tested for the Master Thesis)
@@ -28,7 +25,7 @@ class MyApplication : Application() {
 
 
     // Global Data should be cleared when User terminates the App
-    private fun clearGlobalData() {
+    fun clearGlobalData() {
         GlobalData.userID = null
         GlobalData.loggedInUser = null
         GlobalData.passwordUser = null

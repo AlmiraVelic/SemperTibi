@@ -1,28 +1,27 @@
 package com.example.sempertibi
 
+import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.sempertibi.data.UserDatabase
-import com.github.mikephil.charting.charts.LineChart
-import kotlinx.coroutines.launch
-import android.graphics.Color
-import android.graphics.Typeface
-import android.util.Log
-import com.example.sempertibi.data.UserDao
 import com.example.sempertibi.data.entities.StressPSS
+import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 
 
@@ -68,7 +67,7 @@ class StressTrackerOverview : AppCompatActivity() {
                         val testDate =
                             SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(date.time)
                         Log.d("StressTestOV", "8")
-                        dao.addStressPSS(StressPSS(0, userID!!, testDate, 0))
+                        dao.addStressPSS(StressPSS(0, userID, testDate, 0))
                         Log.d("StressTestOV", "9")
                     }
                 }
@@ -134,13 +133,61 @@ class StressTrackerOverview : AppCompatActivity() {
         }
 
         newMeasureHRV.setOnClickListener {
-            var intent = Intent(this, StressTestHRV::class.java)
+            val intent = Intent(this, StressTestHRV::class.java)
             startActivity(intent)
         }
 
         learnMore.setOnClickListener {
-            var intent = Intent(this, StressTrackerLearn::class.java)
+            val intent = Intent(this, StressTrackerLearn::class.java)
             startActivity(intent)
+        }
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
+        bottomNavigationView.setOnItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menuDashboard -> {
+                    val intent = Intent(this, Dashboard::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.menuMoodJournal -> {
+                    val intent = Intent(this, MoodJournalOverview::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.menuStressTracker -> {
+                    val intent = Intent(this, StressTrackerOverview::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.menuSettings -> {
+                    val intent = Intent(this, Settings::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.menuSignOut -> {
+                    AlertDialog.Builder(this).setTitle("Sign Out")
+                        .setMessage("Do you really want to sign out?")
+                        .setPositiveButton("Yes") { _, _ ->
+                            // Handle sign out here
+                            val myApplication = applicationContext as MyApplication
+                            myApplication.clearGlobalData()
+                            val packageManager = applicationContext.packageManager
+                            val intent =
+                                packageManager.getLaunchIntentForPackage(applicationContext.packageName)
+                            val componentName = intent!!.component
+                            val mainIntent = Intent.makeRestartActivityTask(componentName)
+                            applicationContext.startActivity(mainIntent)
+                        }
+                        .setNegativeButton("No"){_,_->
+                            val intent = Intent(this, Dashboard::class.java)
+                            startActivity(intent)
+                        }
+                        .show()
+                    true
+                }
+                else -> false
+            }
         }
     }
 }

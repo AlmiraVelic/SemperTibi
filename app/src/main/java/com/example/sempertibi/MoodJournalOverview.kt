@@ -1,5 +1,6 @@
 package com.example.sempertibi
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.CalendarView
@@ -7,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.sempertibi.data.UserDao
 import com.example.sempertibi.data.UserDatabase
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,6 +26,55 @@ class MoodJournalOverview : AppCompatActivity() {
         setContentView(R.layout.activity_mood_journal_overview)
 
         initViews()
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
+        bottomNavigationView.setOnItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menuDashboard -> {
+                    val intent = Intent(this, Dashboard::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.menuMoodJournal -> {
+                    val intent = Intent(this, MoodJournalOverview::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.menuStressTracker -> {
+                    val intent = Intent(this, StressTrackerOverview::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.menuSettings -> {
+                    val intent = Intent(this, Settings::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.menuSignOut -> {
+                    AlertDialog.Builder(this).setTitle("Sign Out")
+                        .setMessage("Do you really want to sign out?")
+                        .setPositiveButton("Yes") { _, _ ->
+                            // Handle sign out here
+                            val myApplication = applicationContext as MyApplication
+                            myApplication.clearGlobalData()
+                            val packageManager = applicationContext.packageManager
+                            val intent =
+                                packageManager.getLaunchIntentForPackage(applicationContext.packageName)
+                            val componentName = intent!!.component
+                            val mainIntent = Intent.makeRestartActivityTask(componentName)
+                            applicationContext.startActivity(mainIntent)
+                        }
+                        .setNegativeButton("No"){_,_->
+                            val intent = Intent(this, Dashboard::class.java)
+                            startActivity(intent)
+                        }
+                        .show()
+                    true
+                }
+                else -> false
+            }
+        }
+
         initUserDao()
 
         val currentDate = Date()
@@ -53,7 +104,6 @@ class MoodJournalOverview : AppCompatActivity() {
         userDao = UserDatabase.getInstance(this).userDao()
     }
 
-
     private fun observeDateChanges() {
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val dateInCalendar = formatDate(dayOfMonth, month, year)
@@ -73,7 +123,6 @@ class MoodJournalOverview : AppCompatActivity() {
         val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
         return dateFormat.format(calendar.time)
     }
-
 
     private fun updateFabBtn(date: String) {
         lifecycleScope.launch {

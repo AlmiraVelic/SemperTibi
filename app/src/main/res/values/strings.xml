@@ -26,7 +26,6 @@
     <string name="testStressPSS">Stress Test with PSS</string>
     <string name="answerQuestions">Please answer the following 10 questions</string>
     <string name="lastMonth">In the last month, how often have you </string>
-    <string name="restartTest">Restart Test</string>
     <string name="answerPSS1">Never</string>
     <string name="answerPSS2">Almost never</string>
     <string name="answerPSS3">Sometimes</string>
@@ -65,7 +64,7 @@ For more information click <a href="https://campushealth.unc.edu/health-topic/nu
     <string name="action_sign_in_short">Sign in</string>
     <string name="lotus">Logo of Semper Tibi that shows a blue lotus flower</string>
     <string name="title_activity_mood_journal_overview">MoodJournalOverview</string>
-    <string name="signout">Sign out</string>
+    <string name="signOut">Sign out</string>
     <string name="logoString">Logo of semper tibi</string>
 
     <string-array name="gender_identity">
@@ -100,10 +99,7 @@ For more information click <a href="https://campushealth.unc.edu/health-topic/nu
         • <b>High:</b> Scores 27–40 \n\nFor more information about the PSS Score click <a href="https://www.corc.uk.net/outcome-experience-measures/perceived-stress-scale-pss-10/">here</a>
     </string>
 
-    <string name="channel_id">Reminder</string>
     <string name="channel_name">SemperTibi Reminder</string>
-    <string name="channel_description">Reminder to use SemperTibi today</string>
-    <string name="reminderContentText">Don\'t forget to use SemperTibi today!</string>
     <string name="faq_stress_tracker">FAQ Stress Tracker</string>
     <string name="question_1_x">Question: 1/x</string>
     <string name="button_explanation_PSSTest">Button to get the next question. After finishing the 9th question, button is set to finish.</string>
@@ -122,9 +118,13 @@ For more information click <a href="https://campushealth.unc.edu/health-topic/nu
     <string name="button_to_save">Button to save user changes.</string>
     <string name="user_info_HRV">Dear user, \n\nthis page is under construction. \nThank you for using SemperTibi. \n\nWish you a nice day 😊\n\nTime for a <a href="https://pbs.twimg.com/media/DNp_ZOIVAAA7wQh?format=jpg&amp;name=large">joke?</a></string>
     <string name="stress_level_head">Stress Level:</string>
-    <string name="forgot_password">Forgot Password? Click here</string>
+    <string name="forgot_password">Forgot Password? Click <u>here</u></string>
     <string name="reset_password_info">Please enter your e-mail address to reset your password</string>
     <string name="reset_password">Reset Password</string>
     <string name="button_to_reset_password_info">Button to reset the password. Press to reset password.</string>
+    <string name="save_entry">Save entry</string>
+    <string name="button_save_moodjournal">Button to save your input in the Mood Journal</string>
+    <string name="journal">Journal</string>
+    <string name="tracker">Tracker</string>
 
 </resources>
