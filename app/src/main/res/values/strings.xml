@@ -123,8 +123,17 @@ For more information click <a href="https://campushealth.unc.edu/health-topic/nu
     <string name="reset_password">Reset Password</string>
     <string name="button_to_reset_password_info">Button to reset the password. Press to reset password.</string>
     <string name="save_entry">Save entry</string>
-    <string name="button_save_moodjournal">Button to save your input in the Mood Journal</string>
+    <string name="button_save_moodJournal">Button to save your input in the Mood Journal</string>
     <string name="journal">Journal</string>
     <string name="tracker">Tracker</string>
+    <string name="security_questions">Security Questions</string>
+    <string name="answer_security_questions">Please answer following four questions due to security reasons. Thank you</string>
+    <string name="button_to_save_security_info">Button to save the security questions and answers.</string>
+    <string name="save_answers">Save answers</string>
+    <string name="security_question_1">What was the name of the street where you grew up?</string>
+    <string name="security_question_2">What is your mother\'s maiden name?</string>
+    <string name="security_question_3">What is your favorite movie?</string>
+    <string name="security_question_4">What is your favorite color?</string>
+    <string name="enter_answer_here">Please enter your answer here</string>
 
 </resources>

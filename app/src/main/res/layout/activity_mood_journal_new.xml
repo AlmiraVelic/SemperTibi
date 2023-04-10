@@ -121,7 +121,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="12dp"
-                android:contentDescription="@string/button_save_moodjournal"
+                android:contentDescription="@string/button_save_moodJournal"
                 android:text="@string/save_entry"
                 android:textColor="@color/gray"
                 android:textSize="24sp"

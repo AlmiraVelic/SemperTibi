@@ -139,21 +139,27 @@ class Register : AppCompatActivity() {
                             lifecycleScope.launch {
                                 insertUser.forEach { dao.addUser(it) }
                             }
+                            // Insert user id for security questions
+                            lifecycleScope.launch {
+                                GlobalData.userID = dao.getUserByMail(emailInputFieldText.text.toString())?.user_id
+                            }
+
                             emptyInputEditText()
-                            // Toast to show success message that record saved successfully
+
                             Toast.makeText(
                                 applicationContext,
-                                getString(R.string.success_message),
+                                "Security questions following",
                                 Toast.LENGTH_SHORT
                             ).show()
+
                             btnRegister.visibility = View.GONE
                             timer.schedule(object : TimerTask() {
                                 override fun run() {
-                                    val intent = Intent(this@Register, SigninActivity::class.java)
+                                    val intent = Intent(this@Register, SecurityQuestions::class.java)
                                     startActivity(intent)
                                     finish()
                                 }
-                            }, 2000)
+                            }, 1000)
                         } else {
                             validateUsername()
                             validateEmail()

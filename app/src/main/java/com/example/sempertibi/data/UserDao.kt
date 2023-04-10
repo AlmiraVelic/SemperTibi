@@ -2,10 +2,7 @@ package com.example.sempertibi.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.sempertibi.data.entities.MoodJournal
-import com.example.sempertibi.data.entities.StressHRV
-import com.example.sempertibi.data.entities.StressPSS
-import com.example.sempertibi.data.entities.User
+import com.example.sempertibi.data.entities.*
 import java.util.*
 
 /*
@@ -93,4 +90,13 @@ interface UserDao {
 
     @Delete
     suspend fun deleteStressTestHRV(testHRV: StressHRV)
+
+    @Query("SELECT * FROM security_questions")
+    suspend fun getAll(): List<SecurityQuestion>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSecurityQuestions(question: SecurityQuestion)
+
+    @Update
+    suspend fun updateSecurityQuestions(question: SecurityQuestion)
 }
