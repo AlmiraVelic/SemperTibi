@@ -44,7 +44,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val notificationManager = NotificationManagerCompat.from(context)
 
         // Check if the app has the necessary permissions to show the notification
-        if (context!!.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+        if (context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
             notificationManager.notify(0, notification)
         }
     }

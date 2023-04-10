@@ -91,8 +91,8 @@ interface UserDao {
     @Delete
     suspend fun deleteStressTestHRV(testHRV: StressHRV)
 
-    @Query("SELECT * FROM security_questions")
-    suspend fun getAll(): List<SecurityQuestion>
+    @Query("SELECT * FROM securityQuestion WHERE user_id = :user_id ORDER BY RANDOM() LIMIT 2")
+    fun getTwoRandomSecurityQuestions(user_id: Int): List<SecurityQuestion>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSecurityQuestions(question: SecurityQuestion)

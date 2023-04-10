@@ -19,7 +19,7 @@
 
     <application
         android:name=".MyApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/logo_icon"
@@ -29,6 +29,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SemperTibi"
         tools:targetApi="33">
+        <activity
+            android:name=".SecurityCheck"
+            android:exported="false" />
         <activity
             android:name=".SecurityQuestions"
             android:exported="false" />

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -14,6 +15,9 @@ class Dashboard : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
+
+        // Random Quote
+        displayRandomQuote()
 
         // Buttons
         val moodJournal = findViewById<Button>(R.id.btnMoodJournal)
@@ -100,4 +104,27 @@ class Dashboard : AppCompatActivity() {
         }
 
     }
+
+    private fun loadQuotes(): List<String> {
+        val inputStream = assets.open("quotes.txt")
+        val quotes = mutableListOf<String>()
+
+        inputStream.bufferedReader().useLines { lines ->
+            lines.forEach {
+                quotes.add(it)
+            }
+        }
+
+        return quotes
+    }
+
+    private fun displayRandomQuote() {
+        val quotes = loadQuotes()
+        val quoteIndex = (0..quotes.size-1).random()
+        val randomQuote = quotes[quoteIndex]
+
+        val quoteTextView: TextView = findViewById(R.id.quoteTextView)
+        quoteTextView.text = randomQuote
+    }
+
 }

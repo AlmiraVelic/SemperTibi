@@ -43,83 +43,89 @@ class SecurityQuestions : AppCompatActivity() {
         initializeViews()
         timer = Timer()
 
-        saveButton.setOnClickListener {
-            if (validateQuestion1() and validateQuestion2() and validateQuestion3() and validateQuestion4()) {
-                val insertQuestions = listOf(
-                    SecurityQuestion(
-                        question_id = 0,
-                        user_id = GlobalData.userID!!,
-                        question_text = R.string.security_question_1.toString(),
-                        answer = streetNameInput.text.toString()
-                    ),
-                    SecurityQuestion(
-                        question_id = 0,
-                        user_id = GlobalData.userID!!,
-                        question_text = R.string.security_question_2.toString(),
-                        answer = motherNameInput.text.toString()
-                    ),
-                    SecurityQuestion(
-                        question_id = 0,
-                        user_id = GlobalData.userID!!,
-                        question_text = R.string.security_question_3.toString(),
-                        answer = movieNameInput.text.toString()
-                    ),
-                    SecurityQuestion(
-                        question_id = 0,
-                        user_id = GlobalData.userID!!,
-                        question_text = R.string.security_question_4.toString(),
-                        answer = colorInput.text.toString()
+        lifecycleScope.launch {
+
+            val userDB =  withContext(Dispatchers.IO) { dao.getUserByMail(GlobalData.emailUser.toString())}
+            val userID = userDB!!.user_id
+
+            saveButton.setOnClickListener {
+                if (validateQuestion1() and validateQuestion2() and validateQuestion3() and validateQuestion4()) {
+                    val insertQuestions = listOf(
+                        SecurityQuestion(
+                            question_id = 0,
+                            userID,
+                            question_text = getString(R.string.security_question_1),
+                            answer = streetNameInput.text.toString()
+                        ),
+                        SecurityQuestion(
+                            question_id = 0,
+                            userID,
+                            question_text = getString(R.string.security_question_2),
+                            answer = motherNameInput.text.toString()
+                        ),
+                        SecurityQuestion(
+                            question_id = 0,
+                            userID,
+                            question_text = getString(R.string.security_question_3),
+                            answer = movieNameInput.text.toString()
+                        ),
+                        SecurityQuestion(
+                            question_id = 0,
+                            userID,
+                            question_text = getString(R.string.security_question_4),
+                            answer = colorInput.text.toString()
+                        )
                     )
-                )
 
-                lifecycleScope.launch {
-                    insertQuestions.forEach { dao.insertSecurityQuestions(it) }
-                }
-
-                emptyInputEditText()
-
-                saveButton.visibility = View.GONE
-
-                // Toast to show success message that record saved successfully
-                Toast.makeText(
-                    applicationContext,
-                    getString(R.string.success_message),
-                    Toast.LENGTH_SHORT
-                ).show()
-                lifecycleScope.launch {
-                    val existingEntry =
-                        withContext(Dispatchers.IO) { dao.getUserByID(GlobalData.userID!!) }
-
-                    val user = existingEntry?.name
-                    val mailMessage =
-                        "<h1>Welcome to Semper Tibi</h1>" +
-                                "<p>Dear $user," +
-                                "<br><br>" +
-                                "This E-Mail is automatically generated after registration to the Semper Tibi Android App." +
-                                "<br><br>" +
-                                "Enjoy the usage of <b>SemperTibi!</b>" +
-                                "</p>" +
-                                "<br><br>" +
-                                "<p>Please send an e-mail to us, in case you have not registered by yourself!<br>" +
-                                "<a href=\"sempertibi.app@gmail.com\">sempertibi.app@gmail.com</a>" +
-                                "</p>"
-                    if (user != null) {
-                        sendEmail(existingEntry.email, user, mailMessage)
+                    lifecycleScope.launch {
+                        insertQuestions.forEach { dao.insertSecurityQuestions(it) }
                     }
-                }
 
-                timer.schedule(object : TimerTask() {
-                    override fun run() {
-                        val intent = Intent(this@SecurityQuestions, SigninActivity::class.java)
-                        startActivity(intent)
-                        finish()
+                    emptyInputEditText()
+
+                    saveButton.visibility = View.GONE
+
+                    // Toast to show success message that record saved successfully
+                    Toast.makeText(
+                        applicationContext,
+                        getString(R.string.success_message),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    lifecycleScope.launch {
+                        val existingEntry =
+                            withContext(Dispatchers.IO) { dao.getUserByID(userID) }
+
+                        val user = existingEntry?.name
+                        val mailMessage =
+                            "<h1>Welcome to Semper Tibi</h1>" +
+                                    "<p>Dear $user," +
+                                    "<br><br>" +
+                                    "This E-Mail is automatically generated after registration to the Semper Tibi Android App." +
+                                    "<br><br>" +
+                                    "Enjoy the usage of <b>SemperTibi!</b>" +
+                                    "</p>" +
+                                    "<br><br>" +
+                                    "<p>Please send an e-mail to us, in case you have not registered by yourself!<br>" +
+                                    "<a href=\"sempertibi.app@gmail.com\">sempertibi.app@gmail.com</a>" +
+                                    "</p>"
+                        if (user != null) {
+                            sendEmail(existingEntry.email, user, mailMessage)
+                        }
                     }
-                }, 2000)
-            } else {
-                validateQuestion1()
-                validateQuestion2()
-                validateQuestion3()
-                validateQuestion4()
+
+                    timer.schedule(object : TimerTask() {
+                        override fun run() {
+                            val intent = Intent(this@SecurityQuestions, SigninActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }, 2000)
+                } else {
+                    validateQuestion1()
+                    validateQuestion2()
+                    validateQuestion3()
+                    validateQuestion4()
+                }
             }
         }
     }
@@ -198,7 +204,7 @@ class SecurityQuestions : AppCompatActivity() {
         val mail = SendGridMail()
         mail.addRecipient(email, name)
         mail.setFrom("sempertibi.app@gmail.com", "SemperTibi App")
-        mail.setSubject("Password Reset for SemperTibi")
+        mail.setSubject("Registration in SemperTibi")
         mail.setHtmlContent(message)
 
         val task = SendTask(sendGrid)

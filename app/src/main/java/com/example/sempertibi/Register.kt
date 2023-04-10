@@ -139,10 +139,8 @@ class Register : AppCompatActivity() {
                             lifecycleScope.launch {
                                 insertUser.forEach { dao.addUser(it) }
                             }
-                            // Insert user id for security questions
-                            lifecycleScope.launch {
-                                GlobalData.userID = dao.getUserByMail(emailInputFieldText.text.toString())?.user_id
-                            }
+
+                            GlobalData.emailUser = emailInputFieldText.text.toString()
 
                             emptyInputEditText()
 

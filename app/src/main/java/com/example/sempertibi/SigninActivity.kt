@@ -2,11 +2,13 @@ package com.example.sempertibi
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
@@ -19,6 +21,7 @@ import kotlinx.coroutines.withContext
 import org.mindrot.jbcrypt.BCrypt
 import java.util.concurrent.Executor
 
+@Suppress("IMPLICIT_CAST_TO_ANY")
 class SigninActivity : AppCompatActivity() {
 
     private lateinit var userInputField: TextInputEditText
@@ -32,6 +35,7 @@ class SigninActivity : AppCompatActivity() {
     private lateinit var biometricPrompt: androidx.biometric.BiometricPrompt
     private lateinit var promptInfo: androidx.biometric.BiometricPrompt.PromptInfo
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
@@ -44,6 +48,7 @@ class SigninActivity : AppCompatActivity() {
         registerButton = findViewById(R.id.btRegisterSignIn)
 
         val userDao = UserDatabase.getInstance(this).userDao()
+
         loginButton.setOnClickListener {
 
             val user = userInputField.text.toString().trim()
@@ -61,6 +66,10 @@ class SigninActivity : AppCompatActivity() {
                     //Verify the password against the stored hash using secure hashing algorithm BCrypt
                     if (userInDB != null && BCrypt.checkpw(password, userInDB.passwordHash)) {
 
+                        GlobalData.userID = userInDB.user_id
+                        GlobalData.loggedInUser = user
+                        GlobalData.passwordUser = password
+
                         executor = ContextCompat.getMainExecutor(this@SigninActivity)
 
                         biometricPrompt = androidx.biometric.BiometricPrompt(
@@ -74,18 +83,17 @@ class SigninActivity : AppCompatActivity() {
                                 ) {
                                     super.onAuthenticationError(errorCode, errString)
                                     showMessage("Error, $errString")
+                                    startActivity(Intent(this@SigninActivity,SecurityCheck::class.java))
                                 }
 
                                 @SuppressLint("SetTextI18n")
                                 override fun onAuthenticationSucceeded(result: androidx.biometric.BiometricPrompt.AuthenticationResult) {
                                     super.onAuthenticationSucceeded(result)
-                                    showMessage("Successful auth")
+                                    showMessage("Successful biometric authentication")
 
                                     // Authentication succeeded
                                     // set Global Data for Settings Activity
-                                    GlobalData.userID = userInDB.user_id
-                                    GlobalData.loggedInUser = user
-                                    GlobalData.passwordUser = password
+
                                     GlobalData.emailUser = userInDB.email
                                     GlobalData.notificationUser = userInDB.notification
                                     GlobalData.genderUser = userInDB.gender
@@ -102,12 +110,13 @@ class SigninActivity : AppCompatActivity() {
                                 override fun onAuthenticationFailed() {
                                     super.onAuthenticationFailed()
                                     showMessage("Authentication Failed")
+                                    startActivity(Intent(this@SigninActivity,SecurityCheck::class.java))
                                 }
                             })
 
                         promptInfo = androidx.biometric.BiometricPrompt.PromptInfo.Builder()
                             .setTitle("Biometric Authentication")
-                            .setSubtitle("Login using fingerprint or face")
+                            .setSubtitle("Login using fingerprint")
                             .setNegativeButtonText("Cancel")
                             .build()
 
@@ -116,13 +125,13 @@ class SigninActivity : AppCompatActivity() {
                     } else {
                         Log.d("CoroutineDebug", "Authentication failed")
                         // Authentication failed
-                        showMessage("Login failed")
+                        showMessage("Login failed, please check Username and Password")
                     }
                 }
             }
         }
 
-        tvForgotPassword.setOnClickListener{
+        tvForgotPassword.setOnClickListener {
             startActivity(Intent(this, ForgotPassword::class.java))
         }
 
@@ -146,10 +155,6 @@ class SigninActivity : AppCompatActivity() {
             return false
         }
         return true
-    }
-
-    private fun authenticateWithFingerprint(){
-
     }
 
 }
