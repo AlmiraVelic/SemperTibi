@@ -41,8 +41,8 @@ class SecurityCheck : AppCompatActivity() {
                 userID
             )}
 
-            tv1.text = twoRandomQuestions[0].question_text
-            tv2.text = twoRandomQuestions[1].question_text
+            tv1.text = twoRandomQuestions[0].question_text.trim()
+            tv2.text = twoRandomQuestions[1].question_text.trim()
 
             saveButton.setOnClickListener {
 

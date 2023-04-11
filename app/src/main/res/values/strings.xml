@@ -119,6 +119,7 @@ For more information click <a href="https://campushealth.unc.edu/health-topic/nu
     <string name="user_info_HRV">Dear user, \n\nthis page is under construction. \nThank you for using SemperTibi. \n\nWish you a nice day 😊\n\nTime for a <a href="https://pbs.twimg.com/media/DNp_ZOIVAAA7wQh?format=jpg&amp;name=large">joke?</a></string>
     <string name="stress_level_head">Stress Level:</string>
     <string name="forgot_password">Forgot Password? Click <u>here</u></string>
+    <string name="change_security_questions">Click <u>here</u> to change the security questions</string>
     <string name="reset_password_info">Please enter your e-mail address to reset your password</string>
     <string name="reset_password">Reset Password</string>
     <string name="button_to_reset_password_info">Button to reset the password. Press to reset password.</string>
@@ -128,6 +129,7 @@ For more information click <a href="https://campushealth.unc.edu/health-topic/nu
     <string name="tracker">Tracker</string>
     <string name="security_questions">Security Questions</string>
     <string name="answer_security_questions">Please answer following four questions due to security reasons. Thank you</string>
+    <string name="update_security_questions">Please do not change, if answers are still valid. Thank you</string>
     <string name="answer_security_check">Please answer following two questions to enter the app</string>
     <string name="button_to_save_security_info">Button to save the security questions and answers.</string>
     <string name="save_answers">Save answers</string>

@@ -3,18 +3,15 @@ package com.example.sempertibi
 import android.Manifest
 import android.app.AlarmManager
 import android.app.AlertDialog
-import android.app.PendingIntent
-import android.app.PendingIntent.*
+import android.app.PendingIntent.FLAG_IMMUTABLE
+import android.app.PendingIntent.getBroadcast
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Patterns
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.Button
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
@@ -58,6 +55,8 @@ class Settings : AppCompatActivity() {
     lateinit var genderInputField: AutoCompleteTextView
     lateinit var btnSaveChanges: Button
 
+    lateinit var tvChangeSecurityQuestions: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
@@ -76,6 +75,7 @@ class Settings : AppCompatActivity() {
         genderInputLayout = findViewById(R.id.setGender)
         genderInputField = findViewById(R.id.input_gender)
         btnSaveChanges = findViewById(R.id.btSave)
+        tvChangeSecurityQuestions = findViewById(R.id.tvChangeSecurityQuestions)
 
         notificationSwitch.isChecked = GlobalData.notificationUser ?: false
         usernameInputEditText.setText(GlobalData.loggedInUser)
@@ -140,6 +140,11 @@ class Settings : AppCompatActivity() {
                 validatePassword()
                 validateRepeatedPassword()
             }
+        }
+
+        // Link to change the security questions
+        tvChangeSecurityQuestions.setOnClickListener {
+            startActivity(Intent(this, SettingsSecurityQuestions::class.java))
         }
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/anti_flash_white"
-    tools:context=".SecurityQuestions">
+    tools:context=".SettingsSecurityQuestions">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,7 +41,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
-            android:text="@string/answer_security_questions"
+            android:text="@string/update_security_questions"
             android:textSize="18sp" />
 
         <com.google.android.material.divider.MaterialDivider
@@ -78,7 +78,6 @@
                 android:drawablePadding="12dp"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
-
 
 
         <TextView
@@ -184,12 +183,22 @@
         android:id="@+id/logo"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
+        android:layout_alignBottom="@id/bottom_nav"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="66dp"
         android:contentDescription="@string/logoString"
-        android:scaleType="centerInside"
         android:src="@drawable/lotus" />
+
+    <!-- Bottom navigation view -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/anti_flash_white"
+        app:itemIconTint="@color/lotus_blue"
+        app:itemTextColor="@color/logo_font"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/my_menu" />
 
 </RelativeLayout>

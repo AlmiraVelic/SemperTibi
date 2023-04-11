@@ -30,6 +30,9 @@
         android:theme="@style/Theme.SemperTibi"
         tools:targetApi="33">
         <activity
+            android:name=".SettingsSecurityQuestions"
+            android:exported="false" />
+        <activity
             android:name=".SecurityCheck"
             android:exported="false" />
         <activity

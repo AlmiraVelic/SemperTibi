@@ -44,9 +44,6 @@ interface UserDao {
     @Query("SELECT * FROM moodJournal WHERE user_id = :user_id AND entry_date = :entry_date")// Query the situation, that is inserted in the Moodjournal for a specific day
     fun readMoodOfUser(user_id: Int, entry_date: String): MoodJournal?
 
-    @Query("SELECT * FROM moodJournal WHERE user_id = :user_id")
-    suspend fun getAllMoodEntries(user_id: Int): List<MoodJournal>
-
     @Update
     suspend fun updateMood(moodJournal: MoodJournal)
 
@@ -90,6 +87,9 @@ interface UserDao {
 
     @Delete
     suspend fun deleteStressTestHRV(testHRV: StressHRV)
+
+    @Query("SELECT * FROM securityQuestion WHERE user_id = :user_id")
+    fun getSecurityQuestions(user_id: Int): List<SecurityQuestion>
 
     @Query("SELECT * FROM securityQuestion WHERE user_id = :user_id ORDER BY RANDOM() LIMIT 2")
     fun getTwoRandomSecurityQuestions(user_id: Int): List<SecurityQuestion>
