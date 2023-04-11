@@ -66,6 +66,17 @@
                 android:textSize="24sp" />
 
             <Button
+                android:id="@+id/btnToDoList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/toDoList"
+                android:textColor="@color/logo_font"
+                android:textSize="24sp" />
+
+            <Button
                 android:id="@+id/btnStressTracker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

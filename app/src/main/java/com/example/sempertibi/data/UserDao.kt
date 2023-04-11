@@ -99,4 +99,19 @@ interface UserDao {
 
     @Update
     suspend fun updateSecurityQuestions(question: SecurityQuestion)
+
+    @Query("SELECT * FROM toDoItems WHERE user_id = :user_id")
+    fun getAllTodoItems(user_id: Int): LiveData<List<ToDoItem>>
+
+    @Query("SELECT * FROM toDoItems WHERE todo_id = :todo_id")
+    fun getTodoItemByID(todo_id: Int): ToDoItem
+
+    @Insert
+    suspend fun insertTodoItem(todoItem: ToDoItem)
+
+    @Update
+    suspend fun updateTodoItem(todoItem: ToDoItem)
+
+    @Delete
+    suspend fun deleteTodoItem(todoItem: ToDoItem)
 }

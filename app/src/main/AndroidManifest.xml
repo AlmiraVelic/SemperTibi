@@ -30,6 +30,12 @@
         android:theme="@style/Theme.SemperTibi"
         tools:targetApi="33">
         <activity
+            android:name=".EditTodo"
+            android:exported="false" />
+        <activity
+            android:name=".ToDoList"
+            android:exported="false" />
+        <activity
             android:name=".SettingsSecurityQuestions"
             android:exported="false" />
         <activity

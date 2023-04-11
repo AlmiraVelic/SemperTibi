@@ -25,6 +25,13 @@ class Dashboard : AppCompatActivity() {
             val intent = Intent(this, MoodJournalOverview::class.java)
             startActivity(intent)
         }
+
+        val toDoList = findViewById<Button>(R.id.btnToDoList)
+        toDoList.setOnClickListener {
+            val intent = Intent(this, ToDoList::class.java)
+            startActivity(intent)
+        }
+
         val stressTracker = findViewById<Button>(R.id.btnStressTracker)
         stressTracker.setOnClickListener {
             val intent = Intent(this, StressTrackerOverview::class.java)

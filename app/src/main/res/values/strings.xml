@@ -6,6 +6,7 @@
     <string name="newUserQuestion">New User</string>
     <string name="dashBoard">Dashboard</string>
     <string name="moodJournal">Mood Journal</string>
+    <string name="toDoList">To-Do List</string>
     <string name="stressTracker">Stress Tracker</string>
     <string name="tips">Tips &amp; Tricks</string>
     <string name="settings">Settings</string>
@@ -139,5 +140,13 @@ For more information click <a href="https://campushealth.unc.edu/health-topic/nu
     <string name="security_question_4">What is your favorite color?</string>
     <string name="enter_answer_here">Please enter your answer here</string>
     <string name="your_daily_quote">Your daily quote</string>
+    <string name="todo_title_hint">Title of your To-Do Item</string>
+    <string name="todo_description_hint">Describe the To-Do Item</string>
+    <string name="button_add_todo">Add to my list</string>
+    <string name="checkbox_completed">Todo Completed</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="delete_icon">Delete Icon, swipe to delete</string>
+    <string name="toDoListItem">Change To-Do</string>
 
 </resources>

@@ -15,7 +15,8 @@ for the underlying connection to the app's persisted, relational data.
         MoodJournal::class,
         StressPSS::class,
         StressHRV::class,
-        SecurityQuestion::class
+        SecurityQuestion::class,
+        ToDoItem::class
     ],
     version = 1,
     exportSchema = true
