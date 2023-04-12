@@ -48,21 +48,11 @@
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
-
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/lineChart"
+            <com.github.mikephil.charting.charts.HorizontalBarChart
+                android:id="@+id/barChart"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="250dp"
                 android:layout_margin="12dp"/>
-
-            <TextView
-                android:id="@+id/tvStressOutput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:text=""
-                android:textAlignment="center"
-                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/btnNewMeasurePSS"
