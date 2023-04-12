@@ -66,7 +66,7 @@ class SecurityCheck : AppCompatActivity() {
                                 GlobalData.genderUser = userInformation.gender
                         }
 
-                        startActivity(Intent(this@SecurityCheck, Dashboard::class.java))
+                        startActivity(Intent(this@SecurityCheck, MoodTracker::class.java))
                     }else{
                         Toast.makeText(
                             applicationContext,
