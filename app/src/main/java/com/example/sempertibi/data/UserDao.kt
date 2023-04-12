@@ -44,6 +44,9 @@ interface UserDao {
     @Query("SELECT * FROM moodJournal WHERE user_id = :user_id AND entry_date = :entry_date")// Query the situation, that is inserted in the Moodjournal for a specific day
     fun readMoodOfUser(user_id: Int, entry_date: String): MoodJournal?
 
+    @Query("SELECT mood_score FROM moodJournal WHERE user_id = :user_id ORDER BY entry_date DESC LIMIT 7")
+    fun getMoodLast7Entries(user_id: Int): List<Int>
+
     @Update
     suspend fun updateMood(moodJournal: MoodJournal)
 
