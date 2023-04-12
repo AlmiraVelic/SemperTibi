@@ -3,11 +3,20 @@ package com.example.sempertibi
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.CalendarView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.sempertibi.data.UserDao
 import com.example.sempertibi.data.UserDatabase
+import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import kotlinx.coroutines.Dispatchers
@@ -26,6 +35,7 @@ class MoodJournalOverview : AppCompatActivity() {
         setContentView(R.layout.activity_mood_journal_overview)
 
         initViews()
+        setupPieChart()
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
         bottomNavigationView.setOnItemSelectedListener { menuItem ->
@@ -45,8 +55,8 @@ class MoodJournalOverview : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
-                R.id.menuSettings -> {
-                    val intent = Intent(this, Settings::class.java)
+                R.id.menuToDoList -> {
+                    val intent = Intent(this, ToDoList::class.java)
                     startActivity(intent)
                     true
                 }
@@ -64,7 +74,7 @@ class MoodJournalOverview : AppCompatActivity() {
                             val mainIntent = Intent.makeRestartActivityTask(componentName)
                             applicationContext.startActivity(mainIntent)
                         }
-                        .setNegativeButton("No"){_,_->
+                        .setNegativeButton("No") { _, _ ->
                             val intent = Intent(this, Dashboard::class.java)
                             startActivity(intent)
                         }
@@ -137,6 +147,72 @@ class MoodJournalOverview : AppCompatActivity() {
                 GlobalData.moodEntryID = existingEntry.entry_id
                 fabButton.setIconResource(R.drawable.ic_edit)
                 fabButton.text = getString(R.string.editEntry)
+            }
+        }
+    }
+
+    private fun setupPieChart() {
+        val pieChart = findViewById<PieChart>(R.id.pieChart)
+        val pieChartText = findViewById<TextView>(R.id.tvMoodPie)
+
+        lifecycleScope.launch {
+            val moodScores = withContext(Dispatchers.IO) {
+                userDao.getMoodLast7Entries(GlobalData.userID!!)
+            }
+
+            if (moodScores.isNotEmpty()) {
+
+                pieChart.setUsePercentValues(false)
+                pieChart.description.isEnabled = false
+                pieChart.legend.isEnabled = false
+                pieChart.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+                pieChart.legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+                pieChart.legend.setDrawInside(false)
+                pieChart.holeRadius = 40f
+
+                val moodCounts = moodScores.groupingBy { it }.eachCount()
+
+                val entries = moodCounts.entries.map {
+                    val moodIcon = when (it.key) {
+                        5 -> "😊"
+                        1 -> "😢"
+                        2 -> "😠"
+                        4 -> "😲"
+                        3 -> "😨"
+                        else -> ""
+                    }
+                    PieEntry(it.value.toFloat(), moodIcon)
+                }
+
+                val dataSet = PieDataSet(entries, "")
+                dataSet.colors = listOf(
+                    ContextCompat.getColor(this@MoodJournalOverview, R.color.colorMood1),
+                    ContextCompat.getColor(this@MoodJournalOverview, R.color.colorMood2),
+                    ContextCompat.getColor(this@MoodJournalOverview, R.color.colorMood3),
+                    ContextCompat.getColor(this@MoodJournalOverview, R.color.colorMood4),
+                    ContextCompat.getColor(this@MoodJournalOverview, R.color.colorMood5)
+                )
+
+                dataSet.valueFormatter = object : ValueFormatter() {
+                    override fun getFormattedValue(value: Float): String {
+                        return value.toInt().toString()
+                    }
+                }
+
+                val data = PieData(dataSet)
+                data.setValueTextSize(14f)
+                data.setValueTextColor(
+                    ContextCompat.getColor(
+                        this@MoodJournalOverview,
+                        R.color.logo_font
+                    )
+                )
+
+                pieChart.data = data
+                pieChart.invalidate()
+            } else {
+                pieChart.visibility = View.GONE
+                pieChartText.visibility = View.GONE
             }
         }
     }

@@ -10,6 +10,10 @@
     <color name="lotus_lightblue">#42afc2</color> <!-- Lotus light Font = Gabriela-->
     <color name="logo_font">#455a5c</color> <!-- Logo Font color -->
     <color name="stress_indicator_scale_high">#009688</color>
-    <color name="red">#F44336</color>
+    <color name="colorMood1">#E1BEE7</color>
+    <color name="colorMood2">#BBDEFB</color>
+    <color name="colorMood3">#B2DFDB</color>
+    <color name="colorMood4">#FFF9C4</color>
+    <color name="colorMood5">#FFCDD2</color>
 
 </resources>

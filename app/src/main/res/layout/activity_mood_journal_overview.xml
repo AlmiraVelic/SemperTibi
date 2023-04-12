@@ -42,7 +42,7 @@
                 android:id="@+id/tvChooseDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:text="@string/chooseDate"
                 android:textColor="@color/logo_font"
                 android:textSize="20sp" />
@@ -57,7 +57,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="20dp"
+                android:layout_marginTop="-20dp"
+                android:layout_marginHorizontal="20dp"
                 android:backgroundTint="@color/lotus_lightblue"
                 android:contentDescription="@string/edit"
                 android:text="@string/edit"
@@ -68,7 +69,20 @@
                 app:icon="@drawable/ic_edit"
                 app:iconGravity="textStart" />
 
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pieChart"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp" />
+            <TextView
+                android:id="@+id/tvMoodPie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/last_mood_entries"
+                android:textSize="16sp"
+                android:gravity="center"/>
         </LinearLayout>
+
     </androidx.core.widget.NestedScrollView>
 
     <ImageView
@@ -79,7 +93,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="66dp"
         android:contentDescription="@string/logoString"
-        android:src="@drawable/lotus" />
+        android:src="@drawable/lotus"
+        android:visibility="gone"/>
 
     <!-- Bottom navigation view -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
