@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,11 +7,10 @@
     android:background="@color/anti_flash_white"
     tools:context=".TipBreath">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical">
+        android:layout_marginBottom="?actionBarSize">
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScrollView"
@@ -24,6 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:layout_marginTop="20dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -48,34 +48,33 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    android:padding="20dp"
                     android:text="@string/tipBreath"
                     android:textColor="@color/logo_font"
-                    android:textSize="20sp"
-                    android:padding="20dp"/>
+                    android:textSize="20sp" />
 
+                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                    android:id="@+id/VideoBreath"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginEnd="20dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    app:autoPlay="false"
+                    app:videoId="tEmt1Znux58" />
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
-
-        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-            android:id="@+id/VideoBreath"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="20dp"
-            android:gravity="center"
-            android:padding="8dp"
-            app:videoId="tEmt1Znux58"
-            app:autoPlay="false"/>
-
-    </LinearLayout>
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:layout_alignBottom="@id/bottom_nav"
+        android:layout_gravity="bottom"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="66dp"
         android:contentDescription="@string/logoString"
@@ -87,10 +86,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
         android:background="@color/anti_flash_white"
         app:itemIconTint="@color/lotus_blue"
         app:itemTextColor="@color/logo_font"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/my_menu" />
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 

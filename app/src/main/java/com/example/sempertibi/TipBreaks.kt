@@ -1,11 +1,11 @@
 package com.example.sempertibi
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
@@ -25,13 +25,16 @@ class TipBreaks : AppCompatActivity() {
         linkTextView = findViewById(R.id.tvBreak)
 
         linkTextView.setOnClickListener {
+
             AlertDialog.Builder(this).setTitle("Notification")
                 .setMessage("You are leaving the app now to a 3rd party website")
                 .setPositiveButton("Ok"){_,_->
                     linkTextView.movementMethod = LinkMovementMethod.getInstance()
+                    linkTextView.isClickable = true
                 }
                 .setNegativeButton("Cancel", null)
                 .show()
+
         }
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)

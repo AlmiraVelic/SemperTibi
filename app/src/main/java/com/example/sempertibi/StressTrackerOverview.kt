@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.sempertibi.data.UserDatabase
+import com.example.sempertibi.data.entities.StressPSS
 import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -20,6 +21,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.*
 
 class StressTrackerOverview : AppCompatActivity() {
 
@@ -53,7 +56,6 @@ class StressTrackerOverview : AppCompatActivity() {
         // launch a coroutine to fetch data from the database in the background
         lifecycleScope.launch {
 
-            /*
             // add default entries to database if there are less than 7 entries
             withContext(Dispatchers.IO) {
                 val currentDate = Date()
@@ -61,13 +63,13 @@ class StressTrackerOverview : AppCompatActivity() {
                 if (numEntries < 7) {
                     for (i in 1..(7 - numEntries)) {
                         val date = Calendar.getInstance().apply { time = currentDate }
-                        date.add(Calendar.DAY_OF_MONTH, -(i - 7))
+                        date.add(Calendar.DAY_OF_MONTH, (i - 7))
                         val testDate =
                             SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(date.time)
                         dao.addStressPSS(StressPSS(0, userID, testDate, 0))
                     }
                 }
-            }*/
+            }
 
             val pssEntries = withContext(Dispatchers.IO) {
                 dao.getPSSLast7Entries(userID!!)
@@ -125,7 +127,7 @@ class StressTrackerOverview : AppCompatActivity() {
 
                 val legend = barChart.legend
                 legend.isEnabled = true
-                legend.textSize = 16f
+                legend.textSize = 14f
                 legend.textColor =
                     ContextCompat.getColor(this@StressTrackerOverview, R.color.logo_font)
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,94 +7,101 @@
     android:background="@color/anti_flash_white"
     tools:context=".MoodJournalOverview">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_marginBottom="?actionBarSize">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <TextView
-                android:id="@+id/tvMoodJournalOv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/yourMood"
-                android:textColor="@color/logo_font"
-                android:textSize="34sp"
-                android:textStyle="bold" />
-
-            <com.google.android.material.divider.MaterialDivider
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                app:dividerColor="@color/lotus_blue"
-                app:dividerThickness="3dp" />
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvChooseDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="@string/chooseDate"
-                android:textColor="@color/logo_font"
-                android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/tvMoodJournalOv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/yourMood"
+                    android:textColor="@color/logo_font"
+                    android:textSize="34sp"
+                    android:textStyle="bold" />
 
-            <CalendarView
-                android:id="@+id/calendarView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    app:dividerColor="@color/lotus_blue"
+                    app:dividerThickness="3dp" />
 
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/ext_fab"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="-20dp"
-                android:layout_marginHorizontal="20dp"
-                android:backgroundTint="@color/lotus_lightblue"
-                android:contentDescription="@string/edit"
-                android:text="@string/edit"
-                android:textAlignment="center"
-                android:textColor="@color/logo_font"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:icon="@drawable/ic_edit"
-                app:iconGravity="textStart" />
+                <TextView
+                    android:id="@+id/tvChooseDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/chooseDate"
+                    android:textColor="@color/logo_font"
+                    android:textSize="20sp" />
 
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/pieChart"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="20dp" />
-            <TextView
-                android:id="@+id/tvMoodPie"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/last_mood_entries"
-                android:textSize="16sp"
-                android:gravity="center"/>
-        </LinearLayout>
+                <CalendarView
+                    android:id="@+id/calendarView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-    </androidx.core.widget.NestedScrollView>
+                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                    android:id="@+id/ext_fab"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="-20dp"
+                    android:backgroundTint="@color/lotus_lightblue"
+                    android:contentDescription="@string/edit"
+                    android:text="@string/edit"
+                    android:textAlignment="center"
+                    android:textColor="@color/logo_font"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:icon="@drawable/ic_edit"
+                    app:iconGravity="textStart" />
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/pieChart"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="20dp" />
+
+                <TextView
+                    android:id="@+id/tvMoodPie"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/last_mood_entries"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:layout_alignBottom="@id/bottom_nav"
+        android:layout_gravity="bottom"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="66dp"
         android:contentDescription="@string/logoString"
         android:src="@drawable/lotus"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <!-- Bottom navigation view -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -102,10 +109,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
         android:background="@color/anti_flash_white"
         app:itemIconTint="@color/lotus_blue"
         app:itemTextColor="@color/logo_font"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/my_menu" />
 
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,176 +8,190 @@
     android:background="@color/anti_flash_white"
     tools:context=".SettingsSecurityQuestions">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginBottom="?actionBarSize">
 
-        <TextView
-            android:id="@+id/tvSecurityQuestions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/security_questions"
-            android:textColor="@color/gray"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-        <com.google.android.material.divider.MaterialDivider
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="10dp"
-            app:dividerColor="@color/lotus_blue"
-            app:dividerThickness="3dp" />
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:id="@+id/tvInfoSecurityQuestions"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:text="@string/update_security_questions"
-            android:textSize="18sp" />
-
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="10dp"
-            app:dividerColor="@color/lotus_blue"
-            app:dividerThickness="1dp" />
-
-        <TextView
-            android:id="@+id/tvQuestion1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginVertical="2dp"
-            android:text="@string/security_question_1"
-            android:textSize="16sp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/streetNameInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginHorizontal="12dp"
-            android:hint="@string/enter_answer_here"
-            app:endIconMode="clear_text"
-            app:errorEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/streetNameInput"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawablePadding="12dp"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tvSecurityQuestions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/security_questions"
+                    android:textColor="@color/gray"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="10dp"
+                    app:dividerColor="@color/lotus_blue"
+                    app:dividerThickness="3dp" />
+
+                <TextView
+                    android:id="@+id/tvInfoSecurityQuestions"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:text="@string/update_security_questions"
+                    android:textSize="18sp" />
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="10dp"
+                    app:dividerColor="@color/lotus_blue"
+                    app:dividerThickness="1dp" />
+
+                <TextView
+                    android:id="@+id/tvQuestion1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="2dp"
+                    android:text="@string/security_question_1"
+                    android:textSize="16sp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/streetNameInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginHorizontal="12dp"
+                    android:hint="@string/enter_answer_here"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/streetNameInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="12dp"
+                        android:inputType="textMultiLine" />
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-        <TextView
-            android:id="@+id/tvQuestion2"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginVertical="2dp"
-            android:text="@string/security_question_2"
-            android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tvQuestion2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="2dp"
+                    android:text="@string/security_question_2"
+                    android:textSize="16sp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/motherNameInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:hint="@string/enter_answer_here"
-            app:endIconMode="clear_text"
-            app:errorEnabled="true">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/motherNameInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:hint="@string/enter_answer_here"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/motherNameInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawablePadding="12dp"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/motherNameInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="12dp"
+                        android:inputType="textMultiLine" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tvQuestion3"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginVertical="2dp"
-            android:text="@string/security_question_3"
-            android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tvQuestion3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="2dp"
+                    android:text="@string/security_question_3"
+                    android:textSize="16sp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/movieNameInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:hint="@string/enter_answer_here"
-            app:endIconMode="clear_text"
-            app:errorEnabled="true">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/movieNameInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:hint="@string/enter_answer_here"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/movieNameInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawablePadding="12dp"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/movieNameInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="12dp"
+                        android:inputType="textMultiLine" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tvQuestion4"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginVertical="2dp"
-            android:text="@string/security_question_4"
-            android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tvQuestion4"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="2dp"
+                    android:text="@string/security_question_4"
+                    android:textSize="16sp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/colorInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:hint="@string/enter_answer_here"
-            app:endIconMode="clear_text"
-            app:errorEnabled="true">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/colorInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:hint="@string/enter_answer_here"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/colorInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawablePadding="12dp"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/colorInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="12dp"
+                        android:inputType="textMultiLine" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/btSaveSecurityQuestions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            android:contentDescription="@string/button_to_save_security_info"
-            android:text="@string/save_answers"
-            android:textColor="@color/gray"
-            android:textSize="24sp"
-            tools:ignore="TextContrastCheck" />
+                <Button
+                    android:id="@+id/btSaveSecurityQuestions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:contentDescription="@string/button_to_save_security_info"
+                    android:text="@string/save_answers"
+                    android:textColor="@color/gray"
+                    android:textSize="24sp"
+                    tools:ignore="TextContrastCheck" />
 
-    </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/logo"
@@ -187,7 +201,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="66dp"
         android:contentDescription="@string/logoString"
-        android:src="@drawable/lotus" />
+        android:src="@drawable/lotus"
+        android:visibility="gone" />
 
     <!-- Bottom navigation view -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -195,10 +210,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
         android:background="@color/anti_flash_white"
         app:itemIconTint="@color/lotus_blue"
         app:itemTextColor="@color/logo_font"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/my_menu" />
 
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

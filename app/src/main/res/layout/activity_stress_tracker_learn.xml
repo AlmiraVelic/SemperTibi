@@ -44,7 +44,8 @@
         android:indicatorStart="-10dp"
         android:indicatorEnd="40dp"
         android:dividerHeight="0.5dp"
-        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft" />
+        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+        android:layout_marginBottom="?actionBarSize"/>
 
 
     <ImageView

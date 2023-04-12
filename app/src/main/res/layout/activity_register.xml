@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout_register"
@@ -8,184 +8,189 @@
     android:background="@color/anti_flash_white"
     tools:context=".Register">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_marginBottom="?actionBarSize">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <TextView
-                android:id="@+id/tvRegister"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/register"
-                android:textColor="@color/gray"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-            <com.google.android.material.divider.MaterialDivider
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                app:dividerColor="@color/lotus_blue"
-                app:dividerThickness="3dp" />
-
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/switch1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:minHeight="48dp"
-                android:switchMinWidth="60dp"
-                android:text="@string/notifications"
-                android:textColor="@color/gray"
-                android:textOff="@string/show_off"
-                android:textOn="@string/show_on"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:switchPadding="20dp"/>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/register_input_username"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:hint="@string/userName"
-                app:counterEnabled="true"
-                app:counterMaxLength="15"
-                app:endIconMode="clear_text"
-                app:errorEnabled="true">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/usernameInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="12dp"
-                    android:inputType="text"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/register_input_password"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:hint="@string/password"
-                app:endIconMode="password_toggle"
-                app:errorEnabled="true"
-                app:passwordToggleContentDescription="@string/password">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/passwordInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="12dp"
-                    android:inputType="textPassword"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/register_input_repeatPassword"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:hint="@string/passwordRepeat"
-                app:endIconMode="password_toggle"
-                app:errorEnabled="true"
-                app:passwordToggleContentDescription="@string/passwordRepeat">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/repeatPasswordInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="12dp"
-                    android:inputType="textPassword"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/register_input_email"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:hint="@string/mail"
-                app:endIconMode="clear_text"
-                app:errorEnabled="true"
-                app:helperText="@string/mailHint">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/emailInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="12dp"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/register_input_setGender"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                app:errorEnabled="true">
-
-                <AutoCompleteTextView
-                    android:id="@+id/input_gender"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="12dp"
-                    android:hint="@string/gender"
-                    android:inputType="none"
-                    android:minHeight="48dp"
-                    app:simpleItems="@array/gender_identity" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <Button
-                android:id="@+id/btRegister"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:contentDescription="@string/button_to_register"
-                android:text="@string/register"
-                android:textColor="@color/gray"
-                android:textSize="24sp"
-                tools:ignore="TextContrastCheck" />
-
-            <TextView
-                android:id="@+id/appCompatTextViewLoginLink"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:text="@string/text_already_member"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-</RelativeLayout>
+                <TextView
+                    android:id="@+id/tvRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/register"
+                    android:textColor="@color/gray"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    app:dividerColor="@color/lotus_blue"
+                    app:dividerThickness="3dp" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switch1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:minHeight="48dp"
+                    android:switchMinWidth="60dp"
+                    android:text="@string/notifications"
+                    android:textColor="@color/gray"
+                    android:textOff="@string/show_off"
+                    android:textOn="@string/show_on"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:switchPadding="20dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/register_input_username"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:hint="@string/userName"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="15"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/usernameInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="12dp"
+                        android:inputType="text"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/register_input_password"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:hint="@string/password"
+                    app:endIconMode="password_toggle"
+                    app:errorEnabled="true"
+                    app:passwordToggleContentDescription="@string/password">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/passwordInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="12dp"
+                        android:inputType="textPassword"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/register_input_repeatPassword"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:hint="@string/passwordRepeat"
+                    app:endIconMode="password_toggle"
+                    app:errorEnabled="true"
+                    app:passwordToggleContentDescription="@string/passwordRepeat">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/repeatPasswordInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="12dp"
+                        android:inputType="textPassword"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/register_input_email"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:hint="@string/mail"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:helperText="@string/mailHint">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/emailInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="12dp"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/register_input_setGender"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    app:errorEnabled="true">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/input_gender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="12dp"
+                        android:hint="@string/gender"
+                        android:inputType="none"
+                        android:minHeight="48dp"
+                        app:simpleItems="@array/gender_identity" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/btRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:contentDescription="@string/button_to_register"
+                    android:text="@string/register"
+                    android:textColor="@color/gray"
+                    android:textSize="24sp"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/appCompatTextViewLoginLink"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="@string/text_already_member"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

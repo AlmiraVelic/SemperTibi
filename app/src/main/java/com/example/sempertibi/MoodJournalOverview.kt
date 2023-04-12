@@ -179,7 +179,7 @@ class MoodJournalOverview : AppCompatActivity() {
                         2 -> "😠"
                         4 -> "😲"
                         3 -> "😨"
-                        else -> ""
+                        else -> "N/A"
                     }
                     PieEntry(it.value.toFloat(), moodIcon)
                 }

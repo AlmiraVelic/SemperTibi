@@ -109,7 +109,7 @@ class StressTestPSS : AppCompatActivity(), View.OnClickListener {
                             val mainIntent = Intent.makeRestartActivityTask(componentName)
                             applicationContext.startActivity(mainIntent)
                         }
-                        .setNegativeButton("No"){_,_->
+                        .setNegativeButton("No") { _, _ ->
                             val intent = Intent(this, Dashboard::class.java)
                             startActivity(intent)
                         }
@@ -221,13 +221,21 @@ class StressTestPSS : AppCompatActivity(), View.OnClickListener {
                         )
                         Log.d("PSS", "New entry done")
                     } else {
+
+                        val stressPSSUpdate = StressPSS(
+                            testPSS_id = existingEntry.testPSS_id,
+                            user_id = GlobalData.userID!!,
+                            testPSS_date = dateString,
+                            PSS_score = GlobalData.pssScore
+                        )
+
                         // If there is an entry for this day, then user is notified
                         AlertDialog.Builder(this@StressTestPSS).setTitle("Duplicate entry")
                             .setMessage("There is already an entry for today. Do you want to update it?")
                             .setPositiveButton("Update") { _, _ ->
                                 // update the existing entry
                                 lifecycleScope.launch {
-                                    dao.updateStressTestPSS(stressPSS)
+                                    withContext(Dispatchers.IO) {dao.updateStressTestPSS(stressPSSUpdate)}
                                 }
                                 Toast.makeText(
                                     applicationContext, "Results updated", Toast.LENGTH_SHORT
@@ -253,7 +261,6 @@ class StressTestPSS : AppCompatActivity(), View.OnClickListener {
                     }
                 }
             }
-
         }
     }
 
@@ -310,8 +317,6 @@ class StressTestPSS : AppCompatActivity(), View.OnClickListener {
 
         // Display the PSS score
         tvAnswerPSS.text = "Your PSS score is $pssScore \n \n$response"
-
-
     }
 
     private fun updateLayout(pssScore: Int) {
@@ -319,7 +324,7 @@ class StressTestPSS : AppCompatActivity(), View.OnClickListener {
         stressQuestionsLayout.visibility = View.GONE
         btnNext.visibility = View.GONE
 
-        // set Layout for stresslevel visible
+        // set Layout for stress level visible
         stressIndicatorLayout.visibility = View.VISIBLE
         stressIndicatorTitle.visibility = View.VISIBLE
         stressIndicatorArrow.visibility = View.VISIBLE
@@ -355,15 +360,12 @@ class StressTestPSS : AppCompatActivity(), View.OnClickListener {
         // Set Hint text visible
         tvHintPSS.visibility = View.VISIBLE
         tvHintPSS.setOnClickListener {
-            AlertDialog.Builder(this).setTitle("Notification")
+            AlertDialog.Builder(this)
+                .setTitle("Notification")
                 .setMessage("You are leaving the app now to a 3rd party website")
                 .setPositiveButton("Ok") { _, _ ->
                     tvHintPSS.movementMethod = LinkMovementMethod.getInstance()
                 }.setNegativeButton("Cancel", null).show()
         }
     }
-
-
 }
-
-

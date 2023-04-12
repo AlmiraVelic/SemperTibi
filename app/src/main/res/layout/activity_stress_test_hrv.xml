@@ -95,7 +95,7 @@
                 android:id="@+id/hrvTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:layout_marginTop="20dp"
                 android:text="@string/user_info_HRV"
                 android:background="@drawable/tv_background"

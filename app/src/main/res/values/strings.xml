@@ -19,9 +19,9 @@
     <string name="exampleAnswer1">Example: When [SITUATION] happened, I felt [EMOTION].</string>
     <string name="exampleAnswer2">Example: I feel [EMOTION], because [EXPERIENCE].</string>
     <string name="exampleAnswer3">Example: I was able to [ACHIEVEMENT].</string>
-    <string name="newMeasurePSS">New Measurement PSS</string>
-    <string name="newMeasureHRV">New Measurement HRV</string>
-    <string name="learnMore">Learn more about the Tracker</string>
+    <string name="newMeasurePSS">Measurement PSS</string>
+    <string name="newMeasureHRV">Measurement HRV</string>
+    <string name="learnMore">Learn more about Stress Tracker</string>
     <string name="stressLevel">Your Stress-Level</string>
     <string name="heartRate">Detect heart rate</string>
     <string name="testStressPSS">Stress Test with PSS</string>

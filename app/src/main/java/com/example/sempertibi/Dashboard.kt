@@ -99,7 +99,7 @@ class Dashboard : AppCompatActivity() {
                             val mainIntent = Intent.makeRestartActivityTask(componentName)
                             applicationContext.startActivity(mainIntent)
                         }
-                        .setNegativeButton("No"){_,_->
+                        .setNegativeButton("No") { _, _ ->
                             val intent = Intent(this, Dashboard::class.java)
                             startActivity(intent)
                         }
@@ -115,21 +115,18 @@ class Dashboard : AppCompatActivity() {
     private fun loadQuotes(): List<String> {
         val inputStream = assets.open("quotes.txt")
         val quotes = mutableListOf<String>()
-
         inputStream.bufferedReader().useLines { lines ->
             lines.forEach {
                 quotes.add(it)
             }
         }
-
         return quotes
     }
 
     private fun displayRandomQuote() {
         val quotes = loadQuotes()
-        val quoteIndex = (0..quotes.size-1).random()
+        val quoteIndex = (quotes.indices).random()
         val randomQuote = quotes[quoteIndex]
-
         val quoteTextView: TextView = findViewById(R.id.quoteTextView)
         quoteTextView.text = randomQuote
     }

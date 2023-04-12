@@ -1,11 +1,11 @@
 package com.example.sempertibi
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
@@ -26,8 +26,9 @@ class TipSports : AppCompatActivity() {
         linkTextView.setOnClickListener {
             AlertDialog.Builder(this).setTitle("Notification")
                 .setMessage("You are leaving the app now to a 3rd party website")
-                .setPositiveButton("Ok"){_,_->
+                .setPositiveButton("Ok") { _, _ ->
                     linkTextView.movementMethod = LinkMovementMethod.getInstance()
+                    linkTextView.requestFocus()
                 }
                 .setNegativeButton("Cancel", null)
                 .show()
@@ -70,7 +71,7 @@ class TipSports : AppCompatActivity() {
                             val mainIntent = Intent.makeRestartActivityTask(componentName)
                             applicationContext.startActivity(mainIntent)
                         }
-                        .setNegativeButton("No"){_,_->
+                        .setNegativeButton("No") { _, _ ->
                             val intent = Intent(this, Dashboard::class.java)
                             startActivity(intent)
                         }

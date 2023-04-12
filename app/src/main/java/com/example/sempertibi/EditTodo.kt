@@ -20,7 +20,6 @@ class EditTodo : AppCompatActivity() {
     private lateinit var todoTitleInput: TextInputEditText
     private lateinit var todoDescriptionInput: TextInputEditText
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_todo)
