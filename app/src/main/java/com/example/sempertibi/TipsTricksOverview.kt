@@ -2,11 +2,11 @@ package com.example.sempertibi
 
 import android.app.AlertDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
@@ -84,8 +84,8 @@ class TipsTricksOverview : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
-                R.id.menuSettings -> {
-                    val intent = Intent(this, Settings::class.java)
+                R.id.menuToDoList -> {
+                    val intent = Intent(this, ToDoList::class.java)
                     startActivity(intent)
                     true
                 }

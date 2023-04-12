@@ -2,10 +2,10 @@ package com.example.sempertibi
 
 import android.app.AlertDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.sempertibi.data.UserDatabase
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -76,8 +76,8 @@ class EditTodo : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
-                R.id.menuSettings -> {
-                    val intent = Intent(this, Settings::class.java)
+                R.id.menuToDoList -> {
+                    val intent = Intent(this, ToDoList::class.java)
                     startActivity(intent)
                     true
                 }

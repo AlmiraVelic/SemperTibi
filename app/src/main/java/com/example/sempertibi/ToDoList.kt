@@ -5,10 +5,10 @@ import android.content.Intent
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -108,7 +108,7 @@ class ToDoList : AppCompatActivity() {
                             val iconRight = itemView.left + iconMargin + iconEdit!!.intrinsicWidth
                             iconEdit.setBounds(iconLeft, iconTop, iconRight, iconBottom)
 
-                            val background = ColorDrawable(Color.parseColor("#00FF00"))
+                            val background = ColorDrawable(Color.parseColor("#FF4CAF50"))
                             background.setBounds(
                                 itemView.left,
                                 itemView.top,
@@ -125,7 +125,7 @@ class ToDoList : AppCompatActivity() {
                             val iconRight = itemView.right - iconMargin
                             iconDelete.setBounds(iconLeft, iconTop, iconRight, iconBottom)
 
-                            val background = ColorDrawable(Color.parseColor("#F44336"))
+                            val background = ColorDrawable(Color.parseColor("#FFF1776E"))
                             background.setBounds(
                                 itemView.right + dX.toInt() - backgroundCornerOffset,
                                 itemView.top,
@@ -137,7 +137,7 @@ class ToDoList : AppCompatActivity() {
                             iconDelete.draw(c)
                         }
                         else -> { // View is unswiped
-                            val background = ColorDrawable(Color.parseColor("#F44336"))
+                            val background = ColorDrawable(Color.parseColor("#FFF1776E"))
                             background.setBounds(0, 0, 0, 0)
                             background.draw(c)
                         }
@@ -194,8 +194,8 @@ class ToDoList : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
-                R.id.menuSettings -> {
-                    val intent = Intent(this, Settings::class.java)
+                R.id.menuToDoList -> {
+                    val intent = Intent(this, ToDoList::class.java)
                     startActivity(intent)
                     true
                 }
@@ -223,6 +223,7 @@ class ToDoList : AppCompatActivity() {
                 else -> false
             }
         }
+
     }
 
     private fun validateInput(): Boolean {

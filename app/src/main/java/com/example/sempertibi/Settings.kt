@@ -165,8 +165,8 @@ class Settings : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
-                R.id.menuSettings -> {
-                    val intent = Intent(this, Settings::class.java)
+                R.id.menuToDoList -> {
+                    val intent = Intent(this, ToDoList::class.java)
                     startActivity(intent)
                     true
                 }

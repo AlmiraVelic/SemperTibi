@@ -16,19 +16,28 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/menuToDoList"
+        android:contentDescription="@string/to_dos"
+        android:icon="@drawable/ic_list"
+        android:title="@string/to_dos"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/menuStressTracker"
         android:contentDescription="@string/tracker"
         android:icon="@drawable/ic_tracker"
         android:title="@string/tracker"
         app:showAsAction="never" />
 
-    <!-- Settings, should always be in the overflow -->
+    <!-- Settings, should always be in the overflow
     <item
         android:id="@+id/menuSettings"
         android:contentDescription="@string/settings"
         android:icon="@drawable/ic_settings"
         android:title="@string/settings"
         app:showAsAction="never" />
+    -->
+
 
     <item
         android:id="@+id/menuSignOut"

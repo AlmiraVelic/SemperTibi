@@ -75,13 +75,13 @@ class Dashboard : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
-                R.id.menuStressTracker -> {
-                    val intent = Intent(this, StressTrackerOverview::class.java)
+                R.id.menuToDoList -> {
+                    val intent = Intent(this, ToDoList::class.java)
                     startActivity(intent)
                     true
                 }
-                R.id.menuSettings -> {
-                    val intent = Intent(this, Settings::class.java)
+                R.id.menuStressTracker -> {
+                    val intent = Intent(this, StressTrackerOverview::class.java)
                     startActivity(intent)
                     true
                 }

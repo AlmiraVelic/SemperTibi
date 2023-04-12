@@ -1,5 +1,6 @@
 package com.example.sempertibi
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
@@ -89,8 +90,8 @@ class StressTestPSS : AppCompatActivity(), View.OnClickListener {
                     startActivity(intent)
                     true
                 }
-                R.id.menuSettings -> {
-                    val intent = Intent(this, Settings::class.java)
+                R.id.menuToDoList -> {
+                    val intent = Intent(this, ToDoList::class.java)
                     startActivity(intent)
                     true
                 }
@@ -256,6 +257,7 @@ class StressTestPSS : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setQuestion(index: Int) {
         tvQuestion.text = questions[index]
         val myindex = index + 1
@@ -263,6 +265,7 @@ class StressTestPSS : AppCompatActivity(), View.OnClickListener {
         btnNext.text = if (index == questions.size - 1) "Finish" else "Next"
     }
 
+    @SuppressLint("SetTextI18n")
     private fun finishTest() {
         // Reverse score the positively stated items 4,5,7,8
         answers[3] = 4 - answers[3]
