@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,268 +8,297 @@
     tools:context=".StressTestPSS">
 
     <LinearLayout
-        android:id="@+id/StressPSSHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="top|center"
-        android:layout_marginTop="20dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvPSS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/testStressPSS"
-            android:textColor="@color/logo_font"
-            android:textSize="34sp"
-            android:textStyle="bold" />
-
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            app:dividerColor="@color/lotus_blue"
-            app:dividerThickness="3dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/stress_questions_layout"
-        android:layout_below="@id/StressPSSHeader"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="top|center"
-        android:orientation="vertical"
-        android:visibility="visible">
-
-        <TextView
-            android:id="@+id/informationText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:text="@string/answerQuestions"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvQuestionCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/question_1_x"
-            android:textAlignment="center" />
-
-        <TextView
-            android:id="@+id/tvQuestion"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_margin="12dp"
-            android:text="@string/lastMonth"
-            android:textAlignment="center"
-            android:textSize="20sp" />
-
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp">
-
-            <RadioButton
-                android:id="@+id/radio_button_1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/answerPSS1" />
-
-            <RadioButton
-                android:id="@+id/radio_button_2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/answerPSS2" />
-
-            <RadioButton
-                android:id="@+id/radio_button_3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/answerPSS3" />
-
-            <RadioButton
-                android:id="@+id/radio_button_4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/answerPSS4" />
-
-            <RadioButton
-                android:id="@+id/radio_button_5"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/answerPSS5" />
-        </RadioGroup>
-
-        <Button
-            android:id="@+id/btNext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="12dp"
-            android:contentDescription="@string/button_explanation_PSSTest"
-            android:minHeight="32dp"
-            android:text="@string/next"
-            android:textColor="@color/gray"
-            android:textSize="24sp"
-            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/stress_indicator_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/StressPSSHeader"
-        android:layout_margin="12dp"
-        android:visibility="invisible">
-
-        <TextView
-            android:id="@+id/stress_indicator_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/stress_indicator_layout"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
-            android:text="@string/stress_level"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:visibility="invisible"
-            tools:ignore="NotSibling" />
-
-        <ImageView
-            android:id="@+id/stress_indicator_arrow"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/stress_indicator_title"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="-15dp"
-            android:src="@drawable/ic_arrow_drop_down"
-            android:visibility="invisible"
-            android:contentDescription="@string/arrow_PSS_Score" />
-
-        <View
-            android:id="@+id/stress_indicator_bar"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_below="@id/stress_indicator_arrow"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/stress_indicator_bar"
-            android:visibility="invisible" />
-
         <LinearLayout
-            android:id="@+id/stress_indicator_scale"
+            android:id="@+id/StressPSSHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/stress_indicator_bar"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:gravity="fill_horizontal"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:visibility="invisible">
+            android:layout_marginTop="20dp"
+            android:gravity="top|center"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/stress_indicator_low"
+                android:id="@+id/tvPSS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/low"
-                android:textAlignment="center"
-                android:textColor="@color/lotus_blue"
-                android:textSize="16sp"
+                android:text="@string/testStressPSS"
+                android:textColor="@color/logo_font"
+                android:textSize="34sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/stress_indicator_medium"
-                android:layout_width="wrap_content"
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/medium"
-                android:textAlignment="center"
-                android:textColor="@color/lotus_blue"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/stress_indicator_high"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/high"
-                android:textAlignment="center"
-                android:textColor="@color/lotus_blue"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                app:dividerColor="@color/lotus_blue"
+                app:dividerThickness="3dp" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvAnswerPSS"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/stress_indicator_scale"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="12dp"
-            android:text="@string/lastMonth"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:visibility="invisible" />
-    </RelativeLayout>
+            android:layout_marginBottom="?actionBarSize"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+            <LinearLayout
+                android:id="@+id/stress_questions_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="top|center"
+                android:orientation="vertical"
+                android:visibility="visible">
 
-    <Button
-        android:id="@+id/btRestart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/stress_indicator_layout"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="12dp"
-        android:contentDescription="@string/button_explanation_restart"
-        android:minHeight="32dp"
-        android:text="@string/restart_test"
-        android:textColor="@color/gray"
-        android:textSize="24sp"
-        android:visibility="invisible"
-        tools:ignore="TextContrastCheck" />
+                <TextView
+                    android:id="@+id/informationText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:text="@string/answerQuestions"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/btSave"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btRestart"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="12dp"
-        android:contentDescription="@string/button_explanation_save_results"
-        android:minHeight="32dp"
-        android:text="@string/save_results"
-        android:textColor="@color/gray"
-        android:textSize="24sp"
-        android:visibility="invisible"
-        tools:ignore="TextContrastCheck" />
+                <TextView
+                    android:id="@+id/tvQuestionCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/question_1_x"
+                    android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/tvHintPSS"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btSave"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/tv_background"
-        android:padding="12dp"
-        android:text="@string/hintPSS"
-        android:textSize="14sp"
-        android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/tvQuestion"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_margin="12dp"
+                    android:text="@string/lastMonth"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="30dp">
+
+                    <RadioButton
+                        android:id="@+id/radio_button_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/answerPSS1" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/answerPSS2" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/answerPSS3" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/answerPSS4" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/answerPSS5" />
+                </RadioGroup>
+
+                <Button
+                    android:id="@+id/btNext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="12dp"
+                    android:contentDescription="@string/button_explanation_PSSTest"
+                    android:minHeight="32dp"
+                    android:text="@string/next"
+                    android:textColor="@color/gray"
+                    android:textSize="24sp"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="?actionBarSize"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:id="@+id/LLStressIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/StressPSSHeader"
+                android:gravity="top|center"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <RelativeLayout
+                    android:id="@+id/stress_indicator_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:visibility="invisible">
+
+                    <TextView
+                        android:id="@+id/stress_indicator_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/stress_indicator_layout"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:text="@string/stress_level"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:visibility="invisible"
+                        tools:ignore="NotSibling" />
+
+                    <ImageView
+                        android:id="@+id/stress_indicator_arrow"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@id/stress_indicator_title"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="-15dp"
+                        android:contentDescription="@string/arrow_PSS_Score"
+                        android:src="@drawable/ic_arrow_drop_down"
+                        android:visibility="invisible" />
+
+                    <View
+                        android:id="@+id/stress_indicator_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_below="@id/stress_indicator_arrow"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/stress_indicator_bar"
+                        android:visibility="invisible" />
+
+                    <LinearLayout
+                        android:id="@+id/stress_indicator_scale"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/stress_indicator_bar"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="fill_horizontal"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:visibility="invisible">
+
+                        <TextView
+                            android:id="@+id/stress_indicator_low"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/low"
+                            android:textAlignment="center"
+                            android:textColor="@color/lotus_blue"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/stress_indicator_medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/medium"
+                            android:textAlignment="center"
+                            android:textColor="@color/lotus_blue"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/stress_indicator_high"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/high"
+                            android:textAlignment="center"
+                            android:textColor="@color/lotus_blue"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvAnswerPSS"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/stress_indicator_scale"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:text="@string/lastMonth"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:visibility="invisible" />
+
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/btRestart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="12dp"
+                    android:contentDescription="@string/button_explanation_restart"
+                    android:minHeight="32dp"
+                    android:text="@string/restart_test"
+                    android:textColor="@color/gray"
+                    android:textSize="24sp"
+                    android:visibility="invisible"
+                    tools:ignore="TextContrastCheck" />
+
+                <Button
+                    android:id="@+id/btSave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="12dp"
+                    android:contentDescription="@string/button_explanation_save_results"
+                    android:minHeight="32dp"
+                    android:text="@string/save_results"
+                    android:textColor="@color/gray"
+                    android:textSize="24sp"
+                    android:visibility="invisible"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/tvHintPSS"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/tv_background"
+                    android:padding="12dp"
+                    android:text="@string/hintPSS"
+                    android:textSize="14sp"
+                    android:visibility="invisible" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/logo"
@@ -280,7 +309,7 @@
         android:layout_marginBottom="66dp"
         android:contentDescription="@string/logoString"
         android:src="@drawable/lotus"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <!-- Bottom navigation view -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -288,10 +317,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
         android:background="@color/anti_flash_white"
         app:itemIconTint="@color/lotus_blue"
         app:itemTextColor="@color/logo_font"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/my_menu" />
 
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

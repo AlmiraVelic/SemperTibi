@@ -154,6 +154,7 @@ class MoodJournalOverview : AppCompatActivity() {
     private fun setupPieChart() {
         val pieChart = findViewById<PieChart>(R.id.pieChart)
         val pieChartText = findViewById<TextView>(R.id.tvMoodPie)
+        userDao = UserDatabase.getInstance(this).userDao()
 
         lifecycleScope.launch {
             val moodScores = withContext(Dispatchers.IO) {

@@ -113,7 +113,6 @@
                     android:textColor="@color/logo_font"
                     android:textSize="24sp" />
             </LinearLayout>
-
         </androidx.core.widget.NestedScrollView>
     </RelativeLayout>
 
@@ -126,7 +125,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="66dp"
         android:contentDescription="@string/logoString"
-        android:src="@drawable/lotus" />
+        android:src="@drawable/lotus"
+        android:visibility="gone" />
 
     <!-- Bottom navigation view -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
