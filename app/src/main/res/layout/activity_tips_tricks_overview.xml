@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,117 +9,123 @@
     android:background="@color/anti_flash_white"
     tools:context=".TipsTricksOverview">
 
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_marginBottom="?actionBarSize">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp"
-            android:gravity="center">
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <TextView
-                android:id="@+id/tvTipsTricks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tipsHeader"
-                android:textColor="@color/logo_font"
-                android:textSize="34sp"
-                android:textStyle="bold"
-                android:textAlignment="center"/>
-
-            <com.google.android.material.divider.MaterialDivider
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_gravity="center"
-                app:dividerColor="@color/lotus_blue"
-                app:dividerThickness="3dp"/>
-
-            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-                android:id="@+id/VideoOverview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:padding="8dp"
-                app:videoId="tJlcnyji9FY"
-                app:autoPlay="false"/>
+                android:orientation="vertical">
 
-            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-                android:id="@+id/VideoOverview2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:gravity="center"
-                android:padding="8dp"
-                app:videoId="eGVWRvNe1-A"
-                app:autoPlay="false"/>
+                <TextView
+                    android:id="@+id/tvTipsTricks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tipsHeader"
+                    android:textAlignment="center"
+                    android:textColor="@color/logo_font"
+                    android:textSize="34sp"
+                    android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btnBreaks"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:text="@string/breaks"
-                android:textColor="@color/logo_font"
-                android:textSize="24sp"
-                android:layout_marginBottom="5dp"/>
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    app:dividerColor="@color/lotus_blue"
+                    app:dividerThickness="3dp" />
 
-            <Button
-                android:id="@+id/btnBreath"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:text="@string/breath"
-                android:textColor="@color/logo_font"
-                android:textSize="24sp"
-                android:layout_marginBottom="5dp"/>
+                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                    android:id="@+id/VideoOverview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    app:autoPlay="false"
+                    app:videoId="tJlcnyji9FY" />
 
-            <Button
-                android:id="@+id/btnSports"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:text="@string/sports"
-                android:textColor="@color/logo_font"
-                android:textSize="24sp"
-                android:layout_marginBottom="5dp"/>
+                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                    android:id="@+id/VideoOverview2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    app:autoPlay="false"
+                    app:videoId="eGVWRvNe1-A" />
 
-            <Button
-                android:id="@+id/btnPlans"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:text="@string/plans"
-                android:textColor="@color/logo_font"
-                android:textSize="24sp"
-                android:layout_marginBottom="5dp"/>
+                <Button
+                    android:id="@+id/btnBreaks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/breaks"
+                    android:textColor="@color/logo_font"
+                    android:textSize="24sp" />
 
-            <Button
-                android:id="@+id/btnNutrition"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:text="@string/nutrition"
-                android:textColor="@color/logo_font"
-                android:textSize="24sp"/>
+                <Button
+                    android:id="@+id/btnBreath"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/breath"
+                    android:textColor="@color/logo_font"
+                    android:textSize="24sp" />
 
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+                <Button
+                    android:id="@+id/btnSports"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/sports"
+                    android:textColor="@color/logo_font"
+                    android:textSize="24sp" />
+
+                <Button
+                    android:id="@+id/btnPlans"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/plans"
+                    android:textColor="@color/logo_font"
+                    android:textSize="24sp" />
+
+                <Button
+                    android:id="@+id/btnNutrition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="@string/nutrition"
+                    android:textColor="@color/logo_font"
+                    android:textSize="24sp" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/logo"
@@ -128,8 +135,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="66dp"
         android:contentDescription="@string/logoString"
-        android:visibility="gone"
-        android:src="@drawable/lotus" />
+        android:src="@drawable/lotus"
+        android:visibility="gone" />
 
     <!-- Bottom navigation view -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -137,10 +144,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
         android:background="@color/anti_flash_white"
         app:itemIconTint="@color/lotus_blue"
         app:itemTextColor="@color/logo_font"
         app:labelVisibilityMode="labeled"
+        app:layout_scrollFlags="scroll|enterAlways"
         app:menu="@menu/my_menu" />
 
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
