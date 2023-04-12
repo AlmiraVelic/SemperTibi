@@ -148,5 +148,9 @@ For more information click <a href="https://campushealth.unc.edu/health-topic/nu
     <string name="description">Description</string>
     <string name="delete_icon">Delete Icon, swipe to delete</string>
     <string name="toDoListItem">Change To-Do</string>
+    <string name="edit_icon">Edit the entry by swiping left</string>
+    <string name="to_dos">To-Dos</string>
+    <string name="last_7_mood_entries">Last 7 mood entries</string>
+    <string name="last_mood_entries">Here you can see your last mood entries (max. 7)</string>
 
 </resources>
