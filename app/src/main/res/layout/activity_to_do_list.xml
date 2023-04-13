@@ -14,6 +14,7 @@
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:orientation="vertical"
+        android:layout_marginBottom="?actionBarSize"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,6 +88,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_todo_items"
+            android:layout_marginBottom="?actionBarSize"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

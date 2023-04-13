@@ -1,11 +1,11 @@
 package com.example.sempertibi
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class StressTestHRV : AppCompatActivity() {
@@ -18,7 +18,7 @@ class StressTestHRV : AppCompatActivity() {
         linkTextView = findViewById(R.id.hrvTextView)
         linkTextView.setOnClickListener {
             AlertDialog.Builder(this).setTitle("Notification")
-                .setMessage("You are leaving the app now to a 3rd party website")
+                .setMessage("You are leaving the app now to a 3rd party website. Please click again on the text to get there.")
                 .setPositiveButton("Ok") { _, _ ->
                     linkTextView.movementMethod = LinkMovementMethod.getInstance()
                 }

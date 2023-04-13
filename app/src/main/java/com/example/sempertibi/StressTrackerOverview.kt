@@ -3,7 +3,7 @@ package com.example.sempertibi
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.os.StrictMode
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -35,6 +35,7 @@ class StressTrackerOverview : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_stress_tracker_overview)
+        StrictMode.enableDefaults()
 
         // initialize UI elements
         barChart = findViewById(R.id.barChart)
@@ -63,7 +64,7 @@ class StressTrackerOverview : AppCompatActivity() {
                 if (numEntries < 7) {
                     for (i in 1..(7 - numEntries)) {
                         val date = Calendar.getInstance().apply { time = currentDate }
-                        date.add(Calendar.DAY_OF_MONTH, (i - 7))
+                        date.add(Calendar.DAY_OF_MONTH, (i - 8))
                         val testDate =
                             SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(date.time)
                         dao.addStressPSS(StressPSS(0, userID, testDate, 0))
@@ -75,72 +76,68 @@ class StressTrackerOverview : AppCompatActivity() {
                 dao.getPSSLast7Entries(userID!!)
             }
 
-            if(pssEntries != null) {
-                val entries = pssEntries.mapIndexed { index, pssEntry ->
-                    BarEntry(index.toFloat(), pssEntry.PSS_score.toFloat())
-                }
-
-                val dataSet = BarDataSet(entries, "PSS scores")
-
-                dataSet.color =
-                    ContextCompat.getColor(this@StressTrackerOverview, R.color.lotus_blue)
-                dataSet.valueTextColor =
-                    ContextCompat.getColor(this@StressTrackerOverview, R.color.anti_flash_white)
-                dataSet.valueTextSize = 14f
-                dataSet.valueFormatter = object : ValueFormatter() {
-                    override fun getFormattedValue(value: Float): String {
-                        return value.toInt().toString()
-                    }
-                }
-
-                val data = BarData(dataSet)
-                barChart.data = data
-
-                val xAxisBottom = barChart.xAxis
-                xAxisBottom.position = XAxis.XAxisPosition.BOTTOM
-                xAxisBottom.setDrawGridLines(false)
-                val labels = pssEntries.map { it.testPSS_date }
-                xAxisBottom.valueFormatter = IndexAxisValueFormatter(labels)
-                xAxisBottom.labelRotationAngle = 0f
-                xAxisBottom.granularity = 1f
-                xAxisBottom.xOffset = 10f
-
-                val yAxisRight = barChart.axisRight
-                yAxisRight.setDrawGridLines(false)
-                yAxisRight.setDrawAxisLine(false)
-                yAxisRight.axisMinimum = 0f
-                yAxisRight.axisMaximum = 40f
-                yAxisRight.textColor =
-                    ContextCompat.getColor(this@StressTrackerOverview, R.color.logo_font)
-                yAxisRight.isEnabled = true
-                yAxisRight.valueFormatter = YAxisValueFormatter()
-
-                val yAxisLeft = barChart.axisLeft
-                yAxisLeft.setDrawGridLines(false)
-                yAxisLeft.setDrawAxisLine(false)
-                yAxisLeft.labelCount = 3
-                yAxisLeft.axisMinimum = 0f
-                yAxisLeft.axisMaximum = 40f
-                yAxisLeft.textColor =
-                    ContextCompat.getColor(this@StressTrackerOverview, R.color.logo_font)
-                yAxisLeft.isEnabled = true
-
-                val legend = barChart.legend
-                legend.isEnabled = true
-                legend.textSize = 14f
-                legend.textColor =
-                    ContextCompat.getColor(this@StressTrackerOverview, R.color.logo_font)
-
-                barChart.description.isEnabled = false
-                barChart.setTouchEnabled(false)
-                barChart.setDrawValueAboveBar(false)
-
-                barChart.setExtraOffsets(50f, 0f, 0f, 0f)
-
-                barChart.invalidate()
-            }else{
-                barChart.visibility = View.GONE
+            val entries = pssEntries.mapIndexed { index, pssEntry ->
+                BarEntry(index.toFloat(), pssEntry.PSS_score.toFloat())
             }
+
+            val dataSet = BarDataSet(entries, "PSS scores")
+
+            dataSet.color =
+                ContextCompat.getColor(this@StressTrackerOverview, R.color.lotus_blue)
+            dataSet.valueTextColor =
+                ContextCompat.getColor(this@StressTrackerOverview, R.color.anti_flash_white)
+            dataSet.valueTextSize = 14f
+            dataSet.valueFormatter = object : ValueFormatter() {
+                override fun getFormattedValue(value: Float): String {
+                    return value.toInt().toString()
+                }
+            }
+
+            val data = BarData(dataSet)
+            barChart.data = data
+
+            val xAxisBottom = barChart.xAxis
+            xAxisBottom.position = XAxis.XAxisPosition.BOTTOM
+            xAxisBottom.setDrawGridLines(false)
+            val labels = pssEntries.map { it.testPSS_date }
+            xAxisBottom.valueFormatter = IndexAxisValueFormatter(labels)
+            xAxisBottom.labelRotationAngle = 0f
+            xAxisBottom.granularity = 1f
+            xAxisBottom.xOffset = 15f
+
+            val yAxisRight = barChart.axisRight
+            yAxisRight.setDrawGridLines(true)
+            yAxisRight.setDrawAxisLine(false)
+            yAxisRight.axisMinimum = 0f
+            yAxisRight.axisMaximum = 40f
+            yAxisRight.textColor =
+                ContextCompat.getColor(this@StressTrackerOverview, R.color.logo_font)
+            yAxisRight.isEnabled = true
+            yAxisRight.valueFormatter = YAxisValueFormatter()
+
+            val yAxisLeft = barChart.axisLeft
+            yAxisLeft.setDrawGridLines(false)
+            yAxisLeft.setDrawAxisLine(false)
+            yAxisLeft.labelCount = 3
+            yAxisLeft.axisMinimum = 0f
+            yAxisLeft.axisMaximum = 40f
+            yAxisLeft.textColor =
+                ContextCompat.getColor(this@StressTrackerOverview, R.color.logo_font)
+            yAxisLeft.isEnabled = true
+
+            val legend = barChart.legend
+            legend.isEnabled = true
+            legend.textSize = 14f
+            legend.textColor =
+                ContextCompat.getColor(this@StressTrackerOverview, R.color.logo_font)
+
+            barChart.description.isEnabled = false
+            barChart.setTouchEnabled(false)
+            barChart.setDrawValueAboveBar(false)
+
+            barChart.setExtraOffsets(50f, 0f, 0f, 0f)
+
+            barChart.invalidate()
         }
 
         // set up button click listeners to launch new measurement activities or information activities

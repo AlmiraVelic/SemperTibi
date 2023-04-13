@@ -1,11 +1,12 @@
 package com.example.sempertibi
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.StrictMode
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.sempertibi.data.UserDatabase
 import com.example.sempertibi.data.entities.SecurityQuestion
@@ -35,6 +36,7 @@ class SecurityQuestions : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_security_questions)
+        StrictMode.enableDefaults()
 
         // initializing the objects
         val dao = UserDatabase.getInstance(this).userDao()

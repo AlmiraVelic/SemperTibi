@@ -9,9 +9,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.StrictMode
 import android.util.Patterns
 import android.view.View
-import android.widget.*
+import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
@@ -63,6 +66,7 @@ class Register : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        StrictMode.enableDefaults()
 
         // initializing the objects
         val dao = UserDatabase.getInstance(this).userDao()
@@ -98,6 +102,10 @@ class Register : AppCompatActivity() {
                         ).show()
                     }
                     .setPositiveButton("Accept") { _, _ ->
+                        AlertDialog.Builder(this@Register).setTitle("Notification info")
+                            .setMessage("A notification to use the app daily is needed for scientific purpose and will be sent daily at approximately 2 PM")
+                            .setPositiveButton("OK", null)
+                            .show()
                         requestPermission()
                         notificationSwitch.isChecked = true
                     }.show()
@@ -107,6 +115,10 @@ class Register : AppCompatActivity() {
 
         btnRegister.setOnClickListener {
             if (!hasNotificationPermission()) {
+                AlertDialog.Builder(this@Register).setTitle("Notification info")
+                    .setMessage("A notification to use the app daily is needed for scientific purpose and will be sent daily at approximately 2 PM")
+                    .setPositiveButton("OK", null)
+                    .show()
                 requestPermission()
             } else {
                 scheduleNotify()
@@ -297,7 +309,7 @@ class Register : AppCompatActivity() {
     private fun scheduleNotify() {
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val notificationIntent = Intent(this, AlarmReceiver::class.java)
-        notificationIntent.putExtra("message", "Please use the app SemperTibi today")
+        notificationIntent.putExtra("message", "Please use the SemperTibi app today")
         val pendingIntent = PendingIntent.getBroadcast(
             this,
             0,
@@ -307,8 +319,8 @@ class Register : AppCompatActivity() {
 
         // Set the time to trigger the alarm
         val calendar = Calendar.getInstance().apply {
-            set(Calendar.HOUR_OF_DAY, 13) // Set the hour of the day (24-hour clock)
-            set(Calendar.MINUTE, 50) // Set the minute of the hour
+            set(Calendar.HOUR_OF_DAY, 14) // Set the hour of the day (24-hour clock)
+            set(Calendar.MINUTE, 0) // Set the minute of the hour
             set(Calendar.SECOND, 0) // Set the second of the minute
         }
 

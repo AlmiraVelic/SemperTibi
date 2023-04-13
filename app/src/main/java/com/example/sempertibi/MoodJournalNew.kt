@@ -3,9 +3,11 @@ package com.example.sempertibi
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.StrictMode
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
@@ -18,6 +20,8 @@ import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MoodJournalNew : AppCompatActivity() {
 
@@ -26,10 +30,12 @@ class MoodJournalNew : AppCompatActivity() {
     private lateinit var moodAchievementInput: TextInputEditText
     private lateinit var btnSave: Button
     private lateinit var userDao: UserDao
+    private lateinit var tvNote: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mood_journal_new)
+        StrictMode.enableDefaults()
 
         initViews()
         initUserDao()
@@ -171,6 +177,7 @@ class MoodJournalNew : AppCompatActivity() {
         moodAchievementInput = findViewById(R.id.tvAchievementInput)
         // Button
         btnSave = findViewById(R.id.btnSaveEntry)
+        tvNote = findViewById(R.id.tvHintMJ)
     }
 
     private fun initUserDao() {
@@ -190,8 +197,26 @@ class MoodJournalNew : AppCompatActivity() {
                 btnSave.text = getString(R.string.editEntry)
             }
         }
+
+        if (date != getTodayDate()){
+            tvNote.visibility = View.VISIBLE
+        }
     }
 
+    private fun getTodayDate(): String {
+        val calendar = Calendar.getInstance()
 
+        val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+        val month = calendar.get(Calendar.MONTH)
+        val year = calendar.get(Calendar.YEAR)
 
+        calendar.apply {
+            set(Calendar.YEAR, year)
+            set(Calendar.MONTH, month)
+            set(Calendar.DAY_OF_MONTH, dayOfMonth)
+        }
+
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        return dateFormat.format(calendar.time)
+    }
 }

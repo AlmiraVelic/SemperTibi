@@ -27,7 +27,7 @@ class TipBreaks : AppCompatActivity() {
         linkTextView.setOnClickListener {
 
             AlertDialog.Builder(this).setTitle("Notification")
-                .setMessage("You are leaving the app now to a 3rd party website")
+                .setMessage("You are leaving the app now to a 3rd party website. Please click again on the text to get there.")
                 .setPositiveButton("Ok"){_,_->
                     linkTextView.movementMethod = LinkMovementMethod.getInstance()
                     linkTextView.isClickable = true

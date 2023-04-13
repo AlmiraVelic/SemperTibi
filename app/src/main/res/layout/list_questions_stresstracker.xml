@@ -13,7 +13,7 @@
         android:paddingTop="10dp"
         android:paddingEnd="12dp"
         android:paddingBottom="10dp"
-        android:textColor="@android:color/black"
+        android:textColor="@color/logo_font"
         android:textSize="16sp" />
 
 </LinearLayout>

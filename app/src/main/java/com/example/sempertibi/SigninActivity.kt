@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.StrictMode
 import android.util.Log
 import android.widget.Button
 import android.widget.RelativeLayout
@@ -39,6 +40,7 @@ class SigninActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
+        StrictMode.enableDefaults()
 
         userInputField = findViewById(R.id.usernameInput)
         passwordInputField = findViewById(R.id.passwordInput)

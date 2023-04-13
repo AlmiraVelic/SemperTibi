@@ -92,6 +92,16 @@
                     android:textColor="@color/logo_font"
                     android:textSize="24sp" />
 
+                <TextView
+                    android:id="@+id/tvHintST"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/tv_background"
+                    android:padding="12dp"
+                    android:text="@string/hintMoodJournal"
+                    android:textSize="14sp" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </RelativeLayout>

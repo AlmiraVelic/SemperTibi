@@ -3,6 +3,7 @@ package com.example.sempertibi
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.StrictMode
 import android.view.View
 import android.widget.CalendarView
 import android.widget.TextView
@@ -33,6 +34,7 @@ class MoodJournalOverview : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mood_journal_overview)
+        StrictMode.enableDefaults()
 
         initViews()
         setupPieChart()
@@ -191,7 +193,8 @@ class MoodJournalOverview : AppCompatActivity() {
                     ContextCompat.getColor(this@MoodJournalOverview, R.color.colorMood2),
                     ContextCompat.getColor(this@MoodJournalOverview, R.color.colorMood3),
                     ContextCompat.getColor(this@MoodJournalOverview, R.color.colorMood4),
-                    ContextCompat.getColor(this@MoodJournalOverview, R.color.colorMood5)
+                    ContextCompat.getColor(this@MoodJournalOverview, R.color.colorMood5),
+                    ContextCompat.getColor(this@MoodJournalOverview, R.color.colorMood6)
                 )
 
                 dataSet.valueFormatter = object : ValueFormatter() {

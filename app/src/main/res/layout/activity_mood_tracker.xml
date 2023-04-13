@@ -128,10 +128,10 @@
         android:id="@+id/logo"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_gravity="bottom"
         android:layout_alignBottom="@id/bottom_nav"
+        android:layout_gravity="bottom"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="66dp"
+        android:layout_marginBottom="16dp"
         android:contentDescription="@string/logoString"
         android:src="@drawable/lotus" />
 
@@ -141,10 +141,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
         android:background="@color/anti_flash_white"
+        android:visibility="gone"
         app:itemIconTint="@color/lotus_blue"
         app:itemTextColor="@color/logo_font"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/my_menu"
-        android:layout_gravity="bottom"/>
+        app:menu="@menu/my_menu" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

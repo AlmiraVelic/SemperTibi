@@ -152,5 +152,6 @@ For more information click <a href="https://campushealth.unc.edu/health-topic/nu
     <string name="to_dos">To-Dos</string>
     <string name="last_7_mood_entries">Last 7 mood entries</string>
     <string name="last_mood_entries">Here you can see your last mood entries (max. 7)</string>
-
+    <string name="hintMoodJournal"><b>Note:</b>\n\nYour mood score is set to "N/A", as you are currently writing an entry before or after today. This will be also visible in your overview.</string>
+    <string name="hintStressTracker"><b>Note:</b>\n\nYour overview is prefilled with 7 dates in the past. It will be populated automatically when you perform the PSS Test.</string>
 </resources>

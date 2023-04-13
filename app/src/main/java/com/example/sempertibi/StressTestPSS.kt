@@ -3,6 +3,7 @@ package com.example.sempertibi
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.os.StrictMode
 import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.view.View
@@ -62,6 +63,7 @@ class StressTestPSS : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_stress_test_pss)
+        StrictMode.enableDefaults()
 
         GlobalData.pssScore = 0
 
@@ -189,7 +191,7 @@ class StressTestPSS : AppCompatActivity(), View.OnClickListener {
                 val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
                 Log.d("PSS", "Date format set")
                 val dateString = dateFormat.format(currentDate)
-                Log.d("PSS", "Date formated and set to dateString")
+                Log.d("PSS", "Date formatted and set to dateString")
 
                 val stressPSS = StressPSS(
                     testPSS_id = 0,

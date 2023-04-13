@@ -2,6 +2,7 @@ package com.example.sempertibi
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.StrictMode
 import android.util.Patterns
 import android.widget.Button
 import android.widget.Toast
@@ -30,6 +31,7 @@ class ForgotPassword : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_password)
+        StrictMode.enableDefaults()
 
         // initializing the views
         resetInputLayout = findViewById(R.id.resetInputLayout)

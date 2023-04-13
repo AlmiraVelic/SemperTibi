@@ -2,6 +2,7 @@ package com.example.sempertibi
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.StrictMode
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -27,6 +28,7 @@ class SecurityCheck : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_security_check)
+        StrictMode.enableDefaults()
 
         // initializing the objects
         val dao = UserDatabase.getInstance(this).userDao()

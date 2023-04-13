@@ -6,6 +6,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.StrictMode
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +33,7 @@ class ToDoList : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_to_do_list)
+        StrictMode.enableDefaults()
 
         todoTitleInput = findViewById(R.id.todoTitleInput)
         todoDescriptionInput = findViewById(R.id.todoDescriptionInput)
@@ -108,7 +110,7 @@ class ToDoList : AppCompatActivity() {
                             val iconRight = itemView.left + iconMargin + iconEdit!!.intrinsicWidth
                             iconEdit.setBounds(iconLeft, iconTop, iconRight, iconBottom)
 
-                            val background = ColorDrawable(Color.parseColor("#FF4CAF50"))
+                            val background = ColorDrawable(Color.parseColor("#B2DFDB"))
                             background.setBounds(
                                 itemView.left,
                                 itemView.top,
@@ -125,7 +127,7 @@ class ToDoList : AppCompatActivity() {
                             val iconRight = itemView.right - iconMargin
                             iconDelete.setBounds(iconLeft, iconTop, iconRight, iconBottom)
 
-                            val background = ColorDrawable(Color.parseColor("#FFF1776E"))
+                            val background = ColorDrawable(Color.parseColor("#FFCDD2"))
                             background.setBounds(
                                 itemView.right + dX.toInt() - backgroundCornerOffset,
                                 itemView.top,
@@ -137,7 +139,7 @@ class ToDoList : AppCompatActivity() {
                             iconDelete.draw(c)
                         }
                         else -> { // View is unswiped
-                            val background = ColorDrawable(Color.parseColor("#FFF1776E"))
+                            val background = ColorDrawable(Color.parseColor("#FFCDD2"))
                             background.setBounds(0, 0, 0, 0)
                             background.draw(c)
                         }
