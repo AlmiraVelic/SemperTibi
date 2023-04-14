@@ -24,30 +24,42 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/logo_icon"
         android:label="@string/app_name"
-        android:usesCleartextTraffic="true"
         android:localeConfig="@xml/locales_config"
         android:roundIcon="@drawable/logo_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.SemperTibi"
+        android:usesCleartextTraffic="true"
         tools:targetApi="33">
         <activity
             android:name=".EditTodo"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ToDoList"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".SettingsSecurityQuestions"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".SecurityCheck"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".SecurityQuestions"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ForgotPassword"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".StressTrackerLearn"
             android:exported="false"
