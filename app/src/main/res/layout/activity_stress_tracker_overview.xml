@@ -100,7 +100,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/tv_background"
                     android:padding="12dp"
-                    android:text="@string/hintMoodJournal"
+                    android:text="@string/hintStressTracker"
                     android:textSize="14sp" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
