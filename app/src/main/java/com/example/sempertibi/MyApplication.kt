@@ -4,12 +4,15 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
 
 class MyApplication : Application() {
 
     // Notifications to the User as Reminder to use the App (As this app needs to be tested for the Master Thesis)
     // Called when the application is starting, before any other application objects have been created.
     override fun onCreate() {
+        // Dark mode off
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         super.onCreate()
         // Create the NotificationChannel
