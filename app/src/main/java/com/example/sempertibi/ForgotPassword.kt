@@ -128,14 +128,14 @@ class ForgotPassword : AppCompatActivity() {
      * Generates a random password that is secure
      */
     private fun generateRandomPassword(): String {
-        // Generate a random password of length 5 with letters, special chars and numbers
-        val passwordLength = 5
-        val specialChars = "@#$%^&+="
+        // Generate a random password of length 10 with letters, special chars and numbers
+        val passwordLength = 10
+        val specialChars = "`~!@#\$%^&*()-_=+\\\\|[{]};:'\\\",<.>/?"
         val random = SecureRandom()
 
         val password = StringBuilder()
         while (password.length < passwordLength) {
-            when (random.nextInt(4)) {
+            when (random.nextInt(10)) {
                 0 -> password.append(random.nextInt(10)) // add digit
                 1 -> password.append(('a'..'z').random()) // add lowercase letter
                 2 -> password.append(('A'..'Z').random()) // add uppercase letter

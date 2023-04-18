@@ -35,28 +35,28 @@ class Settings : AppCompatActivity() {
                 //"(?=.*[a-z])" +           //at least 1 lower case letter
                 //"(?=.*[A-Z])" +           //at least 1 upper case letter
                 "(?=.*[a-zA-Z])" +          //any letter
-                "(?=.*[@#$%^&+=])" +        //at least 1 special character
+                "(?=.*[`~!@#$%^&*()\\-_=+\\\\|\\[{\\]};:'\",<.>/?])" +        //at least 1 special character
                 "(?=\\S+$)" +               //no white spaces
-                ".{4,}" +                   //at least 4 characters
+                ".{10,}" +                   //at least 10 characters
                 "$"
     )
 
-    lateinit var notificationSwitch: SwitchMaterial
+    private lateinit var notificationSwitch: SwitchMaterial
 
-    lateinit var userInputFieldLayout: TextInputLayout
-    lateinit var passwordInputFieldLayout: TextInputLayout
-    lateinit var passwordRepeatInputFieldLayout: TextInputLayout
-    lateinit var emailInputFieldLayout: TextInputLayout
-    lateinit var genderInputLayout: TextInputLayout
+    private lateinit var userInputFieldLayout: TextInputLayout
+    private lateinit var passwordInputFieldLayout: TextInputLayout
+    private lateinit var passwordRepeatInputFieldLayout: TextInputLayout
+    private lateinit var emailInputFieldLayout: TextInputLayout
+    private lateinit var genderInputLayout: TextInputLayout
 
-    lateinit var usernameInputEditText: TextInputEditText
-    lateinit var passwordInputEditText: TextInputEditText
-    lateinit var passwordRepeatEditText: TextInputEditText
-    lateinit var emailInputEditText: TextInputEditText
-    lateinit var genderInputField: AutoCompleteTextView
-    lateinit var btnSaveChanges: Button
+    private lateinit var usernameInputEditText: TextInputEditText
+    private lateinit var passwordInputEditText: TextInputEditText
+    private lateinit var passwordRepeatEditText: TextInputEditText
+    private lateinit var emailInputEditText: TextInputEditText
+    private lateinit var genderInputField: AutoCompleteTextView
+    private lateinit var btnSaveChanges: Button
 
-    lateinit var tvChangeSecurityQuestions: TextView
+    private lateinit var tvChangeSecurityQuestions: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -225,7 +225,7 @@ class Settings : AppCompatActivity() {
             false
         } else if (!passwordPattern.matcher(passwordInput).matches()) {
             passwordInputFieldLayout.error =
-                "Password too weak - min. 4 characters! Use upper and lowercase letters, numbers, and special symbols like @#\$%^&+="
+                "Password too weak - min. 10 characters! Use upper and lowercase letters, numbers, and special characters."
             false
         } else {
             passwordInputFieldLayout.error = null

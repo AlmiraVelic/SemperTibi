@@ -7,6 +7,8 @@ import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
@@ -42,9 +44,9 @@ class Register : AppCompatActivity() {
                 //"(?=.*[a-z])" +           //at least 1 lower case letter
                 //"(?=.*[A-Z])" +           //at least 1 upper case letter
                 "(?=.*[a-zA-Z])" +          //any letter
-                "(?=.*[@#$%^&+=])" +        //at least 1 special character
+                "(?=.*[`~!@#$%^&*()\\-_=+\\\\|\\[{\\]};:'\",<.>/?])" +        //at least 1 special character
                 "(?=\\S+$)" +               //no white spaces
-                ".{4,}" +                   //at least 4 characters
+                ".{10,}" +                   //at least 10 characters
                 "$"
     )
 
@@ -230,7 +232,7 @@ class Register : AppCompatActivity() {
             false
         } else if (!passwordPattern.matcher(passwordInput).matches()) {
             passwordInputFieldLayout.error =
-                "Password too weak - min. 4 characters! Use upper and lowercase letters, numbers, and special symbols like @#\$%^&+="
+                "Password too weak - min. 4 characters! Use upper and lowercase letters, numbers, and special characters."
             false
         } else {
             passwordInputFieldLayout.error = null
@@ -336,4 +338,13 @@ class Register : AppCompatActivity() {
             pendingIntent
         )
     }
+
+    fun isNetworkConnected(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkCapabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+        return networkCapabilities != null &&
+                (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                        networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR))
+    }
+
 }
