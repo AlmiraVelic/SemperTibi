@@ -16,6 +16,7 @@
     <string name="chooseDate">Please choose a Date</string>
     <string name="questionFeelings">How do you feel today?</string>
     <string name="questionHappening">What happened today?</string>
+    <string name="questionAchievement">Which goals did you achieve?</string>
     <string name="exampleAnswer1">Example: When [SITUATION] happened, I felt [EMOTION].</string>
     <string name="exampleAnswer2">Example: I feel [EMOTION], because [EXPERIENCE].</string>
     <string name="exampleAnswer3">Example: I was able to [ACHIEVEMENT].</string>
