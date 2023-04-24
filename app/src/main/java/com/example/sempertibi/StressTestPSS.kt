@@ -364,7 +364,7 @@ class StressTestPSS : AppCompatActivity(), View.OnClickListener {
         tvHintPSS.setOnClickListener {
             AlertDialog.Builder(this)
                 .setTitle("Notification")
-                .setMessage("You are leaving the app now to a 3rd party website")
+                .setMessage("You are leaving the app now to a 3rd party website. Please click again on the text to get there.")
                 .setPositiveButton("Ok") { _, _ ->
                     tvHintPSS.movementMethod = LinkMovementMethod.getInstance()
                 }.setNegativeButton("Cancel", null).show()

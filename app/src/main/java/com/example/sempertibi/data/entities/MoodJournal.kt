@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 /*
-This class represents the user table within the database
+This class represents the mood journal table within the database
  */
 @Entity(tableName = "moodJournal")
 //@Entity(tableName = "moodJournal", primaryKeys = ["entry_id", "user_id"])
