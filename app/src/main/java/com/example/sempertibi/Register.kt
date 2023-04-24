@@ -178,17 +178,39 @@ class Register : AppCompatActivity() {
                     }
 
                     val existingEntry =
-                        withContext(Dispatchers.IO) { dao.getUserByMail(emailInputFieldText.text.toString()) }
+                        withContext(Dispatchers.IO) { dao.getUserByMail(email) }
+                    val existingEntryName =
+                        withContext(Dispatchers.IO) { dao.getUserByUsername(name) }
 
-                    if ((!checkUser(email)) && (existingEntry == null)) {
+                    if (existingEntryName != null) {
+                        // User is found on local db, do something else
+                        // If there is an entry for this email address, then user is notified
+                        AlertDialog.Builder(this@Register).setTitle("E-Mail found")
+                            .setMessage("There is already a user created with this username. Please chose another username")
+                            .setPositiveButton("Registration") { _, _ ->
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Please use another username",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                startActivity(
+                                    Intent(
+                                        this@Register,
+                                        Register::class.java
+                                    )
+                                )
+                            }
+                            .setNegativeButton("Cancel") { _, _ ->
+                                startActivity(Intent(this@Register, SigninActivity::class.java))
+                            }
+                            .show()
+                    } else if ((!checkUser(email)) && (existingEntry == null)) {
                         // User not found in local or server db
-
                         if (validateUsername() and validatePassword() and validateRepeatedPassword() and validateEmail()) {
-
                             // If there is an active network connection, make an HTTP request to the PHP script
                             val htmlRequest = HtmlRequest(
                                 Request.Method.POST, url, parameters.toString(),
-                                { response ->
+                                { _ ->
                                     // Handle the response from the server
                                     Toast.makeText(
                                         applicationContext,
@@ -281,7 +303,7 @@ class Register : AppCompatActivity() {
                             // If in MySQL Db user is not found, but locally found
                             val htmlRequest = HtmlRequest(
                                 Request.Method.POST, url, parameters.toString(),
-                                { response ->
+                                { _ ->
                                     // Handle the response from the server
                                     Toast.makeText(
                                         applicationContext,
@@ -334,7 +356,7 @@ class Register : AppCompatActivity() {
                             validatePassword()
                             validateRepeatedPassword()
                         }
-                    } else if (checkUser(email) && (existingEntry != null)){
+                    } else if ((checkUser(email)) && (existingEntry != null)) {
                         // User is found, do something else
                         // If there is an entry for this email address, then user is notified
                         AlertDialog.Builder(this@Register).setTitle("E-Mail found")
@@ -356,6 +378,7 @@ class Register : AppCompatActivity() {
                                 startActivity(Intent(this@Register, Register::class.java))
                             }
                             .show()
+
                     }
                 }
             }
@@ -500,8 +523,7 @@ class Register : AppCompatActivity() {
         )
     }
 
-
-    private fun checkUser(email: String): Boolean{
+    private fun checkUser(email: String): Boolean {
         // Make a request to the PHP script and parse the response as JSON
         val url = URL("http://192.168.0.192/sempertibi/getuserbymail.php")
 
