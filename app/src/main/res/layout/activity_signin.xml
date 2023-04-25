@@ -44,22 +44,23 @@
                 app:dividerThickness="3dp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/username"
+                android:id="@+id/email"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
-                android:hint="@string/userName"
+                android:hint="@string/mail"
                 app:endIconMode="clear_text"
-                app:errorEnabled="true">
+                app:errorEnabled="true"
+                app:helperText="@string/mailHint">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/usernameInput"
+                    android:id="@+id/emailInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="12dp"
-                    android:inputType="text"
+                    android:inputType="textEmailAddress"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,7 +89,6 @@
                 android:id="@+id/tvForgotPW"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-10dp"
                 android:layout_marginBottom="20dp"
                 android:layout_marginHorizontal="16dp"
                 android:text="@string/forgot_password"

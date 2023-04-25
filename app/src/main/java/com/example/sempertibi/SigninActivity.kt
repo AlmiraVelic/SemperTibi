@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.sempertibi.data.UserDatabase
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -31,6 +32,8 @@ class SigninActivity : AppCompatActivity() {
     private lateinit var tvForgotPassword: TextView
     private lateinit var loginButton: Button
     private lateinit var registerButton: Button
+    private lateinit var userInputFieldLayout: TextInputLayout
+    private lateinit var passwordInputFieldLayout: TextInputLayout
 
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: androidx.biometric.BiometricPrompt
@@ -42,25 +45,27 @@ class SigninActivity : AppCompatActivity() {
         setContentView(R.layout.activity_signin)
         StrictMode.enableDefaults()
 
-        userInputField = findViewById(R.id.usernameInput)
+        userInputField = findViewById(R.id.emailInput)
         passwordInputField = findViewById(R.id.passwordInput)
         tvForgotPassword = findViewById(R.id.tvForgotPW)
         relativeLayoutSignIn = findViewById(R.id.relativeLayout_signin)
         loginButton = findViewById(R.id.btLogin)
         registerButton = findViewById(R.id.btRegisterSignIn)
+        userInputFieldLayout = findViewById(R.id.email)
+        passwordInputFieldLayout = findViewById(R.id.password)
 
         val userDao = UserDatabase.getInstance(this).userDao()
 
         loginButton.setOnClickListener {
 
-            val user = userInputField.text.toString().trim()
+            val email = userInputField.text.toString().trim()
             val password = passwordInputField.text.toString().trim()
 
             lifecycleScope.launch {
                 Log.d("CoroutineDebug", "Coroutine started")
                 val userInDB = withContext(Dispatchers.IO) {
                     Log.d("CoroutineDebug", "Coroutine suspended: retrieving user")
-                    userDao.getUserByUsername(user)
+                    userDao.getUserByMail(email)
                 }
                 Log.d("CoroutineDebug", "Coroutine resumed: user retrieved")
 
@@ -69,7 +74,7 @@ class SigninActivity : AppCompatActivity() {
                     if (userInDB != null && BCrypt.checkpw(password, userInDB.passwordHash)) {
 
                         GlobalData.userID = userInDB.user_id
-                        GlobalData.loggedInUser = user
+                        GlobalData.loggedInUser = userInDB.name
                         GlobalData.passwordUser = password
 
                         executor = ContextCompat.getMainExecutor(this@SigninActivity)
@@ -127,7 +132,7 @@ class SigninActivity : AppCompatActivity() {
                     } else {
                         Log.d("CoroutineDebug", "Authentication failed")
                         // Authentication failed
-                        showMessage("Login failed, please check Username and Password")
+                        showMessage("Login failed, please check Email and Password")
                     }
                 }
             }
@@ -151,9 +156,11 @@ class SigninActivity : AppCompatActivity() {
     private fun validateInput(): Boolean {
         if (userInputField.text.toString().trim().isEmpty()) {
             showMessage("Please enter Username")
+            userInputFieldLayout.error = "Please enter a valid email address"
             return false
         } else if (passwordInputField.text.toString().trim().isEmpty()) {
             showMessage("Please enter Password")
+            passwordInputFieldLayout.error = "Field can't be empty"
             return false
         }
         return true
