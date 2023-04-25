@@ -32,6 +32,7 @@ import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONException
 import org.json.JSONObject
 import org.mindrot.jbcrypt.BCrypt
 import java.io.BufferedReader
@@ -185,7 +186,7 @@ class Register : AppCompatActivity() {
                     if (existingEntryName != null) {
                         // User is found on local db, do something else
                         // If there is an entry for this email address, then user is notified
-                        AlertDialog.Builder(this@Register).setTitle("E-Mail found")
+                        AlertDialog.Builder(this@Register).setTitle("Username found")
                             .setMessage("There is already a user created with this username. Please chose another username")
                             .setPositiveButton("Registration") { _, _ ->
                                 Toast.makeText(
@@ -539,10 +540,16 @@ class Register : AppCompatActivity() {
         val response = reader.readLine()
         reader.close()
 
-        val result = response?.let {
-            val json = JSONObject(it)
-            json.optBoolean("user_found", false)
-        } ?: false
+        var result = false
+        if (response != null) {
+            try {
+                val json = JSONObject(response)
+                result = json.optBoolean("user_found", false)
+            } catch (e: JSONException) {
+                // Handle non-JSON response here
+                Log.e("checkUser", "Error parsing JSON: $response")
+            }
+        }
 
         return result
     }
