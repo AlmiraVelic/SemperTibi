@@ -63,6 +63,9 @@ interface UserDao {
     @Query("SELECT * FROM stressPSS WHERE user_id = :user_id ORDER BY testPSS_date DESC LIMIT 7")
     fun getPSSLast7Entries(user_id: Int): List<StressPSS>
 
+    @Query("SELECT *, MAX(testPSS_date) as lastEntryDate FROM stressPSS WHERE user_id = :user_id GROUP BY user_id ORDER BY testPSS_date DESC LIMIT 7")
+    fun getPSSLast7EntriesWithLastEntryDate(user_id: Int): List<StressPSS>
+
     @Query("SELECT COUNT(*) FROM stressPSS WHERE user_id = :user_id")
     fun getPSSNumEntries(user_id: Int): Int
 

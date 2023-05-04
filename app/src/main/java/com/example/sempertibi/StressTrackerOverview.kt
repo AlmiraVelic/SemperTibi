@@ -23,6 +23,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class StressTrackerOverview : AppCompatActivity() {
 
@@ -64,7 +65,7 @@ class StressTrackerOverview : AppCompatActivity() {
                 if (numEntries < 7) {
                     for (i in 1..(7 - numEntries)) {
                         val date = Calendar.getInstance().apply { time = currentDate }
-                        date.add(Calendar.DAY_OF_MONTH, (i - 8))
+                        date.add(Calendar.DAY_OF_MONTH, (i - 80))
                         val testDate =
                             SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(date.time)
                         dao.addStressPSS(StressPSS(0, userID, testDate, 0))
@@ -142,8 +143,38 @@ class StressTrackerOverview : AppCompatActivity() {
 
         // set up button click listeners to launch new measurement activities or information activities
         newMeasurePSS.setOnClickListener {
-            val intent = Intent(this, StressTestPSS::class.java)
-            startActivity(intent)
+            lifecycleScope.launch {
+                val pssEntries = withContext(Dispatchers.IO) {
+                    dao.getPSSLast7Entries(userID!!)
+                }
+
+                val lastEntryDate = pssEntries.firstOrNull()?.testPSS_date
+                val dateString = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
+
+                if (lastEntryDate != null) {
+                    val daysSinceLastPSS = daysBetween(lastEntryDate, dateString)
+                    if (daysSinceLastPSS < 30) {
+                        AlertDialog.Builder(this@StressTrackerOverview)
+                            .setTitle("PSS Score Info")
+                            .setMessage("The last PSS Score evaluation has been done in less than 30 days. Do you really want to make a new PSS Test?")
+                            .setPositiveButton("Yes") { _, _ ->
+                                val intent = Intent(this@StressTrackerOverview, StressTestPSS::class.java)
+                                startActivity(intent)
+                            }
+                            .setNegativeButton("No") { _, _ ->
+                                // Do nothing
+                            }
+                            .show()
+                    } else {
+                        val intent = Intent(this@StressTrackerOverview, StressTestPSS::class.java)
+                        startActivity(intent)
+                    }
+                } else {
+                    // No PSS tests found, launch new test activity
+                    val intent = Intent(this@StressTrackerOverview, StressTestPSS::class.java)
+                    startActivity(intent)
+                }
+            }
         }
 
         newMeasureHRV.setOnClickListener {
@@ -193,7 +224,7 @@ class StressTrackerOverview : AppCompatActivity() {
                             val mainIntent = Intent.makeRestartActivityTask(componentName)
                             applicationContext.startActivity(mainIntent)
                         }
-                        .setNegativeButton("No"){_,_->
+                        .setNegativeButton("No") { _, _ ->
                             val intent = Intent(this, Dashboard::class.java)
                             startActivity(intent)
                         }
@@ -203,5 +234,13 @@ class StressTrackerOverview : AppCompatActivity() {
                 else -> false
             }
         }
+    }
+
+    private fun daysBetween(date1: String, date2: String): Int {
+        val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        val d1 = sdf.parse(date1)
+        val d2 = sdf.parse(date2)
+        val diff = d2!!.time - d1!!.time
+        return (TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)).toInt()
     }
 }
