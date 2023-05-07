@@ -65,7 +65,7 @@ class StressTrackerOverview : AppCompatActivity() {
                 if (numEntries < 7) {
                     for (i in 1..(7 - numEntries)) {
                         val date = Calendar.getInstance().apply { time = currentDate }
-                        date.add(Calendar.DAY_OF_MONTH, (i - 80))
+                        date.add(Calendar.DAY_OF_MONTH, (i - 50))
                         val testDate =
                             SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(date.time)
                         dao.addStressPSS(StressPSS(0, userID, testDate, 0))

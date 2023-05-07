@@ -3,7 +3,6 @@ package com.example.sempertibi
 import android.content.Intent
 import android.os.Bundle
 import android.os.StrictMode
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
@@ -61,12 +60,14 @@ class SecurityQuestions : AppCompatActivity() {
             val userDB = withContext(Dispatchers.IO) { dao.getUserByMail(email) }
             val userID = userDB!!.user_id
 
+            /*
             val userIDServer = getUserID(email)
             Log.d("mysql", "userID set")
-
+            */
             saveButton.setOnClickListener {
                 if (validateQuestion1() and validateQuestion2() and validateQuestion3() and validateQuestion4()) {
 
+                    /*
                     // server db
                     insertSecurityQuestion(
                         userIDServer,
@@ -90,6 +91,8 @@ class SecurityQuestions : AppCompatActivity() {
                     )
 
                     Log.d("mysql", "questions inserted")
+
+                     */
 
                     // local db
                     val insertQuestions = listOf(
@@ -260,47 +263,32 @@ class SecurityQuestions : AppCompatActivity() {
     }
 
     private fun getUserID(email: String): Int {
-        val url = URL("http://192.168.0.192/sempertibi/getuserIDbymail.php")
-
-        Log.d("mysql", "1")
+        val url = URL("http://Insert_here_IP_Address/sempertibi/getuserIDbymail.php")
 
         val conn = url.openConnection() as HttpURLConnection
-        Log.d("mysql", "2")
         conn.requestMethod = "POST"
-        Log.d("mysql", "3")
         conn.doOutput = true
-        Log.d("mysql", "4")
 
         val writer = OutputStreamWriter(conn.outputStream)
-        Log.d("mysql", "5")
         writer.write("email=${URLEncoder.encode(email, "UTF-8")}")
-        Log.d("mysql", "6")
         writer.flush()
-        Log.d("mysql", "7")
 
         val reader = BufferedReader(InputStreamReader(conn.inputStream))
-        Log.d("mysql", "8")
         val response = reader.readLine()
-        Log.d("mysql", "9")
-        reader.close()
-        Log.d("mysql", "10")
 
+        reader.close()
         conn.disconnect()
-        Log.d("mysql", "11")
 
         val jsonObject = JSONObject(response)
-        Log.d("mysql", "12")
         if (jsonObject.has("error")) {
-            Log.d("mysql", "13")
             throw RuntimeException(jsonObject.getString("error"))
         } else {
-            Log.d("mysql", "14")
             return jsonObject.getInt("user_id")
         }
     }
 
     private fun insertSecurityQuestion(userId: Int, questionText: String, answer: String) {
-        val url = "http://192.168.0.192/sempertibi/insert_questions.php"
+        val url = "http://Insert_here_IP_Address/sempertibi/insert_questions.php"
         val request = object : StringRequest(
             Method.POST,
             url,
