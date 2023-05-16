@@ -216,7 +216,7 @@ class MoodJournalNew : AppCompatActivity() {
             set(Calendar.DAY_OF_MONTH, dayOfMonth)
         }
 
-        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         return dateFormat.format(calendar.time)
     }
 }

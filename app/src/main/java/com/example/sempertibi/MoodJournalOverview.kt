@@ -90,7 +90,7 @@ class MoodJournalOverview : AppCompatActivity() {
         initUserDao()
 
         val currentDate = Date()
-        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val dateString = dateFormat.format(currentDate)
 
         GlobalData.dateInCalendar = dateString
@@ -132,7 +132,7 @@ class MoodJournalOverview : AppCompatActivity() {
             set(Calendar.DAY_OF_MONTH, dayOfMonth)
         }
 
-        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         return dateFormat.format(calendar.time)
     }
 

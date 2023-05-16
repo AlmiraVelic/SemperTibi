@@ -67,7 +67,7 @@ class StressTrackerOverview : AppCompatActivity() {
                         val date = Calendar.getInstance().apply { time = currentDate }
                         date.add(Calendar.DAY_OF_MONTH, (i - 50))
                         val testDate =
-                            SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(date.time)
+                            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date.time)
                         dao.addStressPSS(StressPSS(0, userID, testDate, 0))
                     }
                 }
@@ -149,7 +149,7 @@ class StressTrackerOverview : AppCompatActivity() {
                 }
 
                 val lastEntryDate = pssEntries.firstOrNull()?.testPSS_date
-                val dateString = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
+                val dateString = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
                 if (lastEntryDate != null) {
                     val daysSinceLastPSS = daysBetween(lastEntryDate, dateString)
@@ -237,7 +237,7 @@ class StressTrackerOverview : AppCompatActivity() {
     }
 
     private fun daysBetween(date1: String, date2: String): Int {
-        val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val d1 = sdf.parse(date1)
         val d2 = sdf.parse(date2)
         val diff = d2!!.time - d1!!.time

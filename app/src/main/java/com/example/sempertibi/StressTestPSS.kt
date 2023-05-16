@@ -188,7 +188,7 @@ class StressTestPSS : AppCompatActivity(), View.OnClickListener {
                 val currentDate = Date()
                 Log.d("PSS", "Current Date set")
                 // format the date to just the day, month, and year
-                val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 Log.d("PSS", "Date format set")
                 val dateString = dateFormat.format(currentDate)
                 Log.d("PSS", "Date formatted and set to dateString")

@@ -145,9 +145,10 @@ class Register : AppCompatActivity() {
                     )
                     val existingEntry =
                         withContext(Dispatchers.IO) { dao.getUserByMail(email) }
+                    /*
                     val existingEntryName =
                         withContext(Dispatchers.IO) { dao.getUserByUsername(name) }
-
+                     */
                     if (existingEntry != null) {
                         // User is found on local db
                         // If there is an entry for this email address, then user is notified
